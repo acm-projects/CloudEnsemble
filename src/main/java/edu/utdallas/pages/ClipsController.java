@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 @Controller
 public class ClipsController {
@@ -38,8 +36,8 @@ public class ClipsController {
         if(DbUtils.clipExists(userName,clipName)) {
             DbUtils.deleteClip(userName, clipName);
         } else {
-            return JsonUtils.createJsonAsString(fail);
+            return JsonUtils.createJson(fail);
         }
-        return JsonUtils.createJsonAsString(success);
+        return JsonUtils.createJson(success);
     }
 }

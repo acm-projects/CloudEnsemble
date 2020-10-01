@@ -1,6 +1,7 @@
 package edu.utdallas.pages;
 
 import com.fasterxml.uuid.Generators;
+import com.mysql.cj.xdevapi.JsonArray;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Properties;
@@ -162,7 +164,7 @@ public class DbUtils {
      * @param params to insert
      * @return followers in a 2d json
      */
-    public static String retrieveAsJsonArr(String[] attributes, String[] columns, String query, String... params) {
+    public static JSONArray retrieveAsJsonArrObj(String[] attributes, String[] columns, String query, String... params) {
         Connection conn = getDbConnection();
         PreparedStatement ps = null;
         if(conn != null) {
@@ -176,20 +178,32 @@ public class DbUtils {
                 while(rs.next()) {
                     JSONObject jsonObject = new JSONObject();
                     for(int i = 0; i < columns.length; i++) {
-                        jsonObject.put(attributes[i], rs.getString(columns[0]));
+                        jsonObject.put(attributes[i], rs.getString(columns[i]));
                     }
                     arr.put(jsonObject);
                 }
                 rs.close();
-                return arr.toString();
+                return arr;
             } catch (SQLException ex) {
                 Logger.getLogger(DbUtils.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(query);
             } finally {
                 closeStatement(ps);
                 closeDbConnection(conn);
             }
         }
-        return "";
+        return new JSONArray();
+    }
+
+    /**
+     * Gets entries with a query and returns them as a 2d string list
+     * @param columns the columns matching retrieval query
+     * @param query to run
+     * @param params to insert
+     * @return followers in a 2d json
+     */
+    public static String retrieveAsJsonArr(String[] attributes, String[] columns, String query, String... params) {
+        return retrieveAsJsonArrObj(attributes, columns, query, params).toString();
     }
 
     /**
@@ -419,8 +433,7 @@ public class DbUtils {
      */
     public static String retrieveClips(String user) {
         String[] column = {"clip_key","clip_name"};
-        String[] attributes = {"clip_key","clip_name"};
-        return retrieveAsJsonArr(column, column,queries.getProperty("RETRIEVE_USER_CLIPS"),user);
+        return retrieveAsJsonArr(column,column,queries.getProperty("RETRIEVE_USER_CLIPS"),user);
     }
 
     /**
@@ -440,6 +453,15 @@ public class DbUtils {
     public static void addTag(String clipKey, String tagId) {
         query(queries.getProperty("ADD_TAG"), clipKey, tagId);
         query(queries.getProperty("INCREMENT_TAG"), tagId);
+    }
+
+    /**
+     * Returns if a clip has a tag already
+     * @param clipKey key to identify clip
+     * @param tagId id of tag to add
+     */
+    public static boolean clipHasTag(String clipKey, String tagId) {
+        return exists(queries.getProperty("CLIP_HAS_TAG"), clipKey, tagId);
     }
 
     /**
@@ -468,7 +490,16 @@ public class DbUtils {
      */
     public static String retrieveTags(String clipKey) {
         String[] columns = {"tag_id"};
-        return retrieveAsJsonArr(columns, columns, queries.getProperty("RETRIEVE_TAGS"), clipKey);
+        JSONObject obj = new JSONObject();
+        JSONArray genreTags = retrieveAsJsonArrObj(columns, columns, queries.getProperty("RETRIEVE_GENRE_TAGS"), clipKey);
+        JSONArray artistTags = retrieveAsJsonArrObj(columns, columns, queries.getProperty("RETRIEVE_ARTIST_TAGS"), clipKey);
+        JSONArray instrumentTags = retrieveAsJsonArrObj(columns, columns, queries.getProperty("RETRIEVE_INSTRUMENT_TAGS"), clipKey);
+        JSONArray otherTags = retrieveAsJsonArrObj(columns, columns, queries.getProperty("RETRIEVE_OTHER_TAGS"), clipKey);
+        obj.put("genre_tags",genreTags);
+        obj.put("artist_tags",artistTags);
+        obj.put("instrument_tags",instrumentTags);
+        obj.put("other_tags",otherTags);
+        return obj.toString();
     }
 
     /**
@@ -493,8 +524,8 @@ public class DbUtils {
     //To test database
     public static void main(String[] args) {
         //deleteCredentials();
-        /*System.out.println(login("email_test","password_test"));
-        boolean checkName = checkName("username_test");
+        System.out.println(login("email_test","password_test"));
+        /*boolean checkName = checkName("username_test");
         boolean checkEmail = checkEmail("email_test");
         System.out.println(checkName);
         System.out.println(checkEmail);
@@ -507,8 +538,11 @@ public class DbUtils {
         System.out.println(isFollowing("username_test","another_user"));
         unFollowUser("username_test","another_user");*/
         //deleteClip("username_test","sound_test.wav");
-
-        newTag("Mozart",TagType.Artist);
+        String[] columns = {"tag_id"};
+        System.out.println(retrieveAsJsonArr(columns,columns,queries.getProperty("RETRIEVE_OTHER_TAGS"),"test"));
+        System.out.println(queries.getProperty("RETRIEVE_OTHER_TAGS"));
+        //IN (?,"hello1")
+        //query(queries.getProperty("DECREMENT_ALL_TAGS"), "6b2e25d2-0067-11eb-84b6-a5ff373173f6");
     }
 
 }

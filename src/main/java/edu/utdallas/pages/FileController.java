@@ -41,17 +41,17 @@ public class FileController {
                 if(!DbUtils.clipExists(userName, multiFile.getOriginalFilename())) {
                     DbUtils.uploadClip(userName, multiFile.getOriginalFilename(), multiFile.getBytes());
                 } else {
-                    return JsonUtils.createJsonAsString(taken);
+                    return JsonUtils.createJson(taken);
                 }
             } else {
-                return JsonUtils.createJsonAsString(fail);
+                return JsonUtils.createJson(fail);
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return JsonUtils.createJsonAsString(fail);
+            return JsonUtils.createJson(fail);
         }
 
-        return JsonUtils.createJsonAsString(success);
+        return JsonUtils.createJson(success);
     }
 
     /**
@@ -72,13 +72,13 @@ public class FileController {
                 String userName = SpringUtils.getStringAttribute(session,LoginController.USERNAME_ATTRIBUTE);
                 DbUtils.uploadPic(userName, multiFile.getBytes());
             } else {
-                return JsonUtils.createJsonAsString(fail);
+                return JsonUtils.createJson(fail);
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return JsonUtils.createJsonAsString(fail);
+            return JsonUtils.createJson(fail);
         }
-        return JsonUtils.createJsonAsString(success);
+        return JsonUtils.createJson(success);
     }
 
     /**

@@ -31,9 +31,9 @@ public class LoginController {
         String login = DbUtils.login(email, password);
         if (!login.equals("")) {
             session.setAttribute(USERNAME_ATTRIBUTE,login);
-            return JsonUtils.createJsonAsString(success);
+            return JsonUtils.createJson(success);
         }
-        return JsonUtils.createJsonAsString(fail);
+        return JsonUtils.createJson(fail);
     }
 
 }

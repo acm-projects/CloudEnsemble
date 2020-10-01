@@ -1,10 +1,7 @@
 package edu.utdallas.pages;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,9 +26,9 @@ public class FollowingController {
         if(!DbUtils.isFollowing(follower,following)) {
             DbUtils.followUser(follower,following);
         } else {
-            return JsonUtils.createJsonAsString(fail);
+            return JsonUtils.createJson(fail);
         }
-        return JsonUtils.createJsonAsString(success);
+        return JsonUtils.createJson(success);
     }
 
     /**
@@ -51,9 +48,9 @@ public class FollowingController {
         if(DbUtils.isFollowing(follower,following)) {
             DbUtils.unFollowUser(follower,following);
         } else {
-            return JsonUtils.createJsonAsString(fail);
+            return JsonUtils.createJson(fail);
         }
-        return JsonUtils.createJsonAsString(success);
+        return JsonUtils.createJson(success);
     }
 
     /**
@@ -62,11 +59,9 @@ public class FollowingController {
      * @return json containing followers
      */
     @ResponseBody
-    @RequestMapping(value="/users/following", method= RequestMethod.GET)
-    public String retrieveFollowing(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        String user = SpringUtils.getStringAttribute(session,LoginController.USERNAME_ATTRIBUTE);
-        return DbUtils.retrieveFollowing(user);
+    @RequestMapping(value="/users/{userName}/following", method= RequestMethod.GET)
+    public String retrieveFollowing(HttpServletRequest request, @PathVariable String userName) {
+        return DbUtils.retrieveFollowing(userName);
     }
 
     /**
@@ -75,11 +70,9 @@ public class FollowingController {
      * @return json containing followers
      */
     @ResponseBody
-    @RequestMapping(value="/users/followers", method= RequestMethod.GET)
-    public String retrieveFollowers(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        String user = SpringUtils.getStringAttribute(session,LoginController.USERNAME_ATTRIBUTE);
-        return DbUtils.retrieveFollowers(user);
+    @RequestMapping(value="/users/{userName}/followers", method= RequestMethod.GET)
+    public String retrieveFollowers(HttpServletRequest request, @PathVariable String userName) {
+        return DbUtils.retrieveFollowers(userName);
     }
 
 }

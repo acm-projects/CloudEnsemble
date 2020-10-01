@@ -12,21 +12,12 @@ public class JsonUtils {
      * @param pairs as varargs
      * @return json string
      */
-    public static String createJsonAsString(String[]... pairs) {
-        return createJson(pairs).toString();
-    }
-
-    /**
-     * Creates a json string from given key value pairs
-     * @param pairs as varargs
-     * @return json string
-     */
-    public static JSONObject createJson(String[]... pairs) {
+    public static String createJson(String[]... pairs) {
         JSONObject jsonObject = new JSONObject();
         for(String[] pair : pairs) {
             jsonObject.put(pair[0], pair[1]);
         }
-        return jsonObject;
+        return jsonObject.toString();
     }
 
     /**

@@ -1,8 +1,6 @@
 package edu.utdallas.pages.controllers;
 
 import edu.utdallas.pages.services.ITagsService;
-import edu.utdallas.pages.services.MySqlDataSource;
-import edu.utdallas.pages.services.TagsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -13,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class TagsController {
 
-    private ITagsService tagsService = new TagsService(new MySqlDataSource());
+    private ITagsService tagsService;
 
     @Autowired
     public TagsController(@Qualifier("TagsService") ITagsService tagsService) {

@@ -2,7 +2,7 @@ package edu.utdallas.pages.services;
 
 import org.springframework.lang.Nullable;
 
-public interface IS3Manager {
+public interface IS3Service {
 
     /**
      * Uploads a file to the bucket

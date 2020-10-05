@@ -1,4 +1,4 @@
-package edu.utdallas.pages;
+package edu.utdallas.pages.implementations;
 
 import com.fasterxml.uuid.Generators;
 import edu.utdallas.pages.services.IDataSource;

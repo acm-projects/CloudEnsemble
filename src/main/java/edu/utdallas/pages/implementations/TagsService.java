@@ -1,9 +1,11 @@
-package edu.utdallas.pages.services;
+package edu.utdallas.pages.implementations;
 
-import edu.utdallas.pages.Database;
 import edu.utdallas.pages.controllers.TagType;
+import edu.utdallas.pages.services.IDataSource;
+import edu.utdallas.pages.services.ITagsService;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service("TagsService")
@@ -11,7 +13,7 @@ public class TagsService implements ITagsService {
 
     private final IDataSource dataSource;
 
-    public TagsService(IDataSource dataSource) {
+    public TagsService(@Qualifier("DataSource") IDataSource dataSource) {
         this.dataSource = dataSource;
     }
 

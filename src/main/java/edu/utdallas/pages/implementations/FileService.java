@@ -1,6 +1,9 @@
-package edu.utdallas.pages.services;
+package edu.utdallas.pages.implementations;
 
-import edu.utdallas.pages.Database;
+import edu.utdallas.pages.services.IDataSource;
+import edu.utdallas.pages.services.IFileService;
+import edu.utdallas.pages.services.IS3Service;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
@@ -8,10 +11,11 @@ import org.springframework.stereotype.Service;
 public class FileService implements IFileService {
 
     private final IDataSource dataSource;
-    private final S3Manager s3Manager = new S3Manager(new AWSBucket());
+    private final IS3Service s3Service;
 
-    public FileService(IDataSource dataSource) {
+    public FileService(@Qualifier("DataSource") IDataSource dataSource, @Qualifier("S3Service") IS3Service s3Service) {
         this.dataSource = dataSource;
+        this.s3Service = s3Service;
     }
 
     /**
@@ -21,7 +25,7 @@ public class FileService implements IFileService {
     public void uploadClip(String user, String name, byte[] fileData) {
         String uuid = Database.getUUID().toString();
         //Upload to S3 Bucket
-        s3Manager.uploadFile(uuid,fileData);
+        s3Service.uploadFile(uuid,fileData);
         //Insert in database
         Database.query(dataSource,dataSource.getQuery("INSERT_CLIP"),uuid,user,name,Database.getTime());
     }
@@ -33,7 +37,7 @@ public class FileService implements IFileService {
     public void uploadPic(String user, byte[] fileData) {
         String uuid = Database.getUUID().toString();
         //Upload to S3 Bucket
-        s3Manager.uploadFile(uuid,fileData);
+        s3Service.uploadFile(uuid,fileData);
         //Insert in database
         Database.query(dataSource,dataSource.getQuery("ADD_PIC"),uuid,user);
     }
@@ -54,7 +58,7 @@ public class FileService implements IFileService {
     public byte[] retrievePicData(String user) {
         String path = retrievePicKey(user);
         if(!path.equals("")) {
-            return s3Manager.retrieveFile(path);
+            return s3Service.retrieveFile(path);
         } else {
             return null;
         }
@@ -76,7 +80,7 @@ public class FileService implements IFileService {
     public byte[] retrieveClipData(String user, String name) {
         String path = retrieveClipKey(user,name);
         if(!path.equals("")) {
-            return s3Manager.retrieveFile(path);
+            return s3Service.retrieveFile(path);
         } else {
             return null;
         }
@@ -88,7 +92,7 @@ public class FileService implements IFileService {
     @Override
     public void deleteClip(String user, String name) {
         //Delete from S3 Bucket
-        s3Manager.deleteFile(retrieveClipKey(user,name));
+        s3Service.deleteFile(retrieveClipKey(user,name));
         //Delete from database
         Database.query(dataSource,dataSource.getQuery("DELETE_CLIP"),user,name);
     }

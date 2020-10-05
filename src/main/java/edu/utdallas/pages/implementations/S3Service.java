@@ -1,4 +1,4 @@
-package edu.utdallas.pages.services;
+package edu.utdallas.pages.implementations;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -6,17 +6,24 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.*;
+import edu.utdallas.pages.services.IAWSBucket;
+import edu.utdallas.pages.services.IS3Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-public class S3Manager implements IS3Manager{
+@Service("S3Service")
+public class S3Service implements IS3Service {
 
     private final IAWSBucket bucket;
     private final BasicAWSCredentials awsCredentials;
 
-    public S3Manager(IAWSBucket bucket) {
+    @Autowired
+    public S3Service(@Qualifier("AWSBucket") IAWSBucket bucket) {
         this.bucket = bucket;
         this.awsCredentials = new BasicAWSCredentials(bucket.getAccessID(),bucket.getAccessKey());
     }
@@ -54,9 +61,6 @@ public class S3Manager implements IS3Manager{
      */
     @Nullable
     public byte[] retrieveFile(String fileName) {
-        System.out.println(awsCredentials);
-        System.out.println(awsCredentials.getAWSAccessKeyId());
-        System.out.println(awsCredentials.getAWSSecretKey());
         AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_2)
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials)).build();
 

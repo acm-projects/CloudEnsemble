@@ -1,6 +1,8 @@
-package edu.utdallas.pages.services;
+package edu.utdallas.pages.implementations;
 
-import edu.utdallas.pages.Database;
+import edu.utdallas.pages.services.IDataSource;
+import edu.utdallas.pages.services.IFollowersService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service("FollowersService")
@@ -8,7 +10,7 @@ public class FollowersService implements IFollowersService {
 
     private final IDataSource dataSource;
 
-    public FollowersService(IDataSource dataSource) {
+    public FollowersService(@Qualifier("DataSource") IDataSource dataSource) {
         this.dataSource = dataSource;
     }
 

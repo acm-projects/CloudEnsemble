@@ -1,7 +1,8 @@
-package edu.utdallas.pages.services;
+package edu.utdallas.pages.implementations;
 
-import edu.utdallas.pages.Database;
-import edu.utdallas.pages.utils.HashManager;
+import edu.utdallas.pages.services.ICredentialsService;
+import edu.utdallas.pages.services.IDataSource;
+import edu.utdallas.pages.services.IHashService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +10,13 @@ import org.springframework.stereotype.Service;
 public class CredentialsService implements ICredentialsService {
 
     private static final String DEFAULT_PROFILE_PIC_KEY = "default_profile_pic.png";
-    private final IDataSource dataSource;
 
-    public CredentialsService(@Qualifier("DataSource") IDataSource dataSource) {
+    private final IDataSource dataSource;
+    private final IHashService hashService;
+
+    public CredentialsService(@Qualifier("DataSource") IDataSource dataSource, @Qualifier("HashService") IHashService hashService) {
         this.dataSource = dataSource;
+        this.hashService = hashService;
     }
 
     /**
@@ -20,9 +24,9 @@ public class CredentialsService implements ICredentialsService {
      */
     @Override
     public void register(String email, String username, String password) {
-        String salt = HashManager.generateSalt();
+        String salt = hashService.generateSalt();
         Database.query(dataSource,dataSource.getQuery("REGISTER"),username,
-                email,DEFAULT_PROFILE_PIC_KEY,HashManager.hashString(password,salt),salt);
+                email,DEFAULT_PROFILE_PIC_KEY, hashService.hashString(password,salt),salt);
     }
 
     /**
@@ -31,7 +35,7 @@ public class CredentialsService implements ICredentialsService {
     @Override
     public String login(String email, String password) {
         return Database.retrieve(dataSource,"user_name",dataSource.getQuery("LOGIN"),email,
-                HashManager.hashString(password,getSalt(email)));
+                hashService.hashString(password,getSalt(email)));
     }
 
     /**

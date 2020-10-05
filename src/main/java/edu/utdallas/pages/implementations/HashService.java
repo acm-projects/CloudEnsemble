@@ -1,29 +1,27 @@
 /*
- * Hashing helper classs
+ * Hashing service class
  * 4/22/20
  */
-package edu.utdallas.pages.utils;
+package edu.utdallas.pages.implementations;
 
+import edu.utdallas.pages.services.IHashService;
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
-/**
- *
- * @author Joseph
- */
-public class HashManager {
+@Service("HashService")
+public class HashService implements IHashService {
 
     /**
      * Hashes a string
      * @param input string to hash
      * @return hashed string
      */
-    public static String hashString(String input, String salt)
-    {
+    public String hashString(String input, String salt) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             md.reset();
@@ -46,7 +44,7 @@ public class HashManager {
      * Generates a random salt
      * @return salt
      */
-    public static String generateSalt() {
+    public String generateSalt() {
         SecureRandom random = new SecureRandom();
         byte[] bytes = new byte[20];
         random.nextBytes(bytes);
@@ -58,7 +56,7 @@ public class HashManager {
      * @param input string
      * @return bytes
      */
-    public static String bytesToString(byte[] input) {
+    public String bytesToString(byte[] input) {
         return Base64.encodeBase64String(input);
     }
 
@@ -67,17 +65,9 @@ public class HashManager {
      * @param input bytes
      * @return string
      */
-    public static byte[] stringToBytes(String input) {
+    public byte[] stringToBytes(String input) {
         return Base64.decodeBase64(input);
     }
 
-    public static void main(String[] args) {
-        String salt = generateSalt();
-        System.out.println(salt.length());
-        System.out.println(hashString("test",salt));
-        System.out.println(hashString("test1",generateSalt()));
-        System.out.println(hashString("test",generateSalt()));
-        System.out.println(hashString("test",salt));
-    }
 
 }

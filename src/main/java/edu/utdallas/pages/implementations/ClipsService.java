@@ -1,6 +1,8 @@
-package edu.utdallas.pages.services;
+package edu.utdallas.pages.implementations;
 
-import edu.utdallas.pages.Database;
+import edu.utdallas.pages.services.IClipsService;
+import edu.utdallas.pages.services.IDataSource;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service("ClipsService")
@@ -8,7 +10,7 @@ public class ClipsService implements IClipsService {
 
     private final IDataSource dataSource;
 
-    public ClipsService(IDataSource dataSource) {
+    public ClipsService(@Qualifier("DataSource") IDataSource dataSource) {
         this.dataSource = dataSource;
     }
 

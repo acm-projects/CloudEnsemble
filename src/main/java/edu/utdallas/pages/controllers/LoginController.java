@@ -1,6 +1,6 @@
 package edu.utdallas.pages.controllers;
 
-import edu.utdallas.pages.services.CredentialsService;
+import edu.utdallas.pages.implementations.CredentialsService;
 import edu.utdallas.pages.services.ICredentialsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

@@ -1,4 +1,4 @@
-package edu.utdallas.pages;
+package edu.utdallas.pages.utils;
 
 import javax.servlet.http.HttpSession;
 

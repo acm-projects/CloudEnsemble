@@ -1,5 +1,10 @@
-package edu.utdallas.pages;
+package edu.utdallas.pages.controllers;
 
+import edu.utdallas.pages.models.*;
+import edu.utdallas.pages.utils.JsonUtils;
+import edu.utdallas.pages.utils.SpringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,6 +13,13 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class FollowingController {
+
+    private IFollowersService followersService;
+
+    @Autowired
+    public FollowingController(@Qualifier("FollowersService") IFollowersService followersService) {
+        this.followersService = followersService;
+    }
 
     /**
      * Follows a user
@@ -22,9 +34,9 @@ public class FollowingController {
         String[] success = {"status","success"};
         String[] fail = {"status","fail"};
         HttpSession session = request.getSession();
-        String follower = SpringUtils.getStringAttribute(session,LoginController.USERNAME_ATTRIBUTE);
-        if(!DbUtils.isFollowing(follower,following)) {
-            DbUtils.followUser(follower,following);
+        String follower = SpringUtils.getStringAttribute(session, LoginController.USERNAME_ATTRIBUTE);
+        if(!followersService.isFollowing(follower,following)) {
+            followersService.followUser(follower,following);
         } else {
             return JsonUtils.createJson(fail);
         }
@@ -41,16 +53,14 @@ public class FollowingController {
     @RequestMapping(value="/users/unfollow", method= RequestMethod.POST)
     public String unFollowUser(HttpServletRequest request,
                                @RequestParam(value="user") String following) {
-        String[] success = {"status","success"};
-        String[] fail = {"status","fail"};
         HttpSession session = request.getSession();
         String follower = SpringUtils.getStringAttribute(session,LoginController.USERNAME_ATTRIBUTE);
-        if(DbUtils.isFollowing(follower,following)) {
-            DbUtils.unFollowUser(follower,following);
+        if(followersService.isFollowing(follower,following)) {
+            followersService.unFollowUser(follower,following);
         } else {
-            return JsonUtils.createJson(fail);
+            return Status.FAIL.getJson();
         }
-        return JsonUtils.createJson(success);
+        return Status.SUCCESS.getJson();
     }
 
     /**
@@ -61,7 +71,7 @@ public class FollowingController {
     @ResponseBody
     @RequestMapping(value="/users/{userName}/following", method= RequestMethod.GET)
     public String retrieveFollowing(HttpServletRequest request, @PathVariable String userName) {
-        return DbUtils.retrieveFollowing(userName);
+        return followersService.retrieveFollowing(userName);
     }
 
     /**
@@ -72,7 +82,7 @@ public class FollowingController {
     @ResponseBody
     @RequestMapping(value="/users/{userName}/followers", method= RequestMethod.GET)
     public String retrieveFollowers(HttpServletRequest request, @PathVariable String userName) {
-        return DbUtils.retrieveFollowers(userName);
+        return followersService.retrieveFollowers(userName);
     }
 
 }

@@ -2,7 +2,7 @@
  * Hashing helper classs
  * 4/22/20
  */
-package edu.utdallas.pages;
+package edu.utdallas.pages.utils;
 
 import org.apache.commons.codec.binary.Base64;
 

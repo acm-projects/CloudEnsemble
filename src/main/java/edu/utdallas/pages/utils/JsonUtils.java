@@ -1,4 +1,4 @@
-package edu.utdallas.pages;
+package edu.utdallas.pages.utils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

@@ -1,5 +1,9 @@
-package edu.utdallas.pages;
+package edu.utdallas.pages.controllers;
 
+import edu.utdallas.pages.models.*;
+import edu.utdallas.pages.utils.SpringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,6 +25,16 @@ import java.util.Iterator;
 @Controller
 public class FileController {
 
+    private final IFileService fileService;
+    private final IClipsService clipsManager;
+
+    @Autowired
+    public FileController(@Qualifier("ClipsService") IClipsService clipsService,
+                           @Qualifier("FileService") IFileService fileService) {
+        this.clipsManager = clipsService;
+        this.fileService = fileService;
+    }
+
     /**
      * Post request to upload a new clip on user's account
      * @param request multi part request that includes file
@@ -29,29 +43,28 @@ public class FileController {
     @ResponseBody
     @RequestMapping(value = "/upload/clip", method = RequestMethod.POST)
     public String handleClipUpload(MultipartHttpServletRequest request) {
-        String[] success = {"status","success"};
-        String[] fail = {"status","fail"};
-        String[] taken = {"status","taken"};
         Iterator<String> iterator = request.getFileNames();
         MultipartFile multiFile = request.getFile(iterator.next());
         HttpSession session = request.getSession();
         try {
             if(multiFile != null) {
-                String userName = SpringUtils.getStringAttribute(session,LoginController.USERNAME_ATTRIBUTE);
-                if(!DbUtils.clipExists(userName, multiFile.getOriginalFilename())) {
-                    DbUtils.uploadClip(userName, multiFile.getOriginalFilename(), multiFile.getBytes());
+                String userName = SpringUtils.getStringAttribute(session, LoginController.USERNAME_ATTRIBUTE);
+                if(userName == null || userName.equals("")) {
+                    return Status.DENIED.getJson();
+                }
+                if(!clipsManager.clipExists(userName, multiFile.getOriginalFilename())) {
+                    fileService.uploadClip(userName, multiFile.getOriginalFilename(), multiFile.getBytes());
                 } else {
-                    return JsonUtils.createJson(taken);
+                    return Status.TAKEN.getJson();
                 }
             } else {
-                return JsonUtils.createJson(fail);
+                return Status.FAIL.getJson();
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return JsonUtils.createJson(fail);
+            return Status.FAIL.getJson();
         }
-
-        return JsonUtils.createJson(success);
+        return Status.SUCCESS.getJson();
     }
 
     /**
@@ -62,23 +75,24 @@ public class FileController {
     @ResponseBody
     @RequestMapping(value = "/upload/pic", method = RequestMethod.POST)
     public String handleProfilePicUpload(MultipartHttpServletRequest request) {
-        String[] success = {"status","success"};
-        String[] fail = {"status","failed"};
         Iterator<String> iterator = request.getFileNames();
         MultipartFile multiFile = request.getFile(iterator.next());
         HttpSession session = request.getSession();
         try {
             if(multiFile != null) {
                 String userName = SpringUtils.getStringAttribute(session,LoginController.USERNAME_ATTRIBUTE);
-                DbUtils.uploadPic(userName, multiFile.getBytes());
+                if(userName == null || userName.equals("")) {
+                    return Status.DENIED.getJson();
+                }
+                fileService.uploadPic(userName, multiFile.getBytes());
             } else {
-                return JsonUtils.createJson(fail);
+                return Status.FAIL.getJson();
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return JsonUtils.createJson(fail);
+            return Status.FAIL.getJson();
         }
-        return JsonUtils.createJson(success);
+        return Status.SUCCESS.getJson();
     }
 
     /**
@@ -93,7 +107,7 @@ public class FileController {
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public HttpEntity<byte[]> retrieveClip(HttpServletRequest request,
                                            @PathVariable String userName, @PathVariable String clipName) {
-        byte[] data = DbUtils.retrieveClipData(userName,clipName);
+        byte[] data = fileService.retrieveClipData(userName,clipName);
         HttpHeaders header = new HttpHeaders();
         header.setContentType(new MediaType("audio", "wav"));
         if(data == null) {
@@ -112,7 +126,7 @@ public class FileController {
     @RequestMapping(value = "/profile/pic", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
     public HttpEntity<byte[]> retrievePic(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        byte[] data = DbUtils.retrievePicData(SpringUtils.getStringAttribute(session,LoginController.USERNAME_ATTRIBUTE));
+        byte[] data = fileService.retrievePicData(SpringUtils.getStringAttribute(session,LoginController.USERNAME_ATTRIBUTE));
         HttpHeaders header = new HttpHeaders();
         header.setContentType(new MediaType("image", "png"));
         if(data != null) {

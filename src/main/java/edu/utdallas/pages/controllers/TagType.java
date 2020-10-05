@@ -1,4 +1,4 @@
-package edu.utdallas.pages;
+package edu.utdallas.pages.controllers;
 
 public enum TagType {
     Genre("1"),

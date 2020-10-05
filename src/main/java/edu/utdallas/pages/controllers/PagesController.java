@@ -1,4 +1,4 @@
-package edu.utdallas.pages;
+package edu.utdallas.pages.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

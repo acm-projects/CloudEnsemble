@@ -16,6 +16,51 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `bands`
+--
+
+DROP TABLE IF EXISTS `bands`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bands` (
+  `band_name` varchar(100) NOT NULL,
+  `date_created` varchar(100) NOT NULL,
+  PRIMARY KEY (`band_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bands`
+--
+
+LOCK TABLES `bands` WRITE;
+/*!40000 ALTER TABLE `bands` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bands` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bands_members`
+--
+
+DROP TABLE IF EXISTS `bands_members`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bands_members` (
+  `band_name` varchar(100) NOT NULL,
+  `band_member` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bands_members`
+--
+
+LOCK TABLES `bands_members` WRITE;
+/*!40000 ALTER TABLE `bands_members` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bands_members` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `clips`
 --
 
@@ -37,7 +82,7 @@ CREATE TABLE `clips` (
 
 LOCK TABLES `clips` WRITE;
 /*!40000 ALTER TABLE `clips` DISABLE KEYS */;
-INSERT INTO `clips` VALUES ('6b2e25d2-0067-11eb-84b6-a5ff373173f6','username_test','sound_testing.wav','2020/09/26 21:16:15'),('c0295398-012a-11eb-9672-85303f65d6cd','username_test','sound_test.wav','2020/09/27 20:34:29');
+INSERT INTO `clips` VALUES ('6b2e25d2-0067-11eb-84b6-a5ff373173f6','username_test','sound_testing.wav','2020/09/26 21:16:15'),('9356c3de-0386-11eb-89f7-ebfd53bd0672','username_test','Windows_snd.mp3','2020/09/30 20:36:50'),('9fce6edd-046b-11eb-900a-59103fe2c6be','username_test','Come As You Are.mp3','2020/10/01 23:56:31'),('c0295398-012a-11eb-9672-85303f65d6cd','username_test','sound_test.wav','2020/09/27 20:34:29'),('f8132f6d-0391-11eb-8260-eb04af04ff1d','username_test','Windows_sound.mp3','2020/09/30 21:58:24');
 /*!40000 ALTER TABLE `clips` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,6 +105,7 @@ CREATE TABLE `clips_tags` (
 
 LOCK TABLES `clips_tags` WRITE;
 /*!40000 ALTER TABLE `clips_tags` DISABLE KEYS */;
+INSERT INTO `clips_tags` VALUES ('6b2e25d2-0067-11eb-84b6-a5ff373173f6','Rock'),('6b2e25d2-0067-11eb-84b6-a5ff373173f6','Radiohead');
 /*!40000 ALTER TABLE `clips_tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,10 +192,11 @@ DROP TABLE IF EXISTS `tags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tags` (
-  `tag_name` varchar(50) NOT NULL,
+  `tag_id` varchar(50) NOT NULL,
   `uses` int(11) NOT NULL,
   `tag_type` int(11) NOT NULL,
-  PRIMARY KEY (`tag_name`)
+  PRIMARY KEY (`tag_id`),
+  UNIQUE KEY `tag_name_UNIQUE` (`tag_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -159,7 +206,7 @@ CREATE TABLE `tags` (
 
 LOCK TABLES `tags` WRITE;
 /*!40000 ALTER TABLE `tags` DISABLE KEYS */;
-INSERT INTO `tags` VALUES ('Mozart',0,2);
+INSERT INTO `tags` VALUES ('Radiohead',1,2),('Rock',1,1);
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -172,4 +219,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-29 23:47:13
+-- Dump completed on 2020-10-04 23:41:47

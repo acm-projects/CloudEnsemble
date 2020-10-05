@@ -1,8 +1,8 @@
 package edu.utdallas.pages.controllers;
 
-import edu.utdallas.pages.models.ITagsService;
-import edu.utdallas.pages.models.MySqlDataSource;
-import edu.utdallas.pages.models.TagsService;
+import edu.utdallas.pages.services.ITagsService;
+import edu.utdallas.pages.services.MySqlDataSource;
+import edu.utdallas.pages.services.TagsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;

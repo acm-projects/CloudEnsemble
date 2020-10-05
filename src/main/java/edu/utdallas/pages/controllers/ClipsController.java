@@ -1,6 +1,6 @@
 package edu.utdallas.pages.controllers;
 
-import edu.utdallas.pages.models.*;
+import edu.utdallas.pages.services.*;
 import edu.utdallas.pages.utils.SpringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

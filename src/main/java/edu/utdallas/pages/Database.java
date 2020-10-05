@@ -1,7 +1,7 @@
 package edu.utdallas.pages;
 
 import com.fasterxml.uuid.Generators;
-import edu.utdallas.pages.models.IDataSource;
+import edu.utdallas.pages.services.IDataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.json.JSONArray;
 import org.json.JSONObject;

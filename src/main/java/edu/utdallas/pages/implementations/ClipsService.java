@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service("ClipsService")
-public class ClipsService implements IClipsService {
-
-    private final IDataSource dataSource;
+public class ClipsService extends DbService implements IClipsService {
 
     public ClipsService(@Qualifier("DataSource") IDataSource dataSource) {
-        this.dataSource = dataSource;
+        super(dataSource);
     }
 
     /**
@@ -20,8 +18,7 @@ public class ClipsService implements IClipsService {
     @Override
     public String retrieveClips(String user) {
         String[] column = {"clip_key","clip_name"};
-        return Database.retrieveAsJsonArr(dataSource,column,column,dataSource.getQuery("RETRIEVE_USER_CLIPS"),user);
-
+        return Database.retrieveAsJsonArr(getDataSource(),column,column,getQuery("RETRIEVE_USER_CLIPS"),user);
     }
 
     /**
@@ -29,7 +26,7 @@ public class ClipsService implements IClipsService {
      */
     @Override
     public boolean clipExists(String user, String name) {
-        return Database.exists(dataSource,dataSource.getQuery("RETRIEVE_CLIP"),user,name);
+        return Database.exists(getDataSource(),getQuery("RETRIEVE_CLIP"),user,name);
     }
 
 }

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class TagsController {
 
-    private ITagsService tagsService;
+    private final ITagsService tagsService;
 
     @Autowired
     public TagsController(@Qualifier("TagsService") ITagsService tagsService) {

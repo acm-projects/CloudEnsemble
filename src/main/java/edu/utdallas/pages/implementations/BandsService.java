@@ -8,40 +8,38 @@ import org.springframework.stereotype.Service;
 import java.sql.SQLException;
 
 @Service("BandsService")
-public class BandsService implements IBandsService {
-
-    private final IDataSource dataSource;
+public class BandsService extends DbService implements IBandsService {
 
     public BandsService(@Qualifier("DataSource") IDataSource dataSource) {
-        this.dataSource = dataSource;
+        super(dataSource);
     }
 
     /**
      * {@inheritDoc}
      */
     public void newBand(String bandName) throws SQLException {
-        Database.queryUnchecked(dataSource, dataSource.getQuery("NEW_BAND"), bandName);
+        Database.queryUnchecked(getDataSource(), getQuery("NEW_BAND"), bandName);
     }
 
     /**
      * {@inheritDoc}
      */
     public void joinBand(String userName, String bandName) {
-        Database.query(dataSource, dataSource.getQuery("JOIN_BAND"), bandName);
+        Database.query(getDataSource(), getQuery("JOIN_BAND"), bandName);
     }
 
     /**
      * {@inheritDoc}
      */
     public void leaveBand(String userName, String bandName) {
-        Database.query(dataSource, dataSource.getQuery("LEAVE_BAND"), bandName);
+        Database.query(getDataSource(), getQuery("LEAVE_BAND"), bandName);
     }
 
     /**
      * {@inheritDoc}
      */
     public  boolean inBand(String userName, String bandName) {
-        return Database.exists(dataSource, dataSource.getQuery("IN_BAND"), userName, bandName);
+        return Database.exists(getDataSource(), getQuery("IN_BAND"), userName, bandName);
     }
 
 }

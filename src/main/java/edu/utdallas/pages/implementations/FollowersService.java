@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service("FollowersService")
-public class FollowersService implements IFollowersService {
-
-    private final IDataSource dataSource;
+public class FollowersService extends DbService implements IFollowersService {
 
     public FollowersService(@Qualifier("DataSource") IDataSource dataSource) {
-        this.dataSource = dataSource;
+        super(dataSource);
     }
 
     /**
@@ -19,7 +17,7 @@ public class FollowersService implements IFollowersService {
      */
     @Override
     public void followUser(String follower, String following) {
-        Database.query(dataSource,dataSource.getQuery("FOLLOW"),follower,following);
+        Database.query(getDataSource(),getQuery("FOLLOW"),follower,following);
     }
 
     /**
@@ -27,7 +25,7 @@ public class FollowersService implements IFollowersService {
      */
     @Override
     public void unFollowUser(String follower, String following) {
-        Database.query(dataSource,dataSource.getQuery("UNFOLLOW"),follower,following);
+        Database.query(getDataSource(),getQuery("UNFOLLOW"),follower,following);
     }
 
     /**
@@ -35,7 +33,7 @@ public class FollowersService implements IFollowersService {
      */
     @Override
     public boolean isFollowing(String follower, String following) {
-        return Database.exists(dataSource,dataSource.getQuery("IS_FOLLOWING"),follower,following);
+        return Database.exists(getDataSource(),getQuery("IS_FOLLOWING"),follower,following);
     }
 
     /**
@@ -44,7 +42,7 @@ public class FollowersService implements IFollowersService {
     @Override
     public String retrieveFollowers(String member) {
         String[] column = {"follower"};
-        return Database.retrieveAsJsonArr(dataSource,column,column,dataSource.getQuery("RETRIEVE_FOLLOWERS"),member);
+        return Database.retrieveAsJsonArr(getDataSource(),column,column,getQuery("RETRIEVE_FOLLOWERS"),member);
     }
 
     /**
@@ -53,7 +51,7 @@ public class FollowersService implements IFollowersService {
     @Override
     public String retrieveFollowing(String member) {
         String[] column = {"following"};
-        return Database.retrieveAsJsonArr(dataSource,column,column,dataSource.getQuery("RETRIEVE_FOLLOWING"), member);
+        return Database.retrieveAsJsonArr(getDataSource(),column,column,getQuery("RETRIEVE_FOLLOWING"), member);
     }
 
 }

@@ -8,13 +8,12 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 @Service("FileService")
-public class FileService implements IFileService {
+public class FileService extends DbService implements IFileService {
 
-    private final IDataSource dataSource;
     private final IS3Service s3Service;
 
     public FileService(@Qualifier("DataSource") IDataSource dataSource, @Qualifier("S3Service") IS3Service s3Service) {
-        this.dataSource = dataSource;
+        super(dataSource);
         this.s3Service = s3Service;
     }
 
@@ -27,7 +26,7 @@ public class FileService implements IFileService {
         //Upload to S3 Bucket
         s3Service.uploadFile(uuid,fileData);
         //Insert in database
-        Database.query(dataSource,dataSource.getQuery("INSERT_CLIP"),uuid,user,name,Database.getTime());
+        Database.query(getDataSource(),getQuery("INSERT_CLIP"),uuid,user,name,Database.getTime());
     }
 
     /**
@@ -39,7 +38,7 @@ public class FileService implements IFileService {
         //Upload to S3 Bucket
         s3Service.uploadFile(uuid,fileData);
         //Insert in database
-        Database.query(dataSource,dataSource.getQuery("ADD_PIC"),uuid,user);
+        Database.query(getDataSource(),getQuery("ADD_PIC"),uuid,user);
     }
 
     /**
@@ -47,7 +46,7 @@ public class FileService implements IFileService {
      */
     @Override
     public String retrievePicKey(String user) {
-        return Database.retrieve(dataSource,"pic_key",dataSource.getQuery("RETRIEVE_PIC"),user);
+        return Database.retrieve(getDataSource(),"pic_key",getQuery("RETRIEVE_PIC"),user);
     }
 
     /**
@@ -69,7 +68,7 @@ public class FileService implements IFileService {
      */
     @Override
     public String retrieveClipKey(String user, String name) {
-        return Database.retrieve(dataSource,"clip_key",dataSource.getQuery("RETRIEVE_CLIP"),user,name);
+        return Database.retrieve(getDataSource(),"clip_key",getQuery("RETRIEVE_CLIP"),user,name);
     }
 
     /**
@@ -94,7 +93,7 @@ public class FileService implements IFileService {
         //Delete from S3 Bucket
         s3Service.deleteFile(retrieveClipKey(user,name));
         //Delete from database
-        Database.query(dataSource,dataSource.getQuery("DELETE_CLIP"),user,name);
+        Database.query(getDataSource(),getQuery("DELETE_CLIP"),user,name);
     }
 
 }

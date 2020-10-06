@@ -42,7 +42,7 @@ public class ClipsController {
     @ResponseBody
     @RequestMapping(value="/clips/delete", method = RequestMethod.POST)
     public String deleteClip(HttpServletRequest request,
-                             @RequestParam(value="clip_name") String clipName) {
+                             @RequestParam(value="sample_name") String clipName) {
         HttpSession session = request.getSession();
         String userName = SpringUtils.getStringAttribute(session, LoginController.USERNAME_ATTRIBUTE);
         if(clipsService.clipExists(userName,clipName)) {

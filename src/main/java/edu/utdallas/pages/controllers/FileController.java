@@ -26,12 +26,12 @@ import java.util.Iterator;
 public class FileController {
 
     private final IFileService fileService;
-    private final IClipsService clipsManager;
+    private final IClipsService clipService;
 
     @Autowired
-    public FileController(@Qualifier("ClipsService") IClipsService clipsService,
+    public FileController(@Qualifier("ClipsService") IClipsService clipService,
                            @Qualifier("FileService") IFileService fileService) {
-        this.clipsManager = clipsService;
+        this.clipService = clipService;
         this.fileService = fileService;
     }
 
@@ -52,7 +52,7 @@ public class FileController {
                 if(userName == null || userName.equals("")) {
                     return Status.DENIED.getJson();
                 }
-                if(!clipsManager.clipExists(userName, multiFile.getOriginalFilename())) {
+                if(!clipService.clipExists(userName, multiFile.getOriginalFilename())) {
                     fileService.uploadClip(userName, multiFile.getOriginalFilename(), multiFile.getBytes());
                 } else {
                     return Status.TAKEN.getJson();

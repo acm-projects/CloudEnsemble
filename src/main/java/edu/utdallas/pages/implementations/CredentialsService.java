@@ -7,15 +7,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service("CredentialsService")
-public class CredentialsService implements ICredentialsService {
+public class CredentialsService extends DbService implements ICredentialsService {
 
     private static final String DEFAULT_PROFILE_PIC_KEY = "default_profile_pic.png";
 
-    private final IDataSource dataSource;
     private final IHashService hashService;
 
     public CredentialsService(@Qualifier("DataSource") IDataSource dataSource, @Qualifier("HashService") IHashService hashService) {
-        this.dataSource = dataSource;
+        super(dataSource);
         this.hashService = hashService;
     }
 
@@ -25,7 +24,7 @@ public class CredentialsService implements ICredentialsService {
     @Override
     public void register(String email, String username, String password) {
         String salt = hashService.generateSalt();
-        Database.query(dataSource,dataSource.getQuery("REGISTER"),username,
+        Database.query(getDataSource(),getQuery("REGISTER"),username,
                 email,DEFAULT_PROFILE_PIC_KEY, hashService.hashString(password,salt),salt);
     }
 
@@ -34,7 +33,7 @@ public class CredentialsService implements ICredentialsService {
      */
     @Override
     public String login(String email, String password) {
-        return Database.retrieve(dataSource,"user_name",dataSource.getQuery("LOGIN"),email,
+        return Database.retrieve(getDataSource(),"user_name",getQuery("LOGIN"),email,
                 hashService.hashString(password,getSalt(email)));
     }
 
@@ -43,7 +42,7 @@ public class CredentialsService implements ICredentialsService {
      */
     @Override
     public String getSalt(String email) {
-        return Database.retrieve(dataSource,"salt",dataSource.getQuery("RETRIEVE_SALT"),email);
+        return Database.retrieve(getDataSource(),"salt",getQuery("RETRIEVE_SALT"),email);
     }
 
     /**
@@ -51,7 +50,7 @@ public class CredentialsService implements ICredentialsService {
      */
     @Override
     public boolean checkEmail(String email) {
-        return !Database.exists(dataSource,dataSource.getQuery("CHECK_EMAIL"),email);
+        return !Database.exists(getDataSource(),getQuery("CHECK_EMAIL"),email);
     }
 
     /**
@@ -59,6 +58,6 @@ public class CredentialsService implements ICredentialsService {
      */
     @Override
     public boolean checkName(String name) {
-        return !Database.exists(dataSource,dataSource.getQuery("CHECK_NAME"),name);
+        return !Database.exists(getDataSource(),getQuery("CHECK_NAME"),name);
     }
 }

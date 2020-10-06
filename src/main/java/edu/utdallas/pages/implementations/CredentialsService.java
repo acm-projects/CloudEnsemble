@@ -24,7 +24,7 @@ public class CredentialsService extends DbService implements ICredentialsService
     @Override
     public void register(String email, String username, String password) {
         String salt = hashService.generateSalt();
-        Database.query(getDataSource(),getQuery("REGISTER"),username,
+        query(getQuery("REGISTER"),username,
                 email,DEFAULT_PROFILE_PIC_KEY, hashService.hashString(password,salt),salt);
     }
 
@@ -33,7 +33,7 @@ public class CredentialsService extends DbService implements ICredentialsService
      */
     @Override
     public String login(String email, String password) {
-        return Database.retrieve(getDataSource(),"user_name",getQuery("LOGIN"),email,
+        return retrieve("user_name",getQuery("LOGIN"),email,
                 hashService.hashString(password,getSalt(email)));
     }
 
@@ -42,7 +42,7 @@ public class CredentialsService extends DbService implements ICredentialsService
      */
     @Override
     public String getSalt(String email) {
-        return Database.retrieve(getDataSource(),"salt",getQuery("RETRIEVE_SALT"),email);
+        return retrieve("salt",getQuery("RETRIEVE_SALT"),email);
     }
 
     /**
@@ -50,7 +50,7 @@ public class CredentialsService extends DbService implements ICredentialsService
      */
     @Override
     public boolean checkEmail(String email) {
-        return !Database.exists(getDataSource(),getQuery("CHECK_EMAIL"),email);
+        return !exists(getQuery("CHECK_EMAIL"),email);
     }
 
     /**
@@ -58,6 +58,6 @@ public class CredentialsService extends DbService implements ICredentialsService
      */
     @Override
     public boolean checkName(String name) {
-        return !Database.exists(getDataSource(),getQuery("CHECK_NAME"),name);
+        return !exists(getQuery("CHECK_NAME"),name);
     }
 }

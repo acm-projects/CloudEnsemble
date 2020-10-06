@@ -22,11 +22,11 @@ public class FileService extends DbService implements IFileService {
      */
     @Override
     public void uploadClip(String user, String name, byte[] fileData) {
-        String uuid = Database.getUUID().toString();
+        String uuid = getUUID().toString();
         //Upload to S3 Bucket
         s3Service.uploadFile(uuid,fileData);
         //Insert in database
-        Database.query(getDataSource(),getQuery("INSERT_CLIP"),uuid,user,name,Database.getTime());
+        query(getQuery("INSERT_CLIP"),uuid,user,name,getTime());
     }
 
     /**
@@ -34,11 +34,11 @@ public class FileService extends DbService implements IFileService {
      */
     @Override
     public void uploadPic(String user, byte[] fileData) {
-        String uuid = Database.getUUID().toString();
+        String uuid = getUUID().toString();
         //Upload to S3 Bucket
         s3Service.uploadFile(uuid,fileData);
         //Insert in database
-        Database.query(getDataSource(),getQuery("ADD_PIC"),uuid,user);
+        query(getQuery("ADD_PIC"),uuid,user);
     }
 
     /**
@@ -46,7 +46,7 @@ public class FileService extends DbService implements IFileService {
      */
     @Override
     public String retrievePicKey(String user) {
-        return Database.retrieve(getDataSource(),"pic_key",getQuery("RETRIEVE_PIC"),user);
+        return retrieve("pic_key",getQuery("RETRIEVE_PIC"),user);
     }
 
     /**
@@ -68,7 +68,7 @@ public class FileService extends DbService implements IFileService {
      */
     @Override
     public String retrieveClipKey(String user, String name) {
-        return Database.retrieve(getDataSource(),"clip_key",getQuery("RETRIEVE_CLIP"),user,name);
+        return retrieve("clip_key",getQuery("RETRIEVE_CLIP"),user,name);
     }
 
     /**
@@ -93,7 +93,7 @@ public class FileService extends DbService implements IFileService {
         //Delete from S3 Bucket
         s3Service.deleteFile(retrieveClipKey(user,name));
         //Delete from database
-        Database.query(getDataSource(),getQuery("DELETE_CLIP"),user,name);
+        query(getQuery("DELETE_CLIP"),user,name);
     }
 
 }

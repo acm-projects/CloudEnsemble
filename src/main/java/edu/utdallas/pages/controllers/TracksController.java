@@ -18,7 +18,7 @@ public class TracksController {
     private final ITracksService tracksService;
 
     @Autowired
-    public TracksController(@Qualifier("TracksController") ITracksService tracksService) {
+    public TracksController(@Qualifier("TracksService") ITracksService tracksService) {
         this.tracksService = tracksService;
     }
 
@@ -60,10 +60,9 @@ public class TracksController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/tracks/samples", method= RequestMethod.GET)
-    public String retrieve(HttpServletRequest request,
-                             @RequestParam("track_key") String trackKey) {
-        return tracksService.retrieveSamples(trackKey);
+    @RequestMapping(value="/tracks/{trackName}/samples", method= RequestMethod.GET)
+    public String retrieve(HttpServletRequest request, String trackName) {
+        return tracksService.retrieveSamples(trackName);
     }
 
 

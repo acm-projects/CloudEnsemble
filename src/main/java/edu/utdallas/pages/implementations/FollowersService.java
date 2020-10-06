@@ -17,7 +17,7 @@ public class FollowersService extends DbService implements IFollowersService {
      */
     @Override
     public void followUser(String follower, String following) {
-        Database.query(getDataSource(),getQuery("FOLLOW"),follower,following);
+        query(getQuery("FOLLOW"),follower,following);
     }
 
     /**
@@ -25,7 +25,7 @@ public class FollowersService extends DbService implements IFollowersService {
      */
     @Override
     public void unFollowUser(String follower, String following) {
-        Database.query(getDataSource(),getQuery("UNFOLLOW"),follower,following);
+        query(getQuery("UNFOLLOW"),follower,following);
     }
 
     /**
@@ -33,7 +33,7 @@ public class FollowersService extends DbService implements IFollowersService {
      */
     @Override
     public boolean isFollowing(String follower, String following) {
-        return Database.exists(getDataSource(),getQuery("IS_FOLLOWING"),follower,following);
+        return exists(getQuery("IS_FOLLOWING"),follower,following);
     }
 
     /**
@@ -42,7 +42,7 @@ public class FollowersService extends DbService implements IFollowersService {
     @Override
     public String retrieveFollowers(String member) {
         String[] column = {"follower"};
-        return Database.retrieveAsJsonArr(getDataSource(),column,column,getQuery("RETRIEVE_FOLLOWERS"),member);
+        return retrieveAsJsonArr(column,column,getQuery("RETRIEVE_FOLLOWERS"),member);
     }
 
     /**
@@ -51,7 +51,7 @@ public class FollowersService extends DbService implements IFollowersService {
     @Override
     public String retrieveFollowing(String member) {
         String[] column = {"following"};
-        return Database.retrieveAsJsonArr(getDataSource(),column,column,getQuery("RETRIEVE_FOLLOWING"), member);
+        return retrieveAsJsonArr(column,column,getQuery("RETRIEVE_FOLLOWING"), member);
     }
 
 }

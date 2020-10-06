@@ -18,7 +18,7 @@ public class ClipsService extends DbService implements IClipsService {
     @Override
     public String retrieveClips(String user) {
         String[] column = {"clip_key","clip_name"};
-        return Database.retrieveAsJsonArr(getDataSource(),column,column,getQuery("RETRIEVE_USER_CLIPS"),user);
+        return retrieveAsJsonArr(column,column,getQuery("RETRIEVE_USER_CLIPS"),user);
     }
 
     /**
@@ -26,7 +26,7 @@ public class ClipsService extends DbService implements IClipsService {
      */
     @Override
     public boolean clipExists(String user, String name) {
-        return Database.exists(getDataSource(),getQuery("RETRIEVE_CLIP"),user,name);
+        return exists(getQuery("RETRIEVE_CLIP"),user,name);
     }
 
 }

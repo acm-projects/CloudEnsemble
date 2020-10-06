@@ -17,8 +17,7 @@ public class TracksService extends DbService implements ITracksService {
      */
     @Override
     public void newTrack(String trackUploader, String trackName) {
-        Database.query(getDataSource(),getQuery("NEW_TRACK"), Database.getUUID().toString(),
-                trackUploader, trackName, Database.getTime());
+        query(getQuery("INSERT_TRACK"), getUUID().toString(), trackUploader, trackName, getTime());
     }
 
     /**
@@ -26,8 +25,7 @@ public class TracksService extends DbService implements ITracksService {
      */
     @Override
     public void addSample(String trackKey, String clipKey, String time, String rack) {
-        Database.query(getDataSource(),getQuery("ADD_SAMPLE"), Database.getUUID().toString(),
-                trackKey, clipKey, time, rack);
+        query(getQuery("ADD_SAMPLE"), getUUID().toString(), trackKey, clipKey, time, rack);
     }
 
     /**
@@ -35,7 +33,7 @@ public class TracksService extends DbService implements ITracksService {
      */
     @Override
     public void removeSample(String sampleKey) {
-        Database.query(getDataSource(),getQuery("REMOVE_SAMPLE"), sampleKey);
+        query(getQuery("REMOVE_SAMPLE"), sampleKey);
     }
 
     /**
@@ -43,7 +41,7 @@ public class TracksService extends DbService implements ITracksService {
      */
     @Override
     public void moveSample(String sampleKey, String rack, String time) {
-        Database.query(getDataSource(),getQuery("MOVE_SAMPLE"), time, rack, sampleKey);
+        query(getQuery("MOVE_SAMPLE"), time, rack, sampleKey);
     }
 
     /**
@@ -52,6 +50,6 @@ public class TracksService extends DbService implements ITracksService {
     @Override
     public String retrieveSamples(String trackKey) {
         String[] column = {"sample_key","clip_key", "time", "rack"};
-        return Database.retrieveAsJsonArr(getDataSource(),column,column,getQuery("RETRIEVE_USER_CLIPS"),trackKey);
+        return retrieveAsJsonArr(column,column,getQuery("RETRIEVE_SAMPLES"),trackKey);
     }
 }

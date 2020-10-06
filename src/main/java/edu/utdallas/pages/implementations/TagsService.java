@@ -20,7 +20,7 @@ public class TagsService extends DbService implements ITagsService {
      */
     @Override
     public void newTag(String tagId, TagType type) {
-        Database.query(getDataSource(),getQuery("NEW_TAG"),tagId, "0", type.getId());
+        query(getQuery("NEW_TAG"),tagId, "0", type.getId());
     }
 
     /**
@@ -28,8 +28,8 @@ public class TagsService extends DbService implements ITagsService {
      */
     @Override
     public void addTag(String clipKey, String tagId) {
-        Database.query(getDataSource(),getQuery("ADD_TAG"), clipKey, tagId);
-        Database.query(getDataSource(),getQuery("INCREMENT_TAG"), tagId);
+        query(getQuery("ADD_TAG"), clipKey, tagId);
+        query(getQuery("INCREMENT_TAG"), tagId);
     }
 
     /**
@@ -37,7 +37,7 @@ public class TagsService extends DbService implements ITagsService {
      */
     @Override
     public boolean clipHasTag(String clipKey, String tagId) {
-        return Database.exists(getDataSource(),getQuery("CLIP_HAS_TAG"), clipKey, tagId);
+        return exists(getQuery("CLIP_HAS_TAG"), clipKey, tagId);
     }
 
     /**
@@ -45,8 +45,8 @@ public class TagsService extends DbService implements ITagsService {
      */
     @Override
     public void removeTag(String clipKey, String tagId) {
-        Database.query(getDataSource(),getQuery("REMOVE_TAG"), clipKey, tagId);
-        Database.query(getDataSource(),getQuery("DECREMENT_TAG"), tagId);
+        query(getQuery("REMOVE_TAG"), clipKey, tagId);
+        query(getQuery("DECREMENT_TAG"), tagId);
     }
 
     /**
@@ -54,8 +54,8 @@ public class TagsService extends DbService implements ITagsService {
      */
     @Override
     public void removeAllTags(String clipKey) {
-        Database.query(getDataSource(),getQuery("REMOVE_ALL_TAGS"), clipKey);
-        Database.query(getDataSource(),getQuery("DECREMENT_ALL_TAGS"), clipKey);
+        query(getQuery("REMOVE_ALL_TAGS"), clipKey);
+        query(getQuery("DECREMENT_ALL_TAGS"), clipKey);
     }
 
     /**
@@ -65,13 +65,13 @@ public class TagsService extends DbService implements ITagsService {
     public String retrieveTags(String clipKey) {
         String[] columns = {"tag_id"};
         JSONObject obj = new JSONObject();
-        JSONArray genreTags = Database.retrieveAsJsonArrObj(getDataSource(),columns,
+        JSONArray genreTags = retrieveAsJsonArrObj(columns,
                 columns, getQuery("RETRIEVE_GENRE_TAGS"), clipKey);
-        JSONArray artistTags  = Database.retrieveAsJsonArrObj(getDataSource(),columns,
+        JSONArray artistTags  = retrieveAsJsonArrObj(columns,
                 columns, getQuery("RETRIEVE_ARTIST_TAGS"), clipKey);
-        JSONArray instrumentTags = Database.retrieveAsJsonArrObj(getDataSource(),columns,
+        JSONArray instrumentTags = retrieveAsJsonArrObj(columns,
                 columns, getQuery("RETRIEVE_INSTRUMENT_TAGS"), clipKey);
-        JSONArray otherTags  = Database.retrieveAsJsonArrObj(getDataSource(),columns,
+        JSONArray otherTags  = retrieveAsJsonArrObj(columns,
                 columns, getQuery("RETRIEVE_OTHER_TAGS"), clipKey);
         obj.put("genre_tags",genreTags);
         obj.put("artist_tags",artistTags);

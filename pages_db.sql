@@ -16,6 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `access_objects`
+--
+
+DROP TABLE IF EXISTS `access_objects`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `access_objects` (
+  `object_key` varchar(1000) NOT NULL,
+  `access_type` int(11) NOT NULL,
+  `accessor_id` varchar(100) NOT NULL,
+  `accessor_type` int(11) NOT NULL,
+  PRIMARY KEY (`object_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `access_objects`
+--
+
+LOCK TABLES `access_objects` WRITE;
+/*!40000 ALTER TABLE `access_objects` DISABLE KEYS */;
+/*!40000 ALTER TABLE `access_objects` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `bands`
 --
 
@@ -72,6 +97,7 @@ CREATE TABLE `clips` (
   `clip_uploader` varchar(100) NOT NULL,
   `clip_name` varchar(100) NOT NULL,
   `date_uploaded` varchar(100) NOT NULL,
+  `access` varchar(45) NOT NULL,
   PRIMARY KEY (`clip_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -82,31 +108,8 @@ CREATE TABLE `clips` (
 
 LOCK TABLES `clips` WRITE;
 /*!40000 ALTER TABLE `clips` DISABLE KEYS */;
-INSERT INTO `clips` VALUES ('6b2e25d2-0067-11eb-84b6-a5ff373173f6','username_test','sound_testing.wav','2020/09/26 21:16:15'),('9356c3de-0386-11eb-89f7-ebfd53bd0672','username_test','Windows_snd.mp3','2020/09/30 20:36:50'),('9fce6edd-046b-11eb-900a-59103fe2c6be','username_test','Come As You Are.mp3','2020/10/01 23:56:31'),('c0295398-012a-11eb-9672-85303f65d6cd','username_test','sound_test.wav','2020/09/27 20:34:29'),('f8132f6d-0391-11eb-8260-eb04af04ff1d','username_test','Windows_sound.mp3','2020/09/30 21:58:24');
+INSERT INTO `clips` VALUES ('434c8890-08f9-11eb-bc80-ef49b8f384af25','username','Windows_sound.mp3','2020/10/07 19:00:24','0'),('5e289a01-08f9-11eb-bc80-3b151f7de11027','username','Come As You Are.mp3','2020/10/07 19:01:16','0'),('d792b6f6-08f8-11eb-8960-b97a0371e07f28','username','Windows_snd.mp3','2020/10/07 18:57:23','0');
 /*!40000 ALTER TABLE `clips` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `clips_tags`
---
-
-DROP TABLE IF EXISTS `clips_tags`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `clips_tags` (
-  `clip_key` varchar(1000) NOT NULL,
-  `tag_id` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `clips_tags`
---
-
-LOCK TABLES `clips_tags` WRITE;
-/*!40000 ALTER TABLE `clips_tags` DISABLE KEYS */;
-INSERT INTO `clips_tags` VALUES ('6b2e25d2-0067-11eb-84b6-a5ff373173f6','Rock'),('6b2e25d2-0067-11eb-84b6-a5ff373173f6','Radiohead');
-/*!40000 ALTER TABLE `clips_tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -133,7 +136,7 @@ CREATE TABLE `credentials` (
 
 LOCK TABLES `credentials` WRITE;
 /*!40000 ALTER TABLE `credentials` DISABLE KEYS */;
-INSERT INTO `credentials` VALUES ('another_username','another_email','default_profile_pic.png','a1de8b63bc3b0905be12553963d5f9b51ef27eae81696916123a95997d4a9b58cc07e5d434846d88ba9705d8fd6cfb32848f3348fe0915551ab45b70cfaa73d','lYKKohjPY48u63AQrp+vhpOodbc='),('username_test','email_test','default_profile_pic.png','3134fdf8b85b1f9e8571fb81ff7301d248b18a0711cb05dcfc5b9a5f44105755691f390d64c1b7ecbcfa6063bb93f93731b56d58af137d502906856e80399e68','9Z0s/+n5YzhNR4r//swNowijdaE=');
+INSERT INTO `credentials` VALUES ('username','email','default_profile_pic.png','c27957325185ad3d05e85e044ca41d826d08a9e59a941c4de88a19925b29a47792f53e3dd5b82365c200104c7fecea0c5cc54fbc58c6020f345b94d3fe73ba6f','wQWX0D3VH2hWKdRSxGYaJa/9XxY=');
 /*!40000 ALTER TABLE `credentials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,32 +159,34 @@ CREATE TABLE `followers` (
 
 LOCK TABLES `followers` WRITE;
 /*!40000 ALTER TABLE `followers` DISABLE KEYS */;
-INSERT INTO `followers` VALUES ('username_test','another_username');
 /*!40000 ALTER TABLE `followers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tag_types`
+-- Table structure for table `samples`
 --
 
-DROP TABLE IF EXISTS `tag_types`;
+DROP TABLE IF EXISTS `samples`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tag_types` (
-  `type_id` int(11) NOT NULL,
-  `type_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`type_id`)
+CREATE TABLE `samples` (
+  `sample_key` varchar(1000) NOT NULL,
+  `track_key` varchar(1000) NOT NULL,
+  `clip_key` varchar(1000) NOT NULL,
+  `time` int(11) NOT NULL,
+  `rack` int(11) NOT NULL,
+  PRIMARY KEY (`sample_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tag_types`
+-- Dumping data for table `samples`
 --
 
-LOCK TABLES `tag_types` WRITE;
-/*!40000 ALTER TABLE `tag_types` DISABLE KEYS */;
-INSERT INTO `tag_types` VALUES (1,'Genre'),(2,'Artist'),(3,'Instrument'),(4,'Other');
-/*!40000 ALTER TABLE `tag_types` ENABLE KEYS */;
+LOCK TABLES `samples` WRITE;
+/*!40000 ALTER TABLE `samples` DISABLE KEYS */;
+INSERT INTO `samples` VALUES ('fb0100cc-0907-11eb-9432-75bc2b73bb7c26','test_track','434c8890-08f9-11eb-bc80-ef49b8f384af25',51,3);
+/*!40000 ALTER TABLE `samples` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -192,11 +197,9 @@ DROP TABLE IF EXISTS `tags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tags` (
+  `object_key` varchar(1000) NOT NULL,
   `tag_id` varchar(50) NOT NULL,
-  `uses` int(11) NOT NULL,
-  `tag_type` int(11) NOT NULL,
-  PRIMARY KEY (`tag_id`),
-  UNIQUE KEY `tag_name_UNIQUE` (`tag_id`)
+  `tag_type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -206,8 +209,35 @@ CREATE TABLE `tags` (
 
 LOCK TABLES `tags` WRITE;
 /*!40000 ALTER TABLE `tags` DISABLE KEYS */;
-INSERT INTO `tags` VALUES ('Radiohead',1,2),('Rock',1,1);
+INSERT INTO `tags` VALUES ('434c8890-08f9-11eb-bc80-ef49b8f384af25','Rock',1);
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tracks`
+--
+
+DROP TABLE IF EXISTS `tracks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tracks` (
+  `track_key` varchar(1000) NOT NULL,
+  `track_uploader` varchar(100) NOT NULL,
+  `track_name` varchar(100) NOT NULL,
+  `date_uploaded` varchar(100) NOT NULL,
+  `access` varchar(45) NOT NULL,
+  PRIMARY KEY (`track_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tracks`
+--
+
+LOCK TABLES `tracks` WRITE;
+/*!40000 ALTER TABLE `tracks` DISABLE KEYS */;
+INSERT INTO `tracks` VALUES ('eeac43cb-0907-11eb-9432-cbc288c34e2d25','username','test_track','2020/10/07 20:45:23','0');
+/*!40000 ALTER TABLE `tracks` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -219,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-04 23:41:47
+-- Dump completed on 2020-10-09 14:19:13

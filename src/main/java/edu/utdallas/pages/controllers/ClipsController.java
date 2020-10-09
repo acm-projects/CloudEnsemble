@@ -29,7 +29,7 @@ public class ClipsController {
      * @return json containing clip names and ids
      */
     @ResponseBody
-    @RequestMapping(value ="/clips/{userName}", method = RequestMethod.GET)
+    @RequestMapping(value ="/{userName}/clips", method = RequestMethod.GET)
     public String retrieveClips(HttpServletRequest request, @PathVariable String userName) {
         return clipsService.retrieveClips(userName);
     }

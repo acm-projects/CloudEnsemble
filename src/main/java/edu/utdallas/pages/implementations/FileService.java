@@ -22,7 +22,7 @@ public class FileService extends DbService implements IFileService {
      */
     @Override
     public void uploadClip(String user, String name, byte[] fileData) {
-        String uuid = getUUID().toString();
+        String uuid = getUUID();
         //Upload to S3 Bucket
         s3Service.uploadFile(uuid,fileData);
         //Insert in database
@@ -34,7 +34,7 @@ public class FileService extends DbService implements IFileService {
      */
     @Override
     public void uploadPic(String user, byte[] fileData) {
-        String uuid = getUUID().toString();
+        String uuid = getUUID();
         //Upload to S3 Bucket
         s3Service.uploadFile(uuid,fileData);
         //Insert in database
@@ -83,6 +83,15 @@ public class FileService extends DbService implements IFileService {
         } else {
             return null;
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Nullable
+    public byte[] retrieveClipData(String clipKey) {
+        return s3Service.retrieveFile(clipKey);
     }
 
     /**

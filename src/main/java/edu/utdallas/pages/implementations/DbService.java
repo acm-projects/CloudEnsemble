@@ -35,8 +35,9 @@ public class DbService {
     /**
      * Gets a suitable UUID for the database
      */
-    public UUID getUUID() {
-        return Generators.timeBasedGenerator().generate();
+    public String getUUID() {
+        System.out.println("thread" + Thread.currentThread().getId());
+        return Generators.timeBasedGenerator().generate().toString() + Thread.currentThread().getId();
     }
 
     /**
@@ -157,13 +158,16 @@ public class DbService {
 
     /**
      * Gets entries with a query and returns them as a 2d string list
+     * @param arr name of array
      * @param columns the columns matching retrieval query
      * @param query to run
      * @param params to insert
      * @return followers in a 2d json
      */
-    public String retrieveAsJsonArr(String[] attributes, String[] columns, String query, String... params) {
-        return retrieveAsJsonArrObj(attributes, columns, query, params).toString();
+    public String retrieveAsJsonArr(String arr, String[] attributes, String[] columns, String query, String... params) {
+        JSONObject obj = new JSONObject();
+        obj.put(arr,retrieveAsJsonArrObj(attributes, columns, query, params));
+        return obj.toString();
     }
 
     /**
@@ -197,4 +201,5 @@ public class DbService {
         }
         return true;
     }
+
 }

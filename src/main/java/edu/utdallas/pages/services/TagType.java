@@ -1,10 +1,10 @@
-package edu.utdallas.pages.controllers;
+package edu.utdallas.pages.services;
 
 public enum TagType {
-    Genre("1"),
-    Artist("2"),
-    Instrument("3"),
-    Other("4");
+    GENRE("1"),
+    ARTIST("2"),
+    INSTRUMENT("3"),
+    OTHER("4");
 
     private String id;
 

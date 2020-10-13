@@ -1,0 +1,48 @@
+.HeaderItems{
+    background: #026aa7;
+    height: 140px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+
+.header-logo img
+{
+width: 120x;
+height: 120px;
+position: absolute;
+top:10px;
+left:30px;
+opacity: 1;
+
+}
+
+.header-menu
+{   align-content: end;
+    display: grid;
+    grid-template-columns: repeat(5,auto);
+    grid-gap: 45px;
+    list-style: none;
+    text-align: center;
+    width: 85vw;
+    justify-content: end;
+    margin-right: 2rem;
+
+}
+
+.nav-links
+{
+    color: white;
+    text-decoration: none;
+    padding: .5rem 1rem;
+}
+
+.nav-links:hover{
+
+    background-color: #1b6e9e;
+    border-radius: 4px;
+    transition: all .2s ease-out;
+}

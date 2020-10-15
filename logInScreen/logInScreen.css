@@ -21,7 +21,7 @@
       .logInScreen {
 
       display: block;
-      position: absolute;
+      position: fixed;
       box-sizing: content-box;
       -ms-transform: rotate(0.00deg);
     -webkit-transform: rotate(0.00deg);
@@ -42,14 +42,16 @@
       overflow-x: auto;
       overflow-y: auto;
       background-color: rgba(255, 255, 255, 1);
-      width: 1920.00px;
-    height: 1080.00px;
+      width: auto;
+    height: auto;
     left: 0px;
     top: 0px;
+    right: 0px;
+    bottom: 0px;
 
 }
 
-.logInScreen .nserl1366 {
+.logInScreen .nserl13661 {
     position: absolute;
       box-sizing: content-box;
       -ms-transform: rotate(0.00deg);
@@ -58,7 +60,7 @@
     -ms-transform-origin: center;
     -webkit-transform-origin: center;
     transform-origin: center;
-      background-image: url("assets/nserl1366.png");
+      background-image: url("assets/nserl13661.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -90,10 +92,11 @@
       border-bottom-left-radius: 0.00px;
       border-bottom-right-radius: 0.00px;
       box-shadow: none;
-      width: 1986.00px;
-    height: 1117.00px;
-    left: -66.00px;
-    top: -18.00px;
+      width: 939.01px;
+    height: auto;
+    left: 0.00px;
+    top: 0.00px;
+    bottom: 0.00px;
 
 }
 
@@ -121,14 +124,14 @@
       overflow-x: unset;
       overflow-y: unset;
       background-color: transparent;
-      width: 1149.00px;
-    height: 1099.00px;
-    top: -9.00px;
-    right: -189.00px;
+      width: 980.80px;
+    height: 1080.00px;
+    top: 0.01px;
+    right: 0.19px;
 
 }
 
-.logInScreen .login .bg {
+.logInScreen .login .rightSide {
     position: absolute;
       box-sizing: content-box;
       -ms-transform: rotate(0.00deg);
@@ -147,32 +150,18 @@
       padding-right: 0.00px;
       padding-bottom: 0.00px;
       padding-left: 0.00px;
-      background-color: rgba(255, 255, 255, 1);
-      border-bottom-color: rgba(112, 112, 112, 1);
-      border-bottom-style: none;
-      border-bottom-width: 1.00px;
-      border-left-color: rgba(112, 112, 112, 1);
-      border-left-style: none;
-      border-left-width: 1.00px;
-      border-right-color: rgba(112, 112, 112, 1);
-      border-right-style: none;
-      border-right-width: 1.00px;
-      border-top-color: rgba(112, 112, 112, 1);
-      border-top-style: none;
-      border-top-width: 1.00px;
-      border-top-left-radius: 0.00px;
-      border-top-right-radius: 0.00px;
-      border-bottom-left-radius: 0.00px;
-      border-bottom-right-radius: 0.00px;
+      fill: rgba(255, 255, 255, 1);
       box-shadow: none;
-      width: 1149.00px;
-    height: 1099.00px;
+      width: auto;
+    height: auto;
     left: 0.00px;
     top: 0.00px;
+    right: -0.00px;
+    bottom: 0.00px;
 
 }
 
-.logInScreen .login .showhide {
+.logInScreen .login .loginWelcomeBackScreen {
 
       display: block;
       position: absolute;
@@ -196,349 +185,14 @@
       overflow-x: unset;
       overflow-y: unset;
       background-color: transparent;
-      width: 16.00px;
-    height: 16.00px;
-    left: 631.00px;
-    top: 466.00px;
+      width: 161.00px;
+    height: 102.00px;
+    top: 113.99px;
+    right: 417.81px;
 
 }
 
-.logInScreen .login .showhide .rectangle1489 {
-    position: absolute;
-      box-sizing: content-box;
-      -ms-transform: rotate(0.00deg);
-    -webkit-transform: rotate(0.00deg);
-    transform: rotate(0.00deg);
-    -ms-transform-origin: center;
-    -webkit-transform-origin: center;
-    transform-origin: center;
-      opacity: 1;
-      cursor: default;
-      margin-top: 0.00px;
-      margin-right: 0.00px;
-      margin-bottom: 0.00px;
-      margin-left: 0.00px;
-      padding-top: 0.00px;
-      padding-right: 0.00px;
-      padding-bottom: 0.00px;
-      padding-left: 0.00px;
-      background-color: transparent;
-      border-bottom-color: rgba(196, 196, 196, 1);
-      border-bottom-style: none;
-      border-bottom-width: 1.00px;
-      border-left-color: rgba(196, 196, 196, 1);
-      border-left-style: none;
-      border-left-width: 1.00px;
-      border-right-color: rgba(196, 196, 196, 1);
-      border-right-style: none;
-      border-right-width: 1.00px;
-      border-top-color: rgba(196, 196, 196, 1);
-      border-top-style: none;
-      border-top-width: 1.00px;
-      border-top-left-radius: 0.00px;
-      border-top-right-radius: 0.00px;
-      border-bottom-left-radius: 0.00px;
-      border-bottom-right-radius: 0.00px;
-      box-shadow: none;
-      width: 16.00px;
-    height: 16.00px;
-    left: 0.00px;
-    top: 0.00px;
-
-}
-
-.logInScreen .login .showhide .iconFeatherEyeOff {
-
-      display: block;
-      position: absolute;
-      box-sizing: content-box;
-      -ms-transform: rotate(0.00deg);
-    -webkit-transform: rotate(0.00deg);
-    transform: rotate(0.00deg);
-    -ms-transform-origin: center;
-    -webkit-transform-origin: center;
-    transform-origin: center;
-      opacity: 1;
-      cursor: default;
-      margin-top: 0.00px;
-      margin-right: 0.00px;
-      margin-bottom: 0.00px;
-      margin-left: 0.00px;
-      padding-top: 0.00px;
-      padding-right: 0.00px;
-      padding-bottom: 0.00px;
-      padding-left: 0.00px;
-      overflow-x: unset;
-      overflow-y: unset;
-      background-color: transparent;
-      width: 14.67px;
-    height: 14.67px;
-    left: 1.00px;
-    top: 1.00px;
-
-}
-
-.logInScreen .login .showhide .iconFeatherEyeOff .path805 {
-    position: absolute;
-      box-sizing: content-box;
-      -ms-transform: rotate(0.00deg);
-    -webkit-transform: rotate(0.00deg);
-    transform: rotate(0.00deg);
-    -ms-transform-origin: center;
-    -webkit-transform-origin: center;
-    transform-origin: center;
-      opacity: 1;
-      cursor: default;
-      margin-top: 0.00px;
-      margin-right: 0.00px;
-      margin-bottom: 0.00px;
-      margin-left: 0.00px;
-      padding-top: 0.00px;
-      padding-right: 0.00px;
-      padding-bottom: 0.00px;
-      padding-left: 0.00px;
-      fill: transparent;
-      stroke: rgba(0, 0, 0, 1);
-          stroke-width: 1.33px;
-          stroke-linecap: round;
-      box-shadow: none;
-      width: 17.33px;
-    height: 13.33px;
-    left: -1.33px;
-    top: 0.67px;
-
-}
-
-.logInScreen .login .showhide .iconFeatherEyeOff .path806 {
-    position: absolute;
-      box-sizing: content-box;
-      -ms-transform: rotate(0.00deg);
-    -webkit-transform: rotate(0.00deg);
-    transform: rotate(0.00deg);
-    -ms-transform-origin: center;
-    -webkit-transform-origin: center;
-    transform-origin: center;
-      opacity: 1;
-      cursor: default;
-      margin-top: 0.00px;
-      margin-right: 0.00px;
-      margin-bottom: 0.00px;
-      margin-left: 0.00px;
-      padding-top: 0.00px;
-      padding-right: 0.00px;
-      padding-bottom: 0.00px;
-      padding-left: 0.00px;
-      fill: transparent;
-      stroke: rgba(0, 0, 0, 1);
-          stroke-width: 1.33px;
-          stroke-linecap: round;
-      box-shadow: none;
-      width: 17.33px;
-    height: 17.33px;
-    left: -1.33px;
-    top: -1.33px;
-
-}
-
-.logInScreen .login .email8b6b7e4d {
-
-      display: block;
-      position: absolute;
-      box-sizing: content-box;
-      -ms-transform: rotate(0.00deg);
-    -webkit-transform: rotate(0.00deg);
-    transform: rotate(0.00deg);
-    -ms-transform-origin: center;
-    -webkit-transform-origin: center;
-    transform-origin: center;
-      opacity: 1;
-      cursor: default;
-      margin-top: 0.00px;
-      margin-right: 0.00px;
-      margin-bottom: 0.00px;
-      margin-left: 0.00px;
-      padding-top: 0.00px;
-      padding-right: 0.00px;
-      padding-bottom: 0.00px;
-      padding-left: 0.00px;
-      overflow-x: unset;
-      overflow-y: unset;
-      background-color: transparent;
-      width: 351.00px;
-    height: 81.00px;
-    left: 305.00px;
-    top: 413.00px;
-
-}
-
-.logInScreen .login .email8b6b7e4d .password2646f71c {
-    position: absolute;
-      box-sizing: content-box;
-      -ms-transform: rotate(0.00deg);
-    -webkit-transform: rotate(0.00deg);
-    transform: rotate(0.00deg);
-    -ms-transform-origin: center;
-    -webkit-transform-origin: center;
-    transform-origin: center;
-      opacity: 1;
-      cursor: default;
-      margin-top: 0.00px;
-      margin-right: 0.00px;
-      margin-bottom: 0.00px;
-      margin-left: 0.00px;
-      padding-top: 0.00px;
-      padding-right: 0.00px;
-      padding-bottom: 0.00px;
-      padding-left: 0.00px;
-      background-color: rgba(255, 255, 255, 0);
-      text-align: left;
-      line-height: 36.00px;
-      letter-spacing: 0.00px;
-      color: rgba(0, 0, 0, 1);
-      -webkit-text-stroke: unset;
-      font-size: 16.00px;
-      font-weight: 400;
-    font-style: normal;
-      font-family: 'Segoe UI', Arial;
-      text-decoration: none;
-      box-shadow: none;
-      overflow-x: unset;
-      overflow-y: unset;
-      white-space: pre;
-      width: 66.00px;
-    height: 21.00px;
-    left: 0.00px;
-    top: -7.50px;
-
-}
-
-.logInScreen .login .email8b6b7e4d .inputBox45703c1a {
-    position: absolute;
-      box-sizing: border-box;
-      -ms-transform: rotate(0.00deg);
-    -webkit-transform: rotate(0.00deg);
-    transform: rotate(0.00deg);
-    -ms-transform-origin: center;
-    -webkit-transform-origin: center;
-    transform-origin: center;
-      opacity: 0.36000001430511475;
-      cursor: default;
-      margin-top: 0.00px;
-      margin-right: 0.00px;
-      margin-bottom: 0.00px;
-      margin-left: 0.00px;
-      padding-top: 0.00px;
-      padding-right: 0.00px;
-      padding-bottom: 0.00px;
-      padding-left: 0.00px;
-      background-color: rgba(255, 255, 255, 1);
-      border-bottom-color: rgba(112, 112, 112, 1);
-      border-bottom-style: solid;
-      border-bottom-width: 1.00px;
-      border-left-color: rgba(112, 112, 112, 1);
-      border-left-style: solid;
-      border-left-width: 1.00px;
-      border-right-color: rgba(112, 112, 112, 1);
-      border-right-style: solid;
-      border-right-width: 1.00px;
-      border-top-color: rgba(112, 112, 112, 1);
-      border-top-style: solid;
-      border-top-width: 1.00px;
-      border-top-left-radius: 8.00px;
-      border-top-right-radius: 8.00px;
-      border-bottom-left-radius: 4.00px;
-      border-bottom-right-radius: 8.00px;
-      box-shadow: none;
-      width: 351.00px;
-    height: 46.00px;
-    left: 0.00px;
-    top: 35.00px;
-
-}
-
-.logInScreen .login .email8b6b7e4d .inputc9bc4c2a {
-    position: absolute;
-      box-sizing: content-box;
-      -ms-transform: rotate(0.00deg);
-    -webkit-transform: rotate(0.00deg);
-    transform: rotate(0.00deg);
-    -ms-transform-origin: center;
-    -webkit-transform-origin: center;
-    transform-origin: center;
-      opacity: 1;
-      cursor: default;
-      margin-top: 0.00px;
-      margin-right: 0.00px;
-      margin-bottom: 0.00px;
-      margin-left: 0.00px;
-      padding-top: 0.00px;
-      padding-right: 0.00px;
-      padding-bottom: 0.00px;
-      padding-left: 0.00px;
-      background-color: rgba(255, 255, 255, 0);
-      text-align: left;
-      line-height: 21.00px;
-      letter-spacing: 0.00px;
-      color: rgba(196, 196, 196, 1);
-      -webkit-text-stroke: unset;
-      font-size: 14.00px;
-      font-weight: 400;
-    font-style: normal;
-      font-family: 'Segoe UI', Arial;
-      text-decoration: none;
-      box-shadow: none;
-      overflow-x: unset;
-      overflow-y: unset;
-      white-space: pre;
-      width: 33.00px;
-    height: 19.00px;
-    left: 12.00px;
-    top: 47.00px;
-
-}
-
-.logInScreen .login .email8b6b7e4d .password {
-    position: absolute;
-      box-sizing: content-box;
-      -ms-transform: rotate(0.00deg);
-    -webkit-transform: rotate(0.00deg);
-    transform: rotate(0.00deg);
-    -ms-transform-origin: center;
-    -webkit-transform-origin: center;
-    transform-origin: center;
-      opacity: 1;
-      cursor: default;
-      margin-top: 0.00px;
-      margin-right: 0.00px;
-      margin-bottom: 0.00px;
-      margin-left: 0.00px;
-      padding-top: 0.00px;
-      padding-right: 0.00px;
-      padding-bottom: 0.00px;
-      padding-left: 0.00px;
-      background-color: rgba(255, 255, 255, 0);
-      text-align: left;
-      line-height: 36.00px;
-      letter-spacing: 0.00px;
-      color: rgba(0, 0, 0, 1);
-      -webkit-text-stroke: unset;
-      font-size: 16.00px;
-      font-weight: 400;
-    font-style: normal;
-      font-family: 'Segoe UI', Arial;
-      text-decoration: none;
-      box-shadow: none;
-      overflow-x: unset;
-      overflow-y: unset;
-      white-space: pre;
-      width: 66.00px;
-    height: 21.00px;
-    left: 0.00px;
-    top: -7.50px;
-
-}
-
-.logInScreen .login .welcomeBack {
+.logInScreen .login .loginWelcomeBackScreen .welcomeBack {
     position: absolute;
       box-sizing: content-box;
       -ms-transform: rotate(0.00deg);
@@ -574,12 +228,84 @@
       white-space: pre;
       width: 161.00px;
     height: 32.00px;
-    left: 399.00px;
-    top: 214.00px;
+    left: 0.00px;
+    top: 68.00px;
 
 }
 
-.logInScreen .login .logIn {
+.logInScreen .login .loginWelcomeBackScreen .logIn {
+    position: absolute;
+      box-sizing: content-box;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 1;
+      cursor: default;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      background-color: rgba(255, 255, 255, 0);
+      text-align: left;
+      line-height: 27.00px;
+      letter-spacing: 0.00px;
+      color: rgba(0, 0, 0, 1);
+      -webkit-text-stroke: unset;
+      font-size: 41.00px;
+      font-weight: 700;
+    font-style: normal;
+      font-family: 'Segoe UI', Arial;
+      text-decoration: none;
+      box-shadow: none;
+      overflow-x: unset;
+      overflow-y: unset;
+      white-space: pre;
+      width: 121.00px;
+    height: 54.00px;
+    left: 20.00px;
+    top: 13.50px;
+
+}
+
+.logInScreen .login .password {
+
+      display: block;
+      position: absolute;
+      box-sizing: content-box;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 1;
+      cursor: default;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      overflow-x: unset;
+      overflow-y: unset;
+      background-color: transparent;
+      width: 370.00px;
+    height: 74.00px;
+    left: 298.99px;
+    top: 391.99px;
+
+}
+
+.logInScreen .login .password .passwordf34cb268 {
     position: absolute;
       box-sizing: content-box;
       -ms-transform: rotate(0.00deg);
@@ -604,8 +330,8 @@
       letter-spacing: 0.00px;
       color: rgba(0, 0, 0, 1);
       -webkit-text-stroke: unset;
-      font-size: 54.00px;
-      font-weight: 700;
+      font-size: 16.00px;
+      font-weight: 400;
     font-style: normal;
       font-family: 'Segoe UI', Arial;
       text-decoration: none;
@@ -613,14 +339,15 @@
       overflow-x: unset;
       overflow-y: unset;
       white-space: pre;
-      width: 159.00px;
-    height: 72.00px;
-    left: 401.00px;
-    top: 145.00px;
+      width: 66.00px;
+    height: 21.00px;
+    left: 0.00px;
+    top: -7.50px;
 
 }
 
-.logInScreen .login .name {
+.logInScreen .login .password .passwordForm {
+  outline: none;
 
       display: block;
       position: absolute;
@@ -644,14 +371,81 @@
       overflow-x: unset;
       overflow-y: unset;
       background-color: transparent;
-      width: 351.00px;
-    height: 81.00px;
-    left: 305.00px;
-    top: 286.00px;
+      width: 100.00%;
+    height: 41.00px;
+    left: 0.00px;
+    bottom: 0.00px;
+
+    background-color: rgba(255, 255, 255, 1);
+      border-bottom-color: rgba(112, 112, 112, 1);
+      border-bottom-style: solid;
+      border-bottom-width: 1.00px;
+      border-left-color: rgba(112, 112, 112, 1);
+      border-left-style: solid;
+      border-left-width: 1.00px;
+      border-right-color: rgba(112, 112, 112, 1);
+      border-right-style: solid;
+      border-right-width: 1.00px;
+      border-top-color: rgba(112, 112, 112, 1);
+      border-top-style: solid;
+      border-top-width: 1.00px;
+      border-top-left-radius: 4.00px;
+      border-top-right-radius: 4.00px;
+      border-bottom-left-radius: 4.00px;
+      border-bottom-right-radius: 4.00px;
+      box-shadow: none;
+  
+
+
+    text-align: left;
+    font-weight: 400;
+    font-style: normal;
+    color: rgba(0, 0, 0, 1);
+    font-size: 14.00px;
+    font-family: 'Segoe UI', Arial;
+    padding-left: 9.999755859375px;
+    width: 100%;
+        width: stretch;
+
+}
+.logInScreen .login .password .passwordForm::placeholder {
+    color: rgba(0, 0, 0, 1);
+
+    opacity: 1;
+}
+
+.logInScreen .login .email {
+
+      display: block;
+      position: absolute;
+      box-sizing: content-box;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 1;
+      cursor: default;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      overflow-x: unset;
+      overflow-y: unset;
+      background-color: transparent;
+      width: 370.00px;
+    height: 78.00px;
+    left: 298.99px;
+    top: 273.99px;
 
 }
 
-.logInScreen .login .name .email {
+.logInScreen .login .email .emailLabel {
     position: absolute;
       box-sizing: content-box;
       -ms-transform: rotate(0.00deg);
@@ -692,52 +486,11 @@
 
 }
 
-.logInScreen .login .name .inputBox {
-    position: absolute;
-      box-sizing: border-box;
-      -ms-transform: rotate(0.00deg);
-    -webkit-transform: rotate(0.00deg);
-    transform: rotate(0.00deg);
-    -ms-transform-origin: center;
-    -webkit-transform-origin: center;
-    transform-origin: center;
-      opacity: 0.36000001430511475;
-      cursor: default;
-      margin-top: 0.00px;
-      margin-right: 0.00px;
-      margin-bottom: 0.00px;
-      margin-left: 0.00px;
-      padding-top: 0.00px;
-      padding-right: 0.00px;
-      padding-bottom: 0.00px;
-      padding-left: 0.00px;
-      background-color: rgba(255, 255, 255, 1);
-      border-bottom-color: rgba(112, 112, 112, 1);
-      border-bottom-style: solid;
-      border-bottom-width: 1.00px;
-      border-left-color: rgba(112, 112, 112, 1);
-      border-left-style: solid;
-      border-left-width: 1.00px;
-      border-right-color: rgba(112, 112, 112, 1);
-      border-right-style: solid;
-      border-right-width: 1.00px;
-      border-top-color: rgba(112, 112, 112, 1);
-      border-top-style: solid;
-      border-top-width: 1.00px;
-      border-top-left-radius: 8.00px;
-      border-top-right-radius: 8.00px;
-      border-bottom-left-radius: 4.00px;
-      border-bottom-right-radius: 8.00px;
-      box-shadow: none;
-      width: 351.00px;
-    height: 46.00px;
-    left: 0.00px;
-    top: 35.00px;
+.logInScreen .login .email .usernameForm {
+  outline: none;
 
-}
-
-.logInScreen .login .name .input {
-    position: absolute;
+      display: block;
+      position: absolute;
       box-sizing: content-box;
       -ms-transform: rotate(0.00deg);
     -webkit-transform: rotate(0.00deg);
@@ -755,26 +508,54 @@
       padding-right: 0.00px;
       padding-bottom: 0.00px;
       padding-left: 0.00px;
-      background-color: rgba(255, 255, 255, 0);
-      text-align: left;
-      line-height: 21.00px;
-      letter-spacing: 0.00px;
-      color: rgba(196, 196, 196, 1);
-      -webkit-text-stroke: unset;
-      font-size: 14.00px;
-      font-weight: 400;
-    font-style: normal;
-      font-family: 'Segoe UI', Arial;
-      text-decoration: none;
-      box-shadow: none;
       overflow-x: unset;
       overflow-y: unset;
-      white-space: pre;
-      width: 33.00px;
-    height: 19.00px;
-    left: 12.00px;
-    top: 47.00px;
+      background-color: transparent;
+      width: 100.00%;
+    height: 41.00px;
+    left: 0.00px;
+    bottom: 0.00px;
 
+    background-image: url("assets/emailContainer.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+      background-color: rgba(255, 255, 255, 1);
+      border-bottom-color: rgba(112, 112, 112, 1);
+      border-bottom-style: solid;
+      border-bottom-width: 1.00px;
+      border-left-color: rgba(112, 112, 112, 1);
+      border-left-style: solid;
+      border-left-width: 1.00px;
+      border-right-color: rgba(112, 112, 112, 1);
+      border-right-style: solid;
+      border-right-width: 1.00px;
+      border-top-color: rgba(112, 112, 112, 1);
+      border-top-style: solid;
+      border-top-width: 1.00px;
+      border-top-left-radius: 4.00px;
+      border-top-right-radius: 4.00px;
+      border-bottom-left-radius: 4.00px;
+      border-bottom-right-radius: 4.00px;
+      box-shadow: none;
+  
+
+
+    text-align: left;
+    font-weight: 400;
+    font-style: normal;
+    color: rgba(0, 0, 0, 1);
+    font-size: 16.00px;
+    font-family: 'Segoe UI', Arial;
+    padding-left: 10px;
+    width: 100%;
+        width: stretch;
+
+}
+.logInScreen .login .email .usernameForm::placeholder {
+    color: rgba(0, 0, 0, 1);
+
+    opacity: 1;
 }
 
 .logInScreen .login .defaultButton {
@@ -803,12 +584,78 @@
       background-color: transparent;
       width: 351.00px;
     height: 57.00px;
-    left: 305.00px;
-    top: 700.00px;
+    left: 308.99px;
+    top: 677.99px;
 
 }
 
-.logInScreen .login .defaultButton .rectangle1515 {
+.logInScreen .login .defaultButton .buttonLogin {
+
+      display: block;
+      position: absolute;
+      box-sizing: content-box;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 1;
+      cursor: pointer;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      overflow-x: unset;
+      overflow-y: unset;
+      background-color: transparent;
+      width: 100.00%;
+    height: 100.00%;
+    left: 0.00px;
+    top: 0.00px;
+
+  border: none;
+  outline: none;
+}
+.logInScreen .login .defaultButton .buttonLogin .activeState {
+
+      display: block;
+      position: absolute;
+      box-sizing: content-box;
+      display: none;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 1;
+      cursor: pointer;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      overflow-x: unset;
+      overflow-y: unset;
+      background-color: transparent;
+      width: auto;
+    height: auto;
+    left: 0.00px;
+    top: 0.00px;
+    right: 0.00px;
+    bottom: 0.00px;
+
+}
+
+.logInScreen .login .defaultButton .buttonLogin .activeState .rectangle1515 {
     position: absolute;
       box-sizing: border-box;
       -ms-transform: rotate(0.00deg);
@@ -818,7 +665,7 @@
     -webkit-transform-origin: center;
     transform-origin: center;
       opacity: 1;
-      cursor: default;
+      cursor: pointer;
       margin-top: 0.00px;
       margin-right: 0.00px;
       margin-bottom: 0.00px;
@@ -827,7 +674,7 @@
       padding-right: 0.00px;
       padding-bottom: 0.00px;
       padding-left: 0.00px;
-      background-color: rgba(2, 106, 167, 1);
+      background-color: rgba(118, 204, 255, 1);
       border-bottom-color: rgba(112, 112, 112, 1);
       border-bottom-style: solid;
       border-bottom-width: 1.00px;
@@ -852,7 +699,7 @@
 
 }
 
-.logInScreen .login .defaultButton .signIn {
+.logInScreen .login .defaultButton .buttonLogin .activeState .signIn {
     position: absolute;
       box-sizing: content-box;
       -ms-transform: rotate(0.00deg);
@@ -862,7 +709,7 @@
     -webkit-transform-origin: center;
     transform-origin: center;
       opacity: 1;
-      cursor: default;
+      cursor: pointer;
       margin-top: 0.00px;
       margin-right: 0.00px;
       margin-bottom: 0.00px;
@@ -893,17 +740,20 @@
 
 }
 
-.logInScreen .blueOpaqueCircle {
-    position: absolute;
-      box-sizing: border-box;
+.logInScreen .login .defaultButton .buttonLogin .hoverState {
+
+      display: block;
+      position: absolute;
+      box-sizing: content-box;
+      display: none;
       -ms-transform: rotate(0.00deg);
     -webkit-transform: rotate(0.00deg);
     transform: rotate(0.00deg);
     -ms-transform-origin: center;
     -webkit-transform-origin: center;
     transform-origin: center;
-      opacity: 0.33000001311302185;
-      cursor: default;
+      opacity: 1;
+      cursor: pointer;
       margin-top: 0.00px;
       margin-right: 0.00px;
       margin-bottom: 0.00px;
@@ -912,7 +762,38 @@
       padding-right: 0.00px;
       padding-bottom: 0.00px;
       padding-left: 0.00px;
-      background-color: rgba(105, 147, 160, 1);
+      overflow-x: unset;
+      overflow-y: unset;
+      background-color: transparent;
+      width: auto;
+    height: auto;
+    left: 0.00px;
+    top: 0.00px;
+    right: 0.00px;
+    bottom: 0.00px;
+
+}
+
+.logInScreen .login .defaultButton .buttonLogin .hoverState .rectangle1515ac505faa {
+    position: absolute;
+      box-sizing: border-box;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 1;
+      cursor: pointer;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      background-color: rgba(255, 255, 255, 1);
       border-bottom-color: rgba(112, 112, 112, 1);
       border-bottom-style: solid;
       border-bottom-width: 1.00px;
@@ -925,85 +806,21 @@
       border-top-color: rgba(112, 112, 112, 1);
       border-top-style: solid;
       border-top-width: 1.00px;
-      border-top-left-radius: 0.00px;
-      border-top-right-radius: 0.00px;
-      border-bottom-left-radius: 0.00px;
-      border-bottom-right-radius: 0.00px;
+      border-top-left-radius: 8.00px;
+      border-top-right-radius: 8.00px;
+      border-bottom-left-radius: 8.00px;
+      border-bottom-right-radius: 8.00px;
       box-shadow: none;
-      width: 977.00px;
-    height: 1099.00px;
-    left: -21.00px;
-    top: -9.00px;
-
-}
-
-.logInScreen .header {
-
-      display: block;
-      position: absolute;
-      box-sizing: content-box;
-      -ms-transform: rotate(0.00deg);
-    -webkit-transform: rotate(0.00deg);
-    transform: rotate(0.00deg);
-    -ms-transform-origin: center;
-    -webkit-transform-origin: center;
-    transform-origin: center;
-      background-image: url("assets/header.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-      opacity: 1;
-      cursor: default;
-      margin-top: 0.00px;
-      margin-right: 0.00px;
-      margin-bottom: 0.00px;
-      margin-left: 0.00px;
-      padding-top: 0.00px;
-      padding-right: 0.00px;
-      padding-bottom: 0.00px;
-      padding-left: 0.00px;
-      overflow-x: unset;
-      overflow-y: unset;
-      background-color: transparent;
-      width: 600.00px;
-    height: 97.00px;
-    left: 194.00px;
-    top: 447.00px;
-
-}
-
-.logInScreen .header .copy {
-
-      display: block;
-      position: absolute;
-      box-sizing: content-box;
-      -ms-transform: rotate(0.00deg);
-    -webkit-transform: rotate(0.00deg);
-    transform: rotate(0.00deg);
-    -ms-transform-origin: center;
-    -webkit-transform-origin: center;
-    transform-origin: center;
-      opacity: 1;
-      cursor: default;
-      margin-top: 0.00px;
-      margin-right: 0.00px;
-      margin-bottom: 0.00px;
-      margin-left: 0.00px;
-      padding-top: 0.00px;
-      padding-right: 0.00px;
-      padding-bottom: 0.00px;
-      padding-left: 0.00px;
-      overflow-x: unset;
-      overflow-y: unset;
-      background-color: transparent;
-      width: 598.00px;
-    height: 97.00px;
+      width: auto;
+    height: auto;
     left: 0.00px;
     top: 0.00px;
+    right: 0.00px;
+    bottom: 0.00px;
 
 }
 
-.logInScreen .header .copy .didYouKnow {
+.logInScreen .login .defaultButton .buttonLogin .hoverState .signIn177c060f {
     position: absolute;
       box-sizing: content-box;
       -ms-transform: rotate(0.00deg);
@@ -1013,7 +830,7 @@
     -webkit-transform-origin: center;
     transform-origin: center;
       opacity: 1;
-      cursor: default;
+      cursor: pointer;
       margin-top: 0.00px;
       margin-right: 0.00px;
       margin-bottom: 0.00px;
@@ -1023,13 +840,13 @@
       padding-bottom: 0.00px;
       padding-left: 0.00px;
       background-color: rgba(255, 255, 255, 0);
-      text-align: center;
-      line-height: 54.00px;
+      text-align: left;
+      line-height: 14.00px;
       letter-spacing: 0.00px;
-      color: rgba(255, 255, 255, 1);
-      -webkit-text-stroke: unset;
-      font-size: 42.00px;
-      font-weight: 700;
+      color: rgba(2, 106, 167, 1);
+      -webkit-text-stroke: 1.00px rgba(2, 106, 167, 1);
+      font-size: 21.00px;
+      font-weight: 400;
     font-style: normal;
       font-family: 'Segoe UI', Arial;
       text-decoration: none;
@@ -1037,15 +854,17 @@
       overflow-x: unset;
       overflow-y: unset;
       white-space: pre;
-      width: 292.00px;
-    height: 56.00px;
-    left: 170.00px;
-    top: 1.00px;
+      width: 74.00px;
+    height: 28.00px;
+    left: 133.00px;
+    bottom: 7.00px;
 
 }
 
-.logInScreen .header .copy .cloudEnsembleWasOriginallyCalledPages {
-    position: absolute;
+.logInScreen .login .defaultButton .buttonLogin .buttonLogin2ead04da {
+
+      display: block;
+      position: absolute;
       box-sizing: content-box;
       -ms-transform: rotate(0.00deg);
     -webkit-transform: rotate(0.00deg);
@@ -1054,7 +873,7 @@
     -webkit-transform-origin: center;
     transform-origin: center;
       opacity: 1;
-      cursor: default;
+      cursor: pointer;
       margin-top: 0.00px;
       margin-right: 0.00px;
       margin-bottom: 0.00px;
@@ -1063,29 +882,65 @@
       padding-right: 0.00px;
       padding-bottom: 0.00px;
       padding-left: 0.00px;
-      background-color: rgba(255, 255, 255, 0);
-      text-align: center;
-      line-height: 21.00px;
-      letter-spacing: 1.20px;
-      color: rgba(255, 255, 255, 1);
-      -webkit-text-stroke: unset;
-      font-size: 24.00px;
-      font-weight: 700;
-    font-style: normal;
-      font-family: Montserrat, Arial;
-      text-decoration: none;
-      box-shadow: none;
       overflow-x: unset;
       overflow-y: unset;
-      white-space: pre;
-      width: 598.00px;
-    height: 29.00px;
+      background-color: transparent;
+      width: auto;
+    height: auto;
     left: 0.00px;
-    top: 72.00px;
+    top: 0.00px;
+    right: 0.00px;
+    bottom: 0.00px;
 
 }
 
-.logInScreen .forgotYourPassword9d3a78d3 {
+.logInScreen .login .defaultButton .buttonLogin .buttonLogin2ead04da .rectangle1515f416294e {
+    position: absolute;
+      box-sizing: border-box;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 1;
+      cursor: pointer;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      background-color: rgba(2, 106, 167, 1);
+      border-bottom-color: rgba(112, 112, 112, 1);
+      border-bottom-style: solid;
+      border-bottom-width: 1.00px;
+      border-left-color: rgba(112, 112, 112, 1);
+      border-left-style: solid;
+      border-left-width: 1.00px;
+      border-right-color: rgba(112, 112, 112, 1);
+      border-right-style: solid;
+      border-right-width: 1.00px;
+      border-top-color: rgba(112, 112, 112, 1);
+      border-top-style: solid;
+      border-top-width: 1.00px;
+      border-top-left-radius: 8.00px;
+      border-top-right-radius: 8.00px;
+      border-bottom-left-radius: 8.00px;
+      border-bottom-right-radius: 8.00px;
+      box-shadow: none;
+      width: auto;
+    height: auto;
+    left: 0.00px;
+    top: 0.00px;
+    right: 0.00px;
+    bottom: 0.00px;
+
+}
+
+.logInScreen .login .defaultButton .buttonLogin .buttonLogin2ead04da .signIn3d82c550 {
     position: absolute;
       box-sizing: content-box;
       -ms-transform: rotate(0.00deg);
@@ -1094,8 +949,8 @@
     -ms-transform-origin: center;
     -webkit-transform-origin: center;
     transform-origin: center;
-      opacity: 0.75;
-      cursor: default;
+      opacity: 1;
+      cursor: pointer;
       margin-top: 0.00px;
       margin-right: 0.00px;
       margin-bottom: 0.00px;
@@ -1106,68 +961,50 @@
       padding-left: 0.00px;
       background-color: rgba(255, 255, 255, 0);
       text-align: left;
-      line-height: 36.00px;
+      line-height: 14.00px;
       letter-spacing: 0.00px;
-      color: rgba(0, 0, 0, 1);
+      color: rgba(255, 255, 255, 1);
       -webkit-text-stroke: unset;
-      font-size: 16.00px;
-      font-weight: 400;
+      font-size: 21.00px;
+      font-weight: 700;
     font-style: normal;
       font-family: 'Segoe UI', Arial;
-      text-decoration: underline;
+      text-decoration: none;
       box-shadow: none;
       overflow-x: unset;
       overflow-y: unset;
       white-space: pre;
-      width: 162.00px;
-    height: 21.00px;
-    left: 1454.00px;
-    top: 532.50px;
+      width: 79.00px;
+    height: 28.00px;
+    left: 133.00px;
+    bottom: 7.00px;
 
 }
 
-.logInScreen .forgotYourPassword {
-    position: absolute;
-      box-sizing: content-box;
-      -ms-transform: rotate(0.00deg);
-    -webkit-transform: rotate(0.00deg);
-    transform: rotate(0.00deg);
-    -ms-transform-origin: center;
-    -webkit-transform-origin: center;
-    transform-origin: center;
-      opacity: 0.75;
-      cursor: default;
-      margin-top: 0.00px;
-      margin-right: 0.00px;
-      margin-bottom: 0.00px;
-      margin-left: 0.00px;
-      padding-top: 0.00px;
-      padding-right: 0.00px;
-      padding-bottom: 0.00px;
-      padding-left: 0.00px;
-      background-color: rgba(255, 255, 255, 0);
-      text-align: left;
-      line-height: 36.00px;
-      letter-spacing: 0.00px;
-      color: rgba(0, 0, 0, 1);
-      -webkit-text-stroke: unset;
-      font-size: 16.00px;
-      font-weight: 400;
-    font-style: normal;
-      font-family: 'Segoe UI', Arial;
-      text-decoration: underline;
-      box-shadow: none;
-      overflow-x: unset;
-      overflow-y: unset;
-      white-space: pre;
-      width: 162.00px;
-    height: 21.00px;
-    left: 1454.00px;
-    top: 532.50px;
 
+
+
+.logInScreen .login .defaultButton .buttonLogin:hover > .hoverState {
+  display: inherit;
+}
+.logInScreen .login .defaultButton .buttonLogin:hover > .buttonLogin2ead04da {
+  display: none;
+}
+.logInScreen .login .defaultButton .buttonLogin:hover > .activeState {
+  display: none;
+}
+.logInScreen .login .defaultButton .buttonLogin:active > .activeState {
+  display: inherit;
+}
+.logInScreen .login .defaultButton .buttonLogin:active > .hoverState {
+  display: none;
+}
+.logInScreen .login .defaultButton .buttonLogin:active > .buttonLogin2ead04da {
+  display: none;
 }
 
-.logInScreen .staySignedInBox {
+
+.logInScreen .login .staySignedInBox {
 
       display: block;
       position: absolute;
@@ -1191,14 +1028,80 @@
       overflow-x: unset;
       overflow-y: unset;
       background-color: transparent;
-      width: 110.00px;
+      width: 115.00px;
     height: 21.00px;
-    left: 1267.00px;
-    top: 540.00px;
+    left: 269.99px;
+    top: 549.99px;
 
 }
 
-.logInScreen .staySignedInBox .rectangle1516 {
+.logInScreen .login .staySignedInBox .rememberMe {
+
+      display: block;
+      position: absolute;
+      box-sizing: content-box;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 1;
+      cursor: pointer;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      overflow-x: unset;
+      overflow-y: unset;
+      background-color: transparent;
+      width: auto;
+    height: auto;
+    left: 0.00px;
+    top: 0.00px;
+    right: 0.00px;
+    bottom: 0.00px;
+
+}
+.logInScreen .login .staySignedInBox .rememberMe .checkedState {
+
+      display: block;
+      position: absolute;
+      box-sizing: content-box;
+      display: none;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 1;
+      cursor: pointer;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      overflow-x: unset;
+      overflow-y: unset;
+      background-color: transparent;
+      width: auto;
+    height: auto;
+    left: 0.00px;
+    top: 0.00px;
+    right: 0.00px;
+    bottom: 0.00px;
+
+}
+
+.logInScreen .login .staySignedInBox .rememberMe .checkedState .container {
     position: absolute;
       box-sizing: border-box;
       -ms-transform: rotate(0.00deg);
@@ -1208,7 +1111,7 @@
     -webkit-transform-origin: center;
     transform-origin: center;
       opacity: 0.6000000238418579;
-      cursor: default;
+      cursor: pointer;
       margin-top: 0.00px;
       margin-right: 0.00px;
       margin-bottom: 0.00px;
@@ -1242,7 +1145,360 @@
 
 }
 
-.logInScreen .staySignedInBox .staySignedIn {
+.logInScreen .login .staySignedInBox .rememberMe .checkedState .staySignedIn {
+    position: absolute;
+      box-sizing: content-box;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 0.75;
+      cursor: pointer;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      background-color: rgba(255, 255, 255, 0);
+      text-align: left;
+      line-height: 36.00px;
+      letter-spacing: 0.00px;
+      color: rgba(0, 0, 0, 1);
+      -webkit-text-stroke: unset;
+      font-size: 12.00px;
+      font-weight: 700;
+    font-style: normal;
+      font-family: 'Segoe UI', Arial;
+      text-decoration: none;
+      box-shadow: none;
+      overflow-x: unset;
+      overflow-y: unset;
+      white-space: pre;
+      width: 80.00px;
+    height: 16.00px;
+    left: 35.00px;
+    top: -7.00px;
+
+}
+
+.logInScreen .login .staySignedInBox .rememberMe .checkedState .iconAwesomeCheck {
+    position: absolute;
+      box-sizing: content-box;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 0.699999988079071;
+      cursor: pointer;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      fill: rgba(0, 0, 0, 1);
+      box-shadow: none;
+      width: 14.75px;
+    height: 11.00px;
+    left: 3.00px;
+    top: 5.00px;
+
+}
+
+.logInScreen .login .staySignedInBox .rememberMe .defaultState {
+
+      display: block;
+      position: absolute;
+      box-sizing: content-box;
+      display: none;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 1;
+      cursor: pointer;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      overflow-x: unset;
+      overflow-y: unset;
+      background-color: transparent;
+      width: auto;
+    height: auto;
+    left: 0.00px;
+    top: 0.00px;
+    right: 0.00px;
+    bottom: 0.00px;
+
+}
+
+.logInScreen .login .staySignedInBox .rememberMe .defaultState .container6a5b99b7 {
+    position: absolute;
+      box-sizing: border-box;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 0.8199999928474426;
+      cursor: pointer;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      background-color: rgba(183, 174, 174, 0.5490196078431373);
+      border-bottom-color: rgba(2, 106, 167, 1);
+      border-bottom-style: solid;
+      border-bottom-width: 1.00px;
+      border-left-color: rgba(2, 106, 167, 1);
+      border-left-style: solid;
+      border-left-width: 1.00px;
+      border-right-color: rgba(2, 106, 167, 1);
+      border-right-style: solid;
+      border-right-width: 1.00px;
+      border-top-color: rgba(2, 106, 167, 1);
+      border-top-style: solid;
+      border-top-width: 1.00px;
+      border-top-left-radius: 0.00px;
+      border-top-right-radius: 0.00px;
+      border-bottom-left-radius: 0.00px;
+      border-bottom-right-radius: 0.00px;
+      box-shadow: none;
+      width: 21.00px;
+    height: auto;
+    left: 0.00px;
+    top: 0.00px;
+    bottom: 0.00px;
+
+}
+
+.logInScreen .login .staySignedInBox .rememberMe .defaultState .staySignedIn6949c7cd {
+    position: absolute;
+      box-sizing: content-box;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 0.75;
+      cursor: pointer;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      background-color: rgba(255, 255, 255, 0);
+      text-align: left;
+      line-height: 36.00px;
+      letter-spacing: 0.00px;
+      color: rgba(0, 0, 0, 1);
+      -webkit-text-stroke: unset;
+      font-size: 12.00px;
+      font-weight: 700;
+    font-style: normal;
+      font-family: 'Segoe UI', Arial;
+      text-decoration: none;
+      box-shadow: none;
+      overflow-x: unset;
+      overflow-y: unset;
+      white-space: pre;
+      width: 80.00px;
+    height: 16.00px;
+    right: 0.00px;
+    bottom: 12.00px;
+
+}
+
+.logInScreen .login .staySignedInBox .rememberMe .defaultState442a8427 {
+
+      display: block;
+      position: absolute;
+      box-sizing: content-box;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 1;
+      cursor: pointer;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      overflow-x: unset;
+      overflow-y: unset;
+      background-color: transparent;
+      width: auto;
+    height: auto;
+    left: 0.00px;
+    top: 0.00px;
+    right: 0.00px;
+    bottom: 0.00px;
+
+}
+
+.logInScreen .login .staySignedInBox .rememberMe .defaultState442a8427 .containerfdeffd7f {
+    position: absolute;
+      box-sizing: border-box;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 0.6000000238418579;
+      cursor: pointer;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      background-color: rgba(255, 255, 255, 1);
+      border-bottom-color: rgba(112, 112, 112, 1);
+      border-bottom-style: solid;
+      border-bottom-width: 1.00px;
+      border-left-color: rgba(112, 112, 112, 1);
+      border-left-style: solid;
+      border-left-width: 1.00px;
+      border-right-color: rgba(112, 112, 112, 1);
+      border-right-style: solid;
+      border-right-width: 1.00px;
+      border-top-color: rgba(112, 112, 112, 1);
+      border-top-style: solid;
+      border-top-width: 1.00px;
+      border-top-left-radius: 0.00px;
+      border-top-right-radius: 0.00px;
+      border-bottom-left-radius: 0.00px;
+      border-bottom-right-radius: 0.00px;
+      box-shadow: none;
+      width: 21.00px;
+    height: auto;
+    left: 0.00px;
+    top: 0.00px;
+    bottom: 0.00px;
+
+}
+
+.logInScreen .login .staySignedInBox .rememberMe .defaultState442a8427 .staySignedIn04635b48 {
+    position: absolute;
+      box-sizing: content-box;
+      -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+      opacity: 0.75;
+      cursor: pointer;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      background-color: rgba(255, 255, 255, 0);
+      text-align: left;
+      line-height: 36.00px;
+      letter-spacing: 0.00px;
+      color: rgba(0, 0, 0, 1);
+      -webkit-text-stroke: unset;
+      font-size: 12.00px;
+      font-weight: 700;
+    font-style: normal;
+      font-family: 'Segoe UI', Arial;
+      text-decoration: none;
+      box-shadow: none;
+      overflow-x: unset;
+      overflow-y: unset;
+      white-space: pre;
+      width: 80.00px;
+    height: 16.00px;
+    right: 0.00px;
+    bottom: 12.00px;
+
+}
+
+
+
+
+.logInScreen .login .staySignedInBox .rememberMe:hover > .defaultState {
+  display: inherit;
+}
+.logInScreen .login .staySignedInBox .rememberMe:hover > .defaultState442a8427 {
+  display: none;
+}
+.logInScreen .login .staySignedInBox .rememberMe:hover > .checkedState {
+  display: none;
+}
+.logInScreen .login .staySignedInBox .rememberMe input:checked ~ .checkedState {
+  display: inherit;
+}
+.logInScreen .login .staySignedInBox .rememberMe input:checked ~ .defaultState {
+  display: none;
+}
+.logInScreen .login .staySignedInBox .rememberMe input:checked ~ .defaultState442a8427 {
+  display: none;
+}
+
+
+.logInScreen .login .staySignedInBox .rememberMe input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0px;
+  width: 0px;
+  margin: 0px;
+}
+.logInScreen .login .staySignedInBox .rememberMe .input-label {
+  position: absolute;
+    cursor: pointer;
+
+  width: auto;
+  height: auto;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 2000;
+  cursor: pointer;
+}
+
+.logInScreen .login .forgotYourPassword {
     position: absolute;
       box-sizing: content-box;
       -ms-transform: rotate(0.00deg);
@@ -1263,23 +1519,23 @@
       padding-left: 0.00px;
       background-color: rgba(255, 255, 255, 0);
       text-align: left;
-      line-height: 36.00px;
+      line-height: 41.00px;
       letter-spacing: 0.00px;
       color: rgba(0, 0, 0, 1);
       -webkit-text-stroke: unset;
-      font-size: 12.00px;
+      font-size: 18.00px;
       font-weight: 400;
     font-style: normal;
       font-family: 'Segoe UI', Arial;
-      text-decoration: none;
+      text-decoration: underline;
       box-shadow: none;
       overflow-x: unset;
       overflow-y: unset;
       white-space: pre;
-      width: 75.00px;
-    height: 16.00px;
-    left: 35.00px;
-    top: -7.00px;
+      width: 182.00px;
+    height: 24.00px;
+    left: 532.99px;
+    top: 538.49px;
 
 }
 

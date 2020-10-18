@@ -1,11 +1,8 @@
 package edu.utdallas.pages.services;
 
-public interface IAWSBucket {
+public interface ISESCredentials {
 
     String getAccessKey();
 
     String getAccessID();
-
-    String getBucketName();
-
 }

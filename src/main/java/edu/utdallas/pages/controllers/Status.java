@@ -1,7 +1,5 @@
 package edu.utdallas.pages.controllers;
 
-import edu.utdallas.pages.utils.JsonUtils;
-
 public enum Status {
 
     SUCCESS("status","success"),
@@ -18,4 +16,5 @@ public enum Status {
     Status(String... status) {
         this.json = JsonUtils.createJson(status);
     }
+
 }

@@ -1,7 +1,6 @@
 package edu.utdallas.pages.controllers;
 
 import edu.utdallas.pages.services.*;
-import edu.utdallas.pages.utils.SpringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
@@ -9,10 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.server.ResponseStatusException;
@@ -21,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Controller
 public class FileController {
@@ -30,7 +28,7 @@ public class FileController {
 
     @Autowired
     public FileController(@Qualifier("ClipsService") IClipsService clipService,
-                           @Qualifier("FileService") IFileService fileService) {
+                          @Qualifier("FileService") IFileService fileService) {
         this.clipService = clipService;
         this.fileService = fileService;
     }
@@ -42,7 +40,7 @@ public class FileController {
      */
     @ResponseBody
     @RequestMapping(value = "/upload/clip", method = RequestMethod.POST)
-    public String handleClipUpload(MultipartHttpServletRequest request) {
+    public String handleClipUpload(MultipartHttpServletRequest request, @RequestParam(value="clip_name") String clipName) {
         Iterator<String> iterator = request.getFileNames();
         MultipartFile multiFile = request.getFile(iterator.next());
         HttpSession session = request.getSession();
@@ -52,8 +50,8 @@ public class FileController {
                 if(userName == null || userName.equals("")) {
                     return Status.DENIED.getJson();
                 }
-                if(!clipService.clipExists(userName, multiFile.getOriginalFilename())) {
-                    fileService.uploadClip(userName, multiFile.getOriginalFilename(), multiFile.getBytes());
+                if(!clipService.clipExists(userName, clipName)) {
+                    fileService.uploadClip(userName, clipName, multiFile.getBytes());
                 } else {
                     return Status.TAKEN.getJson();
                 }
@@ -61,7 +59,7 @@ public class FileController {
                 return Status.FAIL.getJson();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
             return Status.FAIL.getJson();
         }
         return Status.SUCCESS.getJson();
@@ -89,32 +87,10 @@ public class FileController {
                 return Status.FAIL.getJson();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
             return Status.FAIL.getJson();
         }
         return Status.SUCCESS.getJson();
-    }
-
-    /**
-     * Retrieve any given clip as a wav
-     * @param request request
-     * @param userName owner of clip
-     * @param clipName name of clip
-     * @return clip
-     */
-    @ResponseBody
-    @RequestMapping(value = "/clips/{userName}/{clipName}", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public HttpEntity<byte[]> retrieveClip(HttpServletRequest request,
-                                           @PathVariable String userName, @PathVariable String clipName) {
-        byte[] data = fileService.retrieveClipData(userName,clipName);
-        HttpHeaders header = new HttpHeaders();
-        header.setContentType(new MediaType("audio", "wav"));
-        if(data == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
-        }
-        header.setContentLength(data.length);
-        return new HttpEntity<>(data, header);
     }
 
     /**

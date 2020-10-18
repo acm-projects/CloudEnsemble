@@ -6,6 +6,10 @@ import edu.utdallas.pages.services.IHashService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import java.sql.SQLException;
+
 @Service("CredentialsService")
 public class CredentialsService extends DbService implements ICredentialsService {
 
@@ -22,10 +26,9 @@ public class CredentialsService extends DbService implements ICredentialsService
      * {@inheritDoc}
      */
     @Override
-    public void register(String email, String username, String password) {
-        String salt = hashService.generateSalt();
-        query(getQuery("REGISTER"),username,
-                email,DEFAULT_PROFILE_PIC_KEY, hashService.hashString(password,salt),salt);
+    public void register(String email, String username, String hashedPassword, String salt) throws SQLException {
+        queryUncaught(getQuery("REGISTER"),username,
+                email,DEFAULT_PROFILE_PIC_KEY, hashedPassword, salt);
     }
 
     /**
@@ -50,7 +53,14 @@ public class CredentialsService extends DbService implements ICredentialsService
      */
     @Override
     public boolean checkEmail(String email) {
-        return !exists(getQuery("CHECK_EMAIL"),email);
+        boolean result = true;
+        try {
+            InternetAddress address = new InternetAddress(email);
+            address.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return !exists(getQuery("CHECK_EMAIL"),email) && result;
     }
 
     /**
@@ -59,5 +69,13 @@ public class CredentialsService extends DbService implements ICredentialsService
     @Override
     public boolean checkName(String name) {
         return !exists(getQuery("CHECK_NAME"),name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean checkPassword(String password) {
+        return true;
     }
 }

@@ -17,5 +17,17 @@
     Rack:<input type="text" name="rack"/><br/>
     <input type="submit" value="Move Sample"/>
 </form>
+<form action="tracks/sharing/set-visibility" method="post">
+    Track:<input type="text" name="track_key"/><br/>
+    Visibility:<input type="text" name="access_level"/><br/>
+    <input type="submit" value="Set"/>
+</form>
+<form action="tracks/sharing/share" method="post">
+    Track:<input type="text" name="track_key"/><br/>
+    Accessor:<input type="text" name="accessor"/><br/>
+    Visibility:<input type="text" name="access_level"/><br/>
+    Type:<input type="text" name="accessor_type"/><br/>
+    <input type="submit" value="Set"/>
+</form>
 </body>
 </html>

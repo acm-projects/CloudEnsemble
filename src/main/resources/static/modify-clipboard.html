@@ -1,0 +1,20 @@
+<html>
+<body>
+<form action="tracks/clipboard/add" method="post">
+    Select Track:<input type="text" name="track_key"/><br/>
+    Select Clip:<input type="text" name="clip_key"/><br/>
+    <input type="submit" value="add"/>
+</form>
+<form action="tracks/clipboard/remove" method="post">
+    Select Track:<input type="text" name="track_key"/><br/>
+    Select Element:<input type="text" name="element_key"/><br/>
+    <input type="submit" value="remove"/>
+</form>
+<form action="tracks/clipboard/move" method="post">
+    Select Track:<input type="text" name="track_key"/><br/>
+    Select Element:<input type="text" name="element_key"/><br/>
+    Select After Ele:<input type="text" name="after_key"/><br/>
+    <input type="submit" value="move"/>
+</form>
+</body>
+</html>

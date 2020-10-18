@@ -1,5 +1,6 @@
 package edu.utdallas.pages.implementations;
 
+import edu.utdallas.pages.services.AccessLevel;
 import edu.utdallas.pages.services.IClipsService;
 import edu.utdallas.pages.services.IDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,6 +28,14 @@ public class ClipsService extends DbService implements IClipsService {
     @Override
     public boolean clipExists(String user, String name) {
         return exists(getQuery("RETRIEVE_CLIP"),user,name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean clipKeyExists(String user, String key) {
+        return exists(getQuery("RETRIEVE_CLIP_KEY"),user,key);
     }
 
 }

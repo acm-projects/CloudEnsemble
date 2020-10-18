@@ -2,6 +2,7 @@ package edu.utdallas.pages.implementations;
 
 import edu.utdallas.pages.services.IDataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
@@ -11,7 +12,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Service("DataSource")
+@Component("DataSource")
 public class MySqlDataSource implements IDataSource {
 
     private final Properties queries;
@@ -37,7 +38,7 @@ public class MySqlDataSource implements IDataSource {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -48,7 +49,7 @@ public class MySqlDataSource implements IDataSource {
             try {
                 s.close();
             } catch (SQLException ex) {
-                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

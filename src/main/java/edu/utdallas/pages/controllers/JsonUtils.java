@@ -1,4 +1,4 @@
-package edu.utdallas.pages.utils;
+package edu.utdallas.pages.controllers;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -54,5 +54,7 @@ public class JsonUtils {
         jsonObject.put(contentKey,arr);
         return jsonObject.toString();
     }
+
+
 
 }

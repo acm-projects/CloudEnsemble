@@ -1,7 +1,6 @@
 package edu.utdallas.pages.controllers;
 
 import edu.utdallas.pages.services.IBandsService;
-import edu.utdallas.pages.utils.SpringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -10,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Controller
 public class BandsController {
@@ -33,6 +34,7 @@ public class BandsController {
         try {
             bandsService.newBand(bandName);
         } catch (SQLException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.WARNING, null, ex);
             return Status.TAKEN.getJson();
         }
         return Status.SUCCESS.getJson();

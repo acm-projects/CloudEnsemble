@@ -1,5 +1,6 @@
 package edu.utdallas.pages.implementations;
 
+import edu.utdallas.pages.services.AccessLevel;
 import edu.utdallas.pages.services.IDataSource;
 import edu.utdallas.pages.services.ITracksService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +18,7 @@ public class TracksService extends DbService implements ITracksService {
      */
     @Override
     public void newTrack(String trackUploader, String trackName) {
-        query(getQuery("INSERT_TRACK"), getUUID(), trackUploader, trackName, getTime());
+        query(getQuery("INSERT_TRACK"), getUUID(), trackUploader, trackName, getTime(), AccessLevel.RESTRICTED.getId());
     }
 
     /**
@@ -48,9 +49,8 @@ public class TracksService extends DbService implements ITracksService {
      * {@inheritDoc}
      */
     @Override
-    public String retrieveSamples(String trackName) {
+    public String retrieveSamples(String trackKey) {
         String[] column = {"sample_key","clip_key", "time", "rack"};
-        System.out.println(trackName);
-        return retrieveAsJsonArr("samples",column,column,getQuery("RETRIEVE_SAMPLES"),trackName);
+        return retrieveAsJsonArr("samples",column,column,getQuery("RETRIEVE_SAMPLES"),trackKey);
     }
 }

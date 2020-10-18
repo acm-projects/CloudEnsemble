@@ -49,17 +49,16 @@ public interface IFileService {
 
     /**
      * Retrieves the clip data from S3 bucket
-     * @param key of clip
+     * @param clipKey of clip
      */
     @Nullable
     byte[] retrieveClipData(String clipKey);
 
     /**
      * Deletes a clip from the S3 Storage and removes the entry from the database
-     * @param user owner of the clip
-     * @param name name of the clip
+     * @param key to delete
      */
-    void deleteClip(String user, String name);
+    void deleteClip(String key);
 
 
 }

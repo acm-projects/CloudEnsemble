@@ -16,4 +16,12 @@ public interface IClipsService {
      * @return true if it already exists
      */
     boolean clipExists(String user, String name);
+
+    /**
+     * Checks if a clip name is already taken
+     * @param user the owner of the clip
+     * @param key the key of the clip
+     * @return true if it already exists
+     */
+    boolean clipKeyExists(String user, String key);
 }

@@ -1,14 +1,17 @@
 package edu.utdallas.pages.services;
 
+import java.sql.SQLException;
+
 public interface ICredentialsService {
 
     /**
      * Registers a user into the database
      * @param email email for registration
      * @param username the username for registration
-     * @param password password for registration
+     * @param hashedPassword hashed password
+     * @param salt of the password
      */
-    void register(String email, String username, String password);
+    void register(String email, String username, String hashedPassword, String salt) throws SQLException;
 
     /**
      * Validates a login input is valid, returns unique username if login is successful
@@ -29,7 +32,7 @@ public interface ICredentialsService {
     /**
      * Checks if the email is already in the database for registration
      * @param email to check
-     * @return true if email doesn't exist, false otherwise
+     * @return false if email exists or is invalid
      */
     boolean checkEmail(String email);
 
@@ -39,5 +42,12 @@ public interface ICredentialsService {
      * @return true if name doesn't exist, false otherwise
      */
     boolean checkName(String name);
+
+    /**
+     * Checks if the name is already in the database for registration
+     * @param  password to check
+     * @return true if it matches the password policy
+     */
+    boolean checkPassword(String password);
 
 }

@@ -5,7 +5,7 @@ public enum AccessorType {
     USER("0"),
     BAND("1");
 
-    private String id;
+    private final String id;
 
     public String getId() {
         return id;

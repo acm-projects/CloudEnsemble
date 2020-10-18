@@ -98,11 +98,8 @@ public class FileService extends DbService implements IFileService {
      * {@inheritDoc}
      */
     @Override
-    public void deleteClip(String user, String name) {
-        //Delete from S3 Bucket
-        s3Service.deleteFile(retrieveClipKey(user,name));
-        //Delete from database
-        query(getQuery("DELETE_CLIP"),user,name);
+    public void deleteClip(String key) {
+        query(getQuery("DISOWN_CLIP"),Reserved.Anonymous.getText(),key);
     }
 
 }

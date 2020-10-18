@@ -1,8 +1,6 @@
 package edu.utdallas.pages.controllers;
 
 import edu.utdallas.pages.services.*;
-import edu.utdallas.pages.utils.JsonUtils;
-import edu.utdallas.pages.utils.SpringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;

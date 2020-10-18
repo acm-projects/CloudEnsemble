@@ -18,7 +18,7 @@ public class BandsService extends DbService implements IBandsService {
      * {@inheritDoc}
      */
     public void newBand(String bandName) throws SQLException {
-        queryUnchecked(getQuery("NEW_BAND"), bandName);
+        queryUncaught(getQuery("NEW_BAND"), bandName);
     }
 
     /**
@@ -38,7 +38,7 @@ public class BandsService extends DbService implements IBandsService {
     /**
      * {@inheritDoc}
      */
-    public  boolean inBand(String userName, String bandName) {
+    public boolean inBand(String userName, String bandName) {
         return exists(getQuery("IN_BAND"), userName, bandName);
     }
 

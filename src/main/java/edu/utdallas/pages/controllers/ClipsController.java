@@ -1,36 +1,36 @@
 package edu.utdallas.pages.controllers;
 
 import edu.utdallas.pages.services.*;
-import edu.utdallas.pages.utils.SpringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class ClipsController {
 
     private final IClipsService clipsService;
     private final IFileService fileService;
+    private final IAccessService accessService;
 
     @Autowired
     public ClipsController(@Qualifier("ClipsService") IClipsService clipsService,
-                           @Qualifier("FileService") IFileService fileService) {
+                           @Qualifier("FileService") IFileService fileService,
+                           @Qualifier("AccessService") IAccessService accessService) {
         this.clipsService = clipsService;
         this.fileService = fileService;
+        this.accessService = accessService;
     }
 
     /**
      * Retrieve user clips as a json
-     * @param request request
      * @return json containing clip names and ids
      */
     @ResponseBody
     @RequestMapping(value ="/{userName}/clips", method = RequestMethod.GET)
-    public String retrieveClips(HttpServletRequest request, @PathVariable String userName) {
+    public String retrieveClips(@PathVariable String userName) {
         return clipsService.retrieveClips(userName);
     }
 
@@ -42,14 +42,12 @@ public class ClipsController {
     @ResponseBody
     @RequestMapping(value="/clips/delete", method = RequestMethod.POST)
     public String deleteClip(HttpServletRequest request,
-                             @RequestParam(value="sample_name") String clipName) {
-        HttpSession session = request.getSession();
-        String userName = SpringUtils.getStringAttribute(session, LoginController.USERNAME_ATTRIBUTE);
-        if(clipsService.clipExists(userName,clipName)) {
-            fileService.deleteClip(userName, clipName);
-        } else {
-            return Status.SUCCESS.getJson();
+                             @RequestParam(value="clip_key") String clipKey) {
+        if(accessService.canDeleteClip(clipKey,
+                SpringUtils.getStringAttribute(request.getSession(), LoginController.USERNAME_ATTRIBUTE))) {
+            return Status.FAIL.getJson();
         }
-        return Status.FAIL.getJson();
+        fileService.deleteClip(clipKey);
+        return Status.SUCCESS.getJson();
     }
 }

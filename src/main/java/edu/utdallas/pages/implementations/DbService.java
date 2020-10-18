@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,7 +34,6 @@ public class DbService {
      * Gets a suitable UUID for the database
      */
     public String getUUID() {
-        System.out.println("thread" + Thread.currentThread().getId());
         return Generators.timeBasedGenerator().generate().toString() + Thread.currentThread().getId();
     }
 
@@ -50,12 +47,12 @@ public class DbService {
     }
 
     /**
-     * Performs an UNCHECKED string query that doesn't receive or return data: insert,update,delete
+     * Performs an UNCAUGHT string query that doesn't receive or return data: insert,update,delete
      * @param query to run
      * @param params needed for query
      * @throws SQLException if a query fails
      */
-    public void queryUnchecked(String query, String... params) throws SQLException {
+    public void queryUncaught(String query, String... params) throws SQLException {
         Connection conn = dataSource.getConnection();
         PreparedStatement ps = null;
         if(conn != null) {
@@ -79,9 +76,9 @@ public class DbService {
      */
     public void query(String query, String... params) {
         try {
-            queryUnchecked(query, params);
+            queryUncaught(query, params);
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -89,6 +86,7 @@ public class DbService {
      * Retrieves an  element from the database
      * @param query to run
      * @param params needed for query
+     * @return value if found, empty string otherwise
      */
     public String retrieve(String column, String query, String... params) {
         Connection conn = dataSource.getConnection();
@@ -100,16 +98,11 @@ public class DbService {
                     ps.setString(i+1, params[i]);
                 }
                 ResultSet rs = ps.executeQuery();
-                ArrayList<String> retrieve = new ArrayList<>();
-                while(rs.next()) {
-                    retrieve.add(rs.getString(column));
-                }
+                String retrieve = rs.next() ? rs.getString(column) : "";
                 rs.close();
-                if(retrieve.size() == 1) {
-                    return retrieve.get(0);
-                }
+                return retrieve;
             } catch (SQLException ex) {
-                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             } finally {
                 dataSource.closeStatement(ps);
                 dataSource.closeConnection(conn);
@@ -119,11 +112,40 @@ public class DbService {
     }
 
     /**
+     * Retrieves an  element from the database
+     * @param query to run
+     * @param params needed for query
+     * @return value if found, empty string otherwise
+     */
+    public int retrieveValue(String column, String query, String... params) {
+        Connection conn = dataSource.getConnection();
+        PreparedStatement ps = null;
+        if(conn != null) {
+            try {
+                ps = conn.prepareStatement(query);
+                for(int i = 0; i < params.length; i++) {
+                    ps.setString(i+1, params[i]);
+                }
+                ResultSet rs = ps.executeQuery();
+                int retrieve = rs.next() ? rs.getInt(column) : 0;
+                rs.close();
+                return retrieve;
+            } catch (SQLException ex) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                dataSource.closeStatement(ps);
+                dataSource.closeConnection(conn);
+            }
+        }
+        return 0;
+    }
+
+    /**
      * Gets entries with a query and returns them as a 2d string list
      * @param columns the columns matching retrieval query
      * @param query to run
      * @param params to insert
-     * @return followers in a 2d json
+     * @return info in a 2d json
      */
     public JSONArray retrieveAsJsonArrObj(String[] attributes, String[] columns, String query, String... params) {
         Connection conn = dataSource.getConnection();
@@ -146,8 +168,7 @@ public class DbService {
                 rs.close();
                 return arr;
             } catch (SQLException ex) {
-                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println(query);
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             } finally {
                 dataSource.closeStatement(ps);
                 dataSource.closeConnection(conn);
@@ -193,7 +214,7 @@ public class DbService {
                 rs.close();
                 return counter > 0;
             } catch (SQLException ex) {
-                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             } finally {
                 dataSource.closeStatement(ps);
                 dataSource.closeConnection(conn);

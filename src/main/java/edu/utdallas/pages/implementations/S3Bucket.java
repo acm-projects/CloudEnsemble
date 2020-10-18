@@ -1,11 +1,11 @@
 package edu.utdallas.pages.implementations;
 
 
-import edu.utdallas.pages.services.IAWSBucket;
+import edu.utdallas.pages.services.IS3Bucket;
 import org.springframework.stereotype.Component;
 
-@Component("AWSBucket")
-public class AWSBucket implements IAWSBucket {
+@Component("S3Bucket")
+public class S3Bucket implements IS3Bucket {
 
     public static String ACCESS_ID = System.getenv("S3_ID");
     public static String ACCESS_KEY = System.getenv("S3_KEY");

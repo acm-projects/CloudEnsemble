@@ -4,5 +4,18 @@
     Name:<input type="text" name="track_name"/><br/>
     <input type="submit" value="Add"/>
 </form>
+<form action="tracks/samples/add" method="post">
+    Track:<input type="text" name="track_key"/><br/>
+    Clip:<input type="text" name="clip_key"/><br/>
+    Time:<input type="text" name="time"/><br/>
+    Rack:<input type="text" name="rack"/><br/>
+    <input type="submit" value="Add Sample"/>
+</form>
+<form action="tracks/samples/move" method="post">
+    Sample:<input type="text" name="sample_key"/><br/>
+    Time:<input type="text" name="time"/><br/>
+    Rack:<input type="text" name="rack"/><br/>
+    <input type="submit" value="Move Sample"/>
+</form>
 </body>
 </html>

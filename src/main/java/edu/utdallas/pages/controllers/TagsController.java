@@ -1,6 +1,7 @@
 package edu.utdallas.pages.controllers;
 
 import edu.utdallas.pages.services.ITagsService;
+import edu.utdallas.pages.services.TagType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -37,11 +38,10 @@ public class TagsController {
     @RequestMapping(value="/clips/tags/add/artist", method= RequestMethod.POST)
     public String addArtistTagToClip(HttpServletRequest request,
                                            @RequestParam(value="clip_key") String clipKey, @RequestParam(value="tag_id") String tagId) {
-        tagsService.newTag(tagId, TagType.Artist);
-        if(!tagsService.clipHasTag(clipKey, tagId)) {
-            tagsService.addTag(clipKey, tagId);
+        if(!tagsService.objectHasTag(clipKey, tagId)) {
+            tagsService.addTag(clipKey, tagId, TagType.ARTIST);
         } else {
-            return Status.FAIL.getJson();
+            return Status.TAKEN.getJson();
         }
         return Status.SUCCESS.getJson();
     }
@@ -50,11 +50,10 @@ public class TagsController {
     @RequestMapping(value="/clips/tags/add/instrument", method= RequestMethod.POST)
     public String addInstrumentTagToClip(HttpServletRequest request,
                                             @RequestParam(value="clip_key") String clipKey, @RequestParam(value="tag_id") String tagId) {
-        tagsService.newTag(tagId, TagType.Instrument);
-        if(!tagsService.clipHasTag(clipKey, tagId)) {
-            tagsService.addTag(clipKey, tagId);
+        if(!tagsService.objectHasTag(clipKey, tagId)) {
+            tagsService.addTag(clipKey, tagId, TagType.INSTRUMENT);
         } else {
-            return Status.FAIL.getJson();
+            return Status.TAKEN.getJson();
         }
         return Status.SUCCESS.getJson();
     }
@@ -63,11 +62,10 @@ public class TagsController {
     @RequestMapping(value="/clips/tags/add/genre", method= RequestMethod.POST)
     public String addGenreTagToClip(HttpServletRequest request,
                                       @RequestParam(value="clip_key") String clipKey, @RequestParam(value="tag_id") String tagId) {
-        tagsService.newTag(tagId, TagType.Genre);
-        if(!tagsService.clipHasTag(clipKey, tagId)) {
-            tagsService.addTag(clipKey, tagId);
+        if(!tagsService.objectHasTag(clipKey, tagId)) {
+            tagsService.addTag(clipKey, tagId, TagType.GENRE);
         } else {
-            return Status.FAIL.getJson();
+            return Status.TAKEN.getJson();
         }
         return Status.SUCCESS.getJson();
     }
@@ -76,11 +74,10 @@ public class TagsController {
     @RequestMapping(value="/clips/tags/add/other", method= RequestMethod.POST)
     public String addOtherTagToClip(HttpServletRequest request,
                                                 @RequestParam(value="clip_key") String clipKey, @RequestParam(value="tag_id") String tagId) {
-        tagsService.newTag(tagId, TagType.Other);
-        if(!tagsService.clipHasTag(clipKey, tagId)) {
-            tagsService.addTag(clipKey, tagId);
+        if(!tagsService.objectHasTag(clipKey, tagId)) {
+            tagsService.addTag(clipKey, tagId, TagType.OTHER);
         } else {
-            return Status.FAIL.getJson();
+            return Status.TAKEN.getJson();
         }
         return Status.SUCCESS.getJson();
     }

@@ -5,10 +5,7 @@ import edu.utdallas.pages.utils.SpringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -61,7 +58,7 @@ public class TracksController {
 
     @ResponseBody
     @RequestMapping(value="/tracks/{trackName}/samples", method= RequestMethod.GET)
-    public String retrieve(HttpServletRequest request, String trackName) {
+    public String retrieve(HttpServletRequest request, @PathVariable String trackName) {
         return tracksService.retrieveSamples(trackName);
     }
 

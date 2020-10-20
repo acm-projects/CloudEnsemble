@@ -18,7 +18,7 @@ public class ClipsService extends DbService implements IClipsService {
     @Override
     public String retrieveClips(String user) {
         String[] column = {"clip_key","clip_name"};
-        return retrieveAsJsonArr(column,column,getQuery("RETRIEVE_USER_CLIPS"),user);
+        return retrieveAsJsonArr("clips",column,column,getQuery("RETRIEVE_USER_CLIPS"),user);
     }
 
     /**

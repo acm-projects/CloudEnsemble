@@ -118,6 +118,27 @@ public class FileController {
     }
 
     /**
+     * Retrieve any given clip as a wav
+     * @param request request
+     * @param clipKey to get clip
+     * @return clip
+     */
+    @ResponseBody
+    @RequestMapping(value = "/clips/{clipKey}", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public HttpEntity<byte[]> retrieveClip(HttpServletRequest request,
+                                           @PathVariable String clipKey) {
+        byte[] data = fileService.retrieveClipData(clipKey);
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(new MediaType("audio", "wav"));
+        if(data == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
+        }
+        header.setContentLength(data.length);
+        return new HttpEntity<>(data, header);
+    }
+
+    /**
      * Retrieve any given pic as a png
      * @param request request
      * @return profile pic

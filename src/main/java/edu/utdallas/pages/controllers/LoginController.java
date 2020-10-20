@@ -47,6 +47,24 @@ public class LoginController {
     }
 
     /**
+     * Handles a register post request (for testing)
+     * @param request request
+     * @param email the email to register
+     * @param userName the name to register
+     * @param password the password to register
+     * @return empty string
+     */
+    @ResponseBody
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String handleRegister(HttpServletRequest request,
+                              @RequestParam(value="email") String email,
+                                 @RequestParam(value="user_name") String userName,
+                              @RequestParam(value="password") String password) {
+        credentialsService.register(email,userName,password);
+        return "";
+    }
+
+    /**
      * Checks if an email or a username is taken, and sends a verification for that email if it is valid
      * @param email the email to check
      * @param userName the user name to check

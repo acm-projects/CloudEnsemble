@@ -42,7 +42,7 @@ public class FollowersService extends DbService implements IFollowersService {
     @Override
     public String retrieveFollowers(String member) {
         String[] column = {"follower"};
-        return retrieveAsJsonArr(column,column,getQuery("RETRIEVE_FOLLOWERS"),member);
+        return retrieveAsJsonArr("followers",column,column,getQuery("RETRIEVE_FOLLOWERS"),member);
     }
 
     /**
@@ -51,7 +51,7 @@ public class FollowersService extends DbService implements IFollowersService {
     @Override
     public String retrieveFollowing(String member) {
         String[] column = {"following"};
-        return retrieveAsJsonArr(column,column,getQuery("RETRIEVE_FOLLOWING"), member);
+        return retrieveAsJsonArr("following",column,column,getQuery("RETRIEVE_FOLLOWING"), member);
     }
 
 }

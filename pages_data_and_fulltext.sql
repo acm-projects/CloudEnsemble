@@ -1,4 +1,10 @@
-ALTER TABLE clips ADD FULLTEXT(clip_name, clip_uploader);
+ALTER TABLE clips ADD FULLTEXT (clip_name);
+ALTER TABLE clips ADD FULLTEXT (clip_uploader);
+ALTER TABLE tracks ADD FULLTEXT (track_name);
+ALTER TABLE tracks ADD FULLTEXT (track_uploader);
+ALTER TABLE tags ADD FULLTEXT (tag_id);
+ALTER TABLE credentials ADD FULLTEXT (user_name);
+ALTER TABLE bands ADD FULLTEXT (band_name);
 
 INSERT INTO credentials (user_name, email, pic_key, password, salt) 
 VALUES ('Elizabeth', 'elizabeth@gmail.com', '1', 'clements', '1'),

@@ -1,0 +1,13 @@
+.track-image img{
+
+    height:250px;
+    width: 250px;
+    border-radius: 60px;
+    padding: 30px;
+    margin-right: 16px auto;
+
+}
+
+.track-image img:hover{
+    opacity: .6;
+}

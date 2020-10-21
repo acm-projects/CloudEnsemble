@@ -1,11 +1,3 @@
-ALTER TABLE clips ADD FULLTEXT (clip_name);
-ALTER TABLE clips ADD FULLTEXT (clip_uploader);
-ALTER TABLE tracks ADD FULLTEXT (track_name);
-ALTER TABLE tracks ADD FULLTEXT (track_uploader);
-ALTER TABLE tags ADD FULLTEXT (tag_id);
-ALTER TABLE credentials ADD FULLTEXT (user_name);
-ALTER TABLE bands ADD FULLTEXT (band_name);
-
 SET @squery = 'Francisca jazz queen guitar';
 
 SELECT 'clip' AS 'type', clips.clip_name, clips.clip_uploader, 

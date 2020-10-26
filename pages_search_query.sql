@@ -1,6 +1,6 @@
-SET @squery = 'Francisca jazz queen guitar';
+-- SET @squery = 'Francisca jazz queen guitar';
 
-SELECT 'clip' AS 'type', clips.clip_name, clips.clip_uploader, 
+SELECT 'clip' AS 'type', clip_key AS 'key', clips.clip_name AS 'name', clips.clip_uploader AS 'uploader', 
 	   (MATCH (clips.clip_name) AGAINST (@squery) + 
             IF(clips.clip_name LIKE CONCAT('%', CAST(@squery AS CHAR CHARACTER SET utf8), '%'), 0.2, 0) + 
 			MATCH (clips.clip_uploader) AGAINST (@squery) + 
@@ -11,7 +11,7 @@ ON	   tags.object_key = clips.clip_key
 WHERE  clips.access != 0 
 GROUP  BY clips.clip_key  
 UNION  ALL 
-SELECT 'track', tracks.track_name, tracks.track_uploader,  
+SELECT 'track', track_key, tracks.track_name, tracks.track_uploader,  
        (MATCH (tracks.track_name) AGAINST (@squery) + 
             IF(tracks.track_name LIKE CONCAT('%', CAST(@squery AS CHAR CHARACTER SET utf8), '%'), 0.2, 0) + 
 			MATCH (tracks.track_uploader) AGAINST (@squery) + 
@@ -22,12 +22,12 @@ ON	   tags.object_key = tracks.track_key
 WHERE  tracks.access != 0 
 GROUP  BY tracks.track_key 
 UNION  ALL 
-SELECT 'username', NULL, user_name, 
+SELECT 'username', NULL, NULL, user_name, 
        MATCH (user_name) AGAINST (@squery) + 
 	      IF(user_name LIKE CONCAT('%', CAST(@squery AS CHAR CHARACTER SET utf8), '%'), 0.5, 0)  
 FROM   credentials 
 UNION  ALL 
-SELECT 'band', NULL, band_name, 
+SELECT 'band', NULL, NULL, band_name, 
        MATCH (band_name) AGAINST (@squery) + 
 	      IF(band_name LIKE CONCAT('%', CAST(@squery AS CHAR CHARACTER SET utf8), '%'), 0.6, 0)  
 FROM   bands 

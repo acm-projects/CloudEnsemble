@@ -1,0 +1,33 @@
+.card-body img{
+
+    height:250px;
+    width: 250px;
+    border-radius: 60px;
+    padding: 30px;
+    margin-right: 16px auto;
+
+}
+
+.card-body img:hover{
+    opacity: .6;
+}
+
+.col
+{
+    position: absolute;
+    top: 200px;
+    left: 50px;
+
+}
+
+.clips
+{
+    position: absolute;
+    top: 350px;
+    left: 150px;
+    margin-right: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(5,auto);
+    grid-gap: 40px;
+
+}

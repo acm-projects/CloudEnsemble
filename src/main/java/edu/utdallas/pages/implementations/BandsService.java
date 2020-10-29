@@ -17,29 +17,29 @@ public class BandsService extends DbService implements IBandsService {
     /**
      * {@inheritDoc}
      */
-    public void newBand(String bandName) throws SQLException {
-        queryUncaught(getQuery("NEW_BAND"), bandName);
+    public void newBand(String founder, String bandName) throws SQLException {
+        queryUncaught(getQuery("NEW_BAND"), getUUID(), bandName, getTime(), founder);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void joinBand(String userName, String bandName) {
-        query(getQuery("JOIN_BAND"), bandName);
+    public void joinBand(String userName, String bandId) {
+        query(getQuery("JOIN_BAND"), bandId, userName);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void leaveBand(String userName, String bandName) {
-        query(getQuery("LEAVE_BAND"), bandName);
+    public void leaveBand(String userName, String bandId) {
+        query(getQuery("LEAVE_BAND"), bandId, userName);
     }
 
     /**
      * {@inheritDoc}
      */
-    public boolean inBand(String userName, String bandName) {
-        return exists(getQuery("IN_BAND"), userName, bandName);
+    public boolean inBand(String userName, String bandId) {
+        return exists(getQuery("IN_BAND"), bandId, userName);
     }
 
 }

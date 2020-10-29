@@ -27,8 +27,8 @@ public class CredentialsService extends DbService implements ICredentialsService
      */
     @Override
     public void register(String email, String username, String hashedPassword, String salt) throws SQLException {
-        queryUncaught(getQuery("REGISTER"),username,
-                email,DEFAULT_PROFILE_PIC_KEY, hashedPassword, salt);
+        queryUncaught(getQuery("ADD_PIC"),username,DEFAULT_PROFILE_PIC_KEY);
+        queryUncaught(getQuery("REGISTER"),username,email,hashedPassword, salt);
     }
 
     /**

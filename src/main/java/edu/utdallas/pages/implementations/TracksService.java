@@ -17,6 +17,15 @@ public class TracksService extends DbService implements ITracksService {
      * {@inheritDoc}
      */
     @Override
+    public String retrieveTracks(String user) {
+        String[] column = {"track_key","track_name"};
+        return retrieveAsJsonArr("tracks",column,column,getQuery("RETRIEVE_USER_TRACKS"),user);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void newTrack(String trackUploader, String trackName) {
         query(getQuery("INSERT_TRACK"), getUUID(), trackUploader, trackName, getTime(), AccessLevel.RESTRICTED.getId());
     }

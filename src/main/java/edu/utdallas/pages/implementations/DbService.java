@@ -4,6 +4,9 @@ import com.fasterxml.uuid.Generators;
 import edu.utdallas.pages.services.IDataSource;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.safety.Whitelist;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +21,8 @@ public class DbService {
 
     private final IDataSource dataSource;
 
+    public final Document.OutputSettings outputSettings = new Document.OutputSettings().prettyPrint(false);
+
     public DbService(IDataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -28,6 +33,20 @@ public class DbService {
 
     public String getQuery(String key) {
         return dataSource.getQuery(key);
+    }
+
+    /**
+     * Cleans an input string of XSS to display in html
+     * @param str input to clean
+     * @return cleaned string (safe to be used in html)
+     */
+    public String cleanString(String str) {
+        Document document = Jsoup.parse(str);
+        document.outputSettings(outputSettings);
+        document.select("br").append("\\n");
+        document.select("p").prepend("\\n\\n");
+        String s = document.html().replaceAll("\\\\n", "\n");
+        return Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
     }
 
     /**
@@ -222,5 +241,9 @@ public class DbService {
         }
         return true;
     }
+
+//    public static void main(String[] args) {
+//        System.out.println(cleanString("{ : \" \" }"));
+//    }
 
 }

@@ -7,9 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class ClipsController {
+public class ClipsController extends HttpController {
 
     private final IClipsService clipsService;
     private final IFileService fileService;
@@ -29,7 +30,7 @@ public class ClipsController {
      * @return json containing clip names and ids
      */
     @ResponseBody
-    @RequestMapping(value ="/{userName}/clips", method = RequestMethod.GET)
+    @RequestMapping(value ="/{userName}/clips", method = RequestMethod.GET, produces = "application/json")
     public String retrieveClips(@PathVariable String userName) {
         return clipsService.retrieveClips(userName);
     }
@@ -40,11 +41,11 @@ public class ClipsController {
      * @return json determining success or failure
      */
     @ResponseBody
-    @RequestMapping(value="/clips/delete", method = RequestMethod.POST)
+    @RequestMapping(value="/clips/delete", method = RequestMethod.POST, produces = "application/json")
     public String deleteClip(HttpServletRequest request,
                              @RequestParam(value="clip_key") String clipKey) {
         if(accessService.canDeleteClip(clipKey,
-                SpringUtils.getStringAttribute(request.getSession(), LoginController.USERNAME_ATTRIBUTE))) {
+                getStringAttribute(request.getSession(), USERNAME_ATTRIBUTE))) {
             return Status.FAIL.getJson();
         }
         fileService.deleteClip(clipKey);

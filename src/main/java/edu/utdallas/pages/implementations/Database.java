@@ -22,7 +22,7 @@ public class Database {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String connectionURL = URL + DB_NAME + "?useSSL=false";
+        String connectionURL = URL + DB_NAME + "?useSSL=false&allowMultiQueries=true";
         dataSource.setUrl(connectionURL);
         dataSource.setUsername(USERNAME);
         dataSource.setPassword(PASSWORD);

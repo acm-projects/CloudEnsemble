@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Controller
-public class BandsController {
+public class BandsController extends HttpController{
 
     private final IBandsService bandsService;
 
@@ -29,10 +29,15 @@ public class BandsController {
      * @return json determining success or failure
      */
     @ResponseBody
-    @RequestMapping(value ="/band/new", method = RequestMethod.POST)
+    @RequestMapping(value ="/band/new", method = RequestMethod.POST, produces = "application/json")
     public String createBand(HttpServletRequest request, @RequestParam(value="band_name") String bandName) {
+        HttpSession session = request.getSession();
+        String userName = getStringAttribute(session, USERNAME_ATTRIBUTE);
+        if(userName == null || userName.equals("")) {
+            return Status.DENIED.getJson();
+        }
         try {
-            bandsService.newBand(bandName);
+            bandsService.newBand(userName, bandName);
         } catch (SQLException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.WARNING, null, ex);
             return Status.TAKEN.getJson();
@@ -43,16 +48,19 @@ public class BandsController {
     /**
      * Join a band
      * @param request request
-     * @param bandName to join
+     * @param bandId to join
      * @return json determining success or failure
      */
     @ResponseBody
-    @RequestMapping(value ="/band/join", method = RequestMethod.POST)
-    public String joinBand(HttpServletRequest request, @RequestParam(value="band_name") String bandName) {
+    @RequestMapping(value ="/band/join", method = RequestMethod.POST, produces = "application/json")
+    public String joinBand(HttpServletRequest request, @RequestParam(value="band_id") String bandId) {
         HttpSession session = request.getSession();
-        String userName = SpringUtils.getStringAttribute(session, LoginController.USERNAME_ATTRIBUTE);
-        if(!bandsService.inBand(userName, bandName)) {
-            bandsService.joinBand(userName, bandName);
+        String userName = getStringAttribute(session, USERNAME_ATTRIBUTE);
+        if(userName == null || userName.equals("")) {
+            return Status.DENIED.getJson();
+        }
+        if(!bandsService.inBand(userName, bandId)) {
+            bandsService.joinBand(userName, bandId);
             return Status.SUCCESS.getJson();
         }
         return Status.FAIL.getJson();
@@ -61,18 +69,48 @@ public class BandsController {
     /**
      * Leave a band
      * @param request request
-     * @param bandName to leave
+     * @param bandId to leave
      * @return json determining success or failure
      */
     @ResponseBody
-    @RequestMapping(value ="/band/leave", method = RequestMethod.POST)
-    public String leaveBand(HttpServletRequest request, @RequestParam(value="band_name") String bandName) {
+    @RequestMapping(value ="/band/leave", method = RequestMethod.POST, produces = "application/json")
+    public String leaveBand(HttpServletRequest request, @RequestParam(value="band_id") String bandId) {
         HttpSession session = request.getSession();
-        String userName = SpringUtils.getStringAttribute(session, LoginController.USERNAME_ATTRIBUTE);
-        if(bandsService.inBand(userName, bandName)) {
-            bandsService.leaveBand(SpringUtils.getStringAttribute(session, LoginController.USERNAME_ATTRIBUTE), bandName);
+        String userName = getStringAttribute(session, USERNAME_ATTRIBUTE);
+        if(userName == null || userName.equals("")) {
+            return Status.DENIED.getJson();
+        }
+        if(bandsService.inBand(userName, bandId)) {
+            bandsService.leaveBand(getStringAttribute(session, USERNAME_ATTRIBUTE), bandId);
             return Status.SUCCESS.getJson();
         }
         return Status.FAIL.getJson();
+    }
+
+    /**
+     * Leave a band
+     * @param request request
+     * @param bandId to leave
+     * @return json determining success or failure
+     */
+    @ResponseBody
+    @RequestMapping(value ="/band/delete", method = RequestMethod.POST, produces = "application/json")
+    public String deleteBand(HttpServletRequest request, @RequestParam(value="band_id") String bandId) {
+        return "";
+    }
+
+    /**
+     * Leave a band
+     * @param request request
+     * @param bandId to leave
+     * @return json determining success or failure
+     */
+    @ResponseBody
+    @RequestMapping(value ="/band/kick", method = RequestMethod.POST, produces = "application/json")
+    public String kickMember(HttpServletRequest request,
+                             @RequestParam(value="band_id") String bandId,
+                             @RequestParam(value="band_id") String member) {
+
+        return "";
     }
 }

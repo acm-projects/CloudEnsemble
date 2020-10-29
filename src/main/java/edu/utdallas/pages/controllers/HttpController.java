@@ -2,7 +2,9 @@ package edu.utdallas.pages.controllers;
 
 import javax.servlet.http.HttpSession;
 
-public class SpringUtils {
+public class HttpController {
+
+    public static final String USERNAME_ATTRIBUTE = "user_name";
 
     /**
      * Get a string attribute from session
@@ -10,7 +12,7 @@ public class SpringUtils {
      * @param attribute name of attribute
      * @return string stored at attribute
      */
-    public static String getStringAttribute(HttpSession session, String attribute) {
+    public String getStringAttribute(HttpSession session, String attribute) {
         return (String)session.getAttribute(attribute);
     }
 

@@ -4,11 +4,9 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
-import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
 import com.amazonaws.services.simpleemail.model.*;
-import edu.utdallas.pages.services.IS3Bucket;
 import edu.utdallas.pages.services.ISESCredentials;
 import edu.utdallas.pages.services.ISEService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +66,7 @@ public class SEService implements ISEService {
      */
     @Override
     public void sendSuccessEmail(String to, String user) {
-        sendEmail(to,user + ", Your Cloud Ensemble account registered successfully!");
+        sendEmail(to,user + ", Your Cloud Ensemble registration was successful!");
     }
 
 }

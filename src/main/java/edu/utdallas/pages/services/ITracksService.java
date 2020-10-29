@@ -3,6 +3,13 @@ package edu.utdallas.pages.services;
 public interface ITracksService {
 
     /**
+     * Get all the tracks as a json for a certain user
+     * @param user to get tracks for
+     * @return all tracks
+     */
+    public String retrieveTracks(String user);
+
+    /**
      * Create a new track
      * @param trackUploader uploader
      * @param trackName name of track

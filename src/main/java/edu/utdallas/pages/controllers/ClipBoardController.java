@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Controller
-public class ClipBoardController {
+public class ClipBoardController extends HttpController {
 
     private final IClipBoardService clipBoardService;
     private final IAccessService accessService;
@@ -32,11 +33,11 @@ public class ClipBoardController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/tracks/clipboard/add",method= RequestMethod.POST)
+    @RequestMapping(value="/tracks/clipboard/add", method= RequestMethod.POST, produces = "application/json")
     public String addToClipBoard(HttpServletRequest request,
                                  @RequestParam(value="track_key") String trackKey,
                                 @RequestParam(value="clip_key") String clipKey) {
-        String userName = SpringUtils.getStringAttribute(request.getSession(), LoginController.USERNAME_ATTRIBUTE);
+        String userName = getStringAttribute(request.getSession(), USERNAME_ATTRIBUTE);
         if (!accessService.canEditTrack(trackKey,userName)) {
             return Status.DENIED.getJson();
         }
@@ -54,11 +55,11 @@ public class ClipBoardController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/tracks/clipboard/remove",method= RequestMethod.POST)
+    @RequestMapping(value="/tracks/clipboard/remove",method= RequestMethod.POST, produces = "application/json")
     public String removeFromClipBoard(HttpServletRequest request,
                                  @RequestParam(value="track_key") String trackKey,
                                  @RequestParam(value="element_key") String elementKey) {
-        String userName = SpringUtils.getStringAttribute(request.getSession(), LoginController.USERNAME_ATTRIBUTE);
+        String userName = getStringAttribute(request.getSession(), USERNAME_ATTRIBUTE);
         if (!accessService.canEditTrack(trackKey,userName)) {
             return Status.DENIED.getJson();
         }
@@ -67,10 +68,9 @@ public class ClipBoardController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/tracks/{trackKey}/clipboard",method= RequestMethod.GET)
-    public String retrieveClipBoard(HttpServletRequest request,
-                                 @PathVariable String trackKey) {
-        String userName = SpringUtils.getStringAttribute(request.getSession(), LoginController.USERNAME_ATTRIBUTE);
+    @RequestMapping(value="/tracks/{trackKey}/clipboard",method= RequestMethod.GET, produces = "application/json")
+    public String retrieveClipBoard(HttpServletRequest request, @PathVariable String trackKey) {
+        String userName = getStringAttribute(request.getSession(), USERNAME_ATTRIBUTE);
         if (!accessService.canEditTrack(trackKey,userName)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
         }
@@ -78,12 +78,12 @@ public class ClipBoardController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/tracks/clipboard/move",method= RequestMethod.POST)
+    @RequestMapping(value="/tracks/clipboard/move",method= RequestMethod.POST, produces = "application/json")
     public String moveElement(HttpServletRequest request,
                                 @RequestParam(value="track_key") String trackKey,
                                 @RequestParam(value="element_key") String elementKey,
                                 @RequestParam(value="after_key") String afterKey) {
-        String userName = SpringUtils.getStringAttribute(request.getSession(), LoginController.USERNAME_ATTRIBUTE);
+        String userName = getStringAttribute(request.getSession(), USERNAME_ATTRIBUTE);
         if (!accessService.canEditTrack(trackKey,userName)) {
             return Status.DENIED.getJson();
         }

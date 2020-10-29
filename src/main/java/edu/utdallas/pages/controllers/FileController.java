@@ -21,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Controller
-public class FileController {
+public class FileController extends HttpController {
 
     private final IFileService fileService;
     private final IClipsService clipService;
@@ -39,14 +39,14 @@ public class FileController {
      * @return json that identifies success with a status key
      */
     @ResponseBody
-    @RequestMapping(value = "/upload/clip", method = RequestMethod.POST)
+    @RequestMapping(value = "/upload/clip", method = RequestMethod.POST, produces = "application/json")
     public String handleClipUpload(MultipartHttpServletRequest request, @RequestParam(value="clip_name") String clipName) {
         Iterator<String> iterator = request.getFileNames();
         MultipartFile multiFile = request.getFile(iterator.next());
         HttpSession session = request.getSession();
         try {
             if(multiFile != null) {
-                String userName = SpringUtils.getStringAttribute(session, LoginController.USERNAME_ATTRIBUTE);
+                String userName = getStringAttribute(session, USERNAME_ATTRIBUTE);
                 if(userName == null || userName.equals("")) {
                     return Status.DENIED.getJson();
                 }
@@ -71,14 +71,14 @@ public class FileController {
      * @return json that identifies success with a status key
      */
     @ResponseBody
-    @RequestMapping(value = "/upload/pic", method = RequestMethod.POST)
+    @RequestMapping(value = "/upload/pic", method = RequestMethod.POST, produces = "application/json")
     public String handleProfilePicUpload(MultipartHttpServletRequest request) {
         Iterator<String> iterator = request.getFileNames();
         MultipartFile multiFile = request.getFile(iterator.next());
         HttpSession session = request.getSession();
         try {
             if(multiFile != null) {
-                String userName = SpringUtils.getStringAttribute(session,LoginController.USERNAME_ATTRIBUTE);
+                String userName = getStringAttribute(session,USERNAME_ATTRIBUTE);
                 if(userName == null || userName.equals("")) {
                     return Status.DENIED.getJson();
                 }
@@ -95,15 +95,12 @@ public class FileController {
 
     /**
      * Retrieve any given clip as a wav
-     * @param request request
      * @param clipKey to get clip
      * @return clip
      */
     @ResponseBody
-    @RequestMapping(value = "/clips/{clipKey}", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public HttpEntity<byte[]> retrieveClip(HttpServletRequest request,
-                                           @PathVariable String clipKey) {
+    @RequestMapping(value = "/clips/{clipKey}", method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public HttpEntity<byte[]> retrieveClip(@PathVariable String clipKey) {
         byte[] data = fileService.retrieveClipData(clipKey);
         HttpHeaders header = new HttpHeaders();
         header.setContentType(new MediaType("audio", "wav"));
@@ -116,19 +113,18 @@ public class FileController {
 
     /**
      * Retrieve any given pic as a png
-     * @param request request
      * @return profile pic
      */
     @ResponseBody
-    @RequestMapping(value = "/profile/pic", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
-    public HttpEntity<byte[]> retrievePic(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        byte[] data = fileService.retrievePicData(SpringUtils.getStringAttribute(session,LoginController.USERNAME_ATTRIBUTE));
+    @RequestMapping(value = "/{userName}/profile/pic", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
+    public HttpEntity<byte[]> retrievePic(@PathVariable String userName) {
+        byte[] data = fileService.retrievePicData(userName);
         HttpHeaders header = new HttpHeaders();
         header.setContentType(new MediaType("image", "png"));
-        if(data != null) {
-            header.setContentLength(data.length);
+        if(data == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
         }
+        header.setContentLength(data.length);
         return new HttpEntity<>(data, header);
     }
 }

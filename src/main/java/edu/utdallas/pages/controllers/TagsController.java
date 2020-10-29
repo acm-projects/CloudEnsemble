@@ -20,14 +20,13 @@ public class TagsController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/clips/{clipKey}/tags", method= RequestMethod.GET)
-    public String retrieveClipTags(HttpServletRequest request,
-                                     @PathVariable String clipKey) {
+    @RequestMapping(value="/clips/{clipKey}/tags", method= RequestMethod.GET, produces = "application/json")
+    public String retrieveClipTags(@PathVariable String clipKey) {
         return tagsService.retrieveTags(clipKey);
     }
 
     @ResponseBody
-    @RequestMapping(value="/clips/tags/remove", method= RequestMethod.POST)
+    @RequestMapping(value="/clips/tags/remove", method= RequestMethod.POST, produces = "application/json")
     public String removeTagFromClip(HttpServletRequest request,
                                             @RequestParam(value="clip_key") String clipKey, @RequestParam(value="tag_id") String tagId) {
         tagsService.removeTag(clipKey, tagId);
@@ -35,7 +34,7 @@ public class TagsController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/clips/tags/add/artist", method= RequestMethod.POST)
+    @RequestMapping(value="/clips/tags/add/artist", method= RequestMethod.POST, produces = "application/json")
     public String addArtistTagToClip(HttpServletRequest request,
                                            @RequestParam(value="clip_key") String clipKey, @RequestParam(value="tag_id") String tagId) {
         if(!tagsService.objectHasTag(clipKey, tagId)) {
@@ -47,7 +46,7 @@ public class TagsController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/clips/tags/add/instrument", method= RequestMethod.POST)
+    @RequestMapping(value="/clips/tags/add/instrument", method= RequestMethod.POST, produces = "application/json")
     public String addInstrumentTagToClip(HttpServletRequest request,
                                             @RequestParam(value="clip_key") String clipKey, @RequestParam(value="tag_id") String tagId) {
         if(!tagsService.objectHasTag(clipKey, tagId)) {
@@ -59,7 +58,7 @@ public class TagsController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/clips/tags/add/genre", method= RequestMethod.POST)
+    @RequestMapping(value="/clips/tags/add/genre", method= RequestMethod.POST, produces = "application/json")
     public String addGenreTagToClip(HttpServletRequest request,
                                       @RequestParam(value="clip_key") String clipKey, @RequestParam(value="tag_id") String tagId) {
         if(!tagsService.objectHasTag(clipKey, tagId)) {
@@ -71,7 +70,7 @@ public class TagsController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/clips/tags/add/other", method= RequestMethod.POST)
+    @RequestMapping(value="/clips/tags/add/other", method= RequestMethod.POST, produces = "application/json")
     public String addOtherTagToClip(HttpServletRequest request,
                                                 @RequestParam(value="clip_key") String clipKey, @RequestParam(value="tag_id") String tagId) {
         if(!tagsService.objectHasTag(clipKey, tagId)) {

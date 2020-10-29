@@ -7,12 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class FollowingController {
+public class FollowingController extends HttpController {
 
-    private IFollowersService followersService;
+    private final IFollowersService followersService;
 
     @Autowired
     public FollowingController(@Qualifier("FollowersService") IFollowersService followersService) {
@@ -26,19 +27,17 @@ public class FollowingController {
      * @return json determining success or failure
      */
     @ResponseBody
-    @RequestMapping(value="/users/follow", method= RequestMethod.POST)
+    @RequestMapping(value="/users/follow", method = RequestMethod.POST, produces = "application/json")
     public String followUser(HttpServletRequest request,
                             @RequestParam(value="user") String following) {
-        String[] success = {"status","success"};
-        String[] fail = {"status","fail"};
         HttpSession session = request.getSession();
-        String follower = SpringUtils.getStringAttribute(session, LoginController.USERNAME_ATTRIBUTE);
+        String follower = getStringAttribute(session, USERNAME_ATTRIBUTE);
         if(!followersService.isFollowing(follower,following)) {
             followersService.followUser(follower,following);
         } else {
-            return JsonUtils.createJson(fail);
+            return Status.FAIL.getJson();
         }
-        return JsonUtils.createJson(success);
+        return Status.SUCCESS.getJson();
     }
 
     /**
@@ -48,11 +47,11 @@ public class FollowingController {
      * @return json determining success or failure
      */
     @ResponseBody
-    @RequestMapping(value="/users/unfollow", method= RequestMethod.POST)
+    @RequestMapping(value="/users/unfollow", method= RequestMethod.POST, produces = "application/json")
     public String unFollowUser(HttpServletRequest request,
                                @RequestParam(value="user") String following) {
         HttpSession session = request.getSession();
-        String follower = SpringUtils.getStringAttribute(session,LoginController.USERNAME_ATTRIBUTE);
+        String follower = getStringAttribute(session,USERNAME_ATTRIBUTE);
         if(followersService.isFollowing(follower,following)) {
             followersService.unFollowUser(follower,following);
         } else {
@@ -63,23 +62,23 @@ public class FollowingController {
 
     /**
      * Retrieve following users as a json
-     * @param request http request
+     * @param userName name
      * @return json containing followers
      */
     @ResponseBody
-    @RequestMapping(value="/users/{userName}/following", method= RequestMethod.GET)
-    public String retrieveFollowing(HttpServletRequest request, @PathVariable String userName) {
+    @RequestMapping(value="/users/{userName}/following", method= RequestMethod.GET, produces = "application/json")
+    public String retrieveFollowing(@PathVariable String userName) {
         return followersService.retrieveFollowing(userName);
     }
 
     /**
      * Retrieve following users as a json
-     * @param request http request
+     * @param userName name
      * @return json containing followers
      */
     @ResponseBody
-    @RequestMapping(value="/users/{userName}/followers", method= RequestMethod.GET)
-    public String retrieveFollowers(HttpServletRequest request, @PathVariable String userName) {
+    @RequestMapping(value="/users/{userName}/followers", method= RequestMethod.GET, produces = "application/json")
+    public String retrieveFollowers(@PathVariable String userName) {
         return followersService.retrieveFollowers(userName);
     }
 

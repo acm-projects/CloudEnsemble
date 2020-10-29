@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.Random;
@@ -24,9 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Controller
-public class LoginController {
-
-    public static final String USERNAME_ATTRIBUTE = "user_name";
+public class LoginController extends HttpController {
 
     private final ICredentialsService credentialsService;
     private final ISEService emailService;
@@ -59,7 +58,7 @@ public class LoginController {
      * @return json that identifies success with a status key
      */
     @ResponseBody
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
     public String handleLogin(HttpServletRequest request,
                               @RequestParam(value="email") String email,
                               @RequestParam(value="password") String password) {
@@ -80,7 +79,7 @@ public class LoginController {
      * @return a json determining success status of email and of username
      */
     @ResponseBody
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json")
     public String handleRegister(@RequestParam(value="email") String email,
                                  @RequestParam(value="user_name") String userName,
                                  @RequestParam(value="password") String password) {
@@ -90,7 +89,8 @@ public class LoginController {
         if(checkEmail && checkName && checkPassword) {
             String code = generateCode();
             String salt = hashService.generateSalt();
-            accountMap.put(email, new Account(code,userName,hashService.hashString(password,salt),salt));
+            String hashedPassword = hashService.hashString(password,salt);
+            accountMap.put(email, new Account(code,userName,hashedPassword,salt));
             emailService.sendVerificationEmail(email,code);
         }
         String emailStatus = checkEmail ? "success" : "fail";
@@ -107,7 +107,7 @@ public class LoginController {
      * @return fail if code is incorrect, doesn't exist, or if execution fails
      */
     @ResponseBody
-    @RequestMapping(value = "/account/verify", method = RequestMethod.POST)
+    @RequestMapping(value = "/account/verify", method = RequestMethod.POST, produces = "application/json")
     public String verifyAccount(@RequestParam(value="email") String email,
                                 @RequestParam(value="code") String code) {
         Account acc;

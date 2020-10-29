@@ -1,5 +1,6 @@
 package edu.utdallas.pages.implementations;
 
+import edu.utdallas.pages.services.AccessLevel;
 import edu.utdallas.pages.services.IDataSource;
 import edu.utdallas.pages.services.IFileService;
 import edu.utdallas.pages.services.IS3Service;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 @Service("FileService")
 public class FileService extends DbService implements IFileService {
+
+    private static final String DEFAULT_PROFILE_PIC_KEY = "default_profile_pic.png";
 
     private final IS3Service s3Service;
 
@@ -23,10 +26,8 @@ public class FileService extends DbService implements IFileService {
     @Override
     public void uploadClip(String user, String name, byte[] fileData) {
         String uuid = getUUID();
-        //Upload to S3 Bucket
         s3Service.uploadFile(uuid,fileData);
-        //Insert in database
-        query(getQuery("INSERT_CLIP"),uuid,user,name,getTime());
+        query(getQuery("INSERT_CLIP"),uuid,user,name,getTime(), AccessLevel.VIEW.getId());
     }
 
     /**
@@ -35,10 +36,8 @@ public class FileService extends DbService implements IFileService {
     @Override
     public void uploadPic(String user, byte[] fileData) {
         String uuid = getUUID();
-        //Upload to S3 Bucket
         s3Service.uploadFile(uuid,fileData);
-        //Insert in database
-        query(getQuery("ADD_PIC"),uuid,user);
+        query(getQuery("UPDATE_PIC"),uuid,user);
     }
 
     /**
@@ -53,13 +52,12 @@ public class FileService extends DbService implements IFileService {
      * {@inheritDoc}
      */
     @Override
-    @Nullable
     public byte[] retrievePicData(String user) {
         String path = retrievePicKey(user);
         if(!path.equals("")) {
             return s3Service.retrieveFile(path);
         } else {
-            return null;
+            return s3Service.retrieveFile(DEFAULT_PROFILE_PIC_KEY);
         }
     }
 

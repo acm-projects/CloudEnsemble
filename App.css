@@ -1,0 +1,239 @@
+.App {
+  text-align: center;
+}
+
+.Main-picture {
+  height: 90vh;
+  flex-direction: column;
+  align-items: left;
+  position: absolute;
+  top:130px;
+  left:30px;
+  
+}
+
+.App-header {
+  background-color: #026AA7;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+@font-face {
+  font-family: 'Segoe UI';
+  src: local('Segoe UI'), url(./fonts/Segoe_UI.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: 'Segoe UI Bold';
+  src: local('Segoe UI Bold'), url(./fonts/Segoe_UI_Bold.ttf) format('ttf');
+}
+
+.text-title{
+  font: 'Segoe UI';
+  font-size: 85px;
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  position: absolute;
+  top: 200px;
+  left: 720px;
+  right: 30px;
+  text-align: left;
+  line-height: 90px;
+  color: #026aa7;
+}
+
+.text-sub{
+  font: 'Segoe UI';
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  position: absolute;
+  top: 425px;
+  left: 720px;
+  right: 30px;
+  text-align: left;
+  line-height: 40px;
+  color: #707070;
+}
+
+.text-sub-center{
+  font: 'Segoe UI';
+  font-size: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: 650px;
+  text-align: center;
+  line-height: 40px;
+  color: #026aa7;
+}
+
+
+.text-third-left{
+  font: 'Segoe UI';
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 900px;
+  left: 225px;
+  text-align: center;
+  line-height: 30px;
+  color: #707070;
+}
+
+.text-third-middle{
+  font: 'Segoe UI';
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 900px;
+  left: 610px;
+  text-align: center;
+  line-height: 30px;
+  color: #707070;
+}
+
+.text-third-right{
+  font: 'Segoe UI';
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 900px;
+  right: 275px;
+  text-align: center;
+  line-height: 30px;
+  color: #707070;
+}
+
+.text-sub-center-2{
+  font: 'Segoe UI';
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 1140px;
+  left: 570px;
+  right: 570px;
+  text-align: center;
+  line-height: 40px;
+  color: #707070;
+}
+
+.text-sub-center-3{
+  font: 'Segoe UI';
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 1240px;
+  left: 565px;
+  right: 565px;
+  text-align: center;
+  line-height: 40px;
+  color: #707070;
+}
+
+.btn-sub-main{
+  background-color: #026aa7;
+  padding: 8px 15px;
+  /*border-radius: 4px;*/
+  position: absolute;
+  top: 1230px;
+  left: 670px;
+  right: 670px;
+  font-size: 14px;
+  color: #efe7DB;
+}
+
+.btn-outline
+{
+  background-color: transparent;
+  color:  #026aa7;
+  padding: 8px 20px;
+  border-radius: 4px;
+  border: 2px solid #026aa7;
+  /*transition: all .3s ease-out;*/
+  position: absolute;
+  top: 130px;
+  right: 50px;
+  font-size: 18px;
+  color: #026aa7;
+}
+
+.btn-main{
+  background-color: #026aa7;
+  padding: 12px 26px;
+  /*border-radius: 4px;*/
+  position: absolute;
+  top: 570px;
+  left: 720px;
+  font-size: 20px;
+  color: #efe7DB;
+}
+
+
+
+.HeaderItems{
+  background: #026aa7;
+  height: 140px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+
+.header-logo img
+{
+width: 120x;
+height: 120px;
+position: absolute;
+top:10px;
+left:30px;
+opacity: 1;
+
+}
+
+.header-menu
+{   align-content: end;
+  display: grid;
+  grid-template-columns: repeat(5,auto);
+  grid-gap: 45px;
+  list-style: none;
+  text-align: center;
+  width: 85vw;
+  justify-content: end;
+  margin-right: 2rem;
+
+}
+
+.nav-links
+{
+  color: white;
+  text-decoration: none;
+  padding: .5rem 1rem;
+}
+
+.nav-links:hover{
+
+  background-color: #1b6e9e;
+  border-radius: 4px;
+  transition: all .2s ease-out;
+}

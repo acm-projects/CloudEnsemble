@@ -23,6 +23,13 @@ public interface ICredentialsService {
     String login(String email, String password);
 
     /**
+     * Resets a password
+     * @param email for account for reset
+     * @param newPassword new password
+     */
+    void resetPassword(String email, String newPassword);
+
+    /**
      * Gets the salt for a user
      * @param email email of user
      * @return salt
@@ -30,11 +37,18 @@ public interface ICredentialsService {
     String getSalt(String email);
 
     /**
-     * Checks if the email is already in the database for registration
+     * Checks if the email is already in the database for registration or if it is a valid address
      * @param email to check
      * @return false if email exists or is invalid
      */
     boolean checkEmail(String email);
+
+    /**
+     * Checks if the email is already in the database
+     * @param email to check
+     * @return false if email exists or is invalid
+     */
+    boolean emailExists(String email);
 
     /**
      * Checks if the name is already in the database for registration

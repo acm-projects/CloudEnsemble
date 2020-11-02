@@ -33,6 +33,9 @@ public class BandsController extends HttpController{
     public String createBand(HttpServletRequest request, @RequestParam(value="band_name") String bandName) {
         HttpSession session = request.getSession();
         String userName = getStringAttribute(session, USERNAME_ATTRIBUTE);
+        if(isInputInValid(bandName)) {
+            return Status.INVALID.getJson();
+        }
         if(userName == null || userName.equals("")) {
             return Status.DENIED.getJson();
         }
@@ -80,7 +83,7 @@ public class BandsController extends HttpController{
         if(userName == null || userName.equals("")) {
             return Status.DENIED.getJson();
         }
-        if(bandsService.inBand(userName, bandId)) {
+        if(bandsService.inBand(userName, bandId) && !bandsService.isFounder(userName,bandId)) {
             bandsService.leaveBand(getStringAttribute(session, USERNAME_ATTRIBUTE), bandId);
             return Status.SUCCESS.getJson();
         }
@@ -96,7 +99,16 @@ public class BandsController extends HttpController{
     @ResponseBody
     @RequestMapping(value ="/band/delete", method = RequestMethod.POST, produces = "application/json")
     public String deleteBand(HttpServletRequest request, @RequestParam(value="band_id") String bandId) {
-        return "";
+        HttpSession session = request.getSession();
+        String userName = getStringAttribute(session, USERNAME_ATTRIBUTE);
+        if(userName == null || userName.equals("")) {
+            return Status.DENIED.getJson();
+        }
+        if(bandsService.isFounder(userName,bandId)) {
+            bandsService.deleteBand(bandId);
+            return Status.SUCCESS.getJson();
+        }
+        return Status.FAIL.getJson();
     }
 
     /**
@@ -110,7 +122,15 @@ public class BandsController extends HttpController{
     public String kickMember(HttpServletRequest request,
                              @RequestParam(value="band_id") String bandId,
                              @RequestParam(value="band_id") String member) {
-
-        return "";
+        HttpSession session = request.getSession();
+        String userName = getStringAttribute(session, USERNAME_ATTRIBUTE);
+        if(userName == null || userName.equals("")) {
+            return Status.DENIED.getJson();
+        }
+        if(bandsService.isFounder(userName,bandId)) {
+            bandsService.kickMember(bandId,userName);
+            return Status.SUCCESS.getJson();
+        }
+        return Status.FAIL.getJson();
     }
 }

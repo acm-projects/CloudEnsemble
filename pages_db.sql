@@ -37,7 +37,6 @@ CREATE TABLE `access_objects` (
 
 LOCK TABLES `access_objects` WRITE;
 /*!40000 ALTER TABLE `access_objects` DISABLE KEYS */;
-INSERT INTO `access_objects` VALUES ('eeac43cb-0907-11eb-9432-cbc288c34e2d25',1,'joseph',0);
 /*!40000 ALTER TABLE `access_objects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -49,9 +48,14 @@ DROP TABLE IF EXISTS `bands`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bands` (
+  `band_id` varchar(1000) NOT NULL,
   `band_name` varchar(100) NOT NULL,
   `date_created` varchar(100) NOT NULL,
-  PRIMARY KEY (`band_name`)
+  `band_founder` varchar(100) NOT NULL,
+  PRIMARY KEY (`band_id`),
+  FULLTEXT KEY `band_name` (`band_id`),
+  FULLTEXT KEY `band_name_2` (`band_id`),
+  FULLTEXT KEY `band_name_3` (`band_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -72,7 +76,7 @@ DROP TABLE IF EXISTS `bands_members`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bands_members` (
-  `band_name` varchar(100) NOT NULL,
+  `band_id` varchar(1000) NOT NULL,
   `band_member` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -108,7 +112,6 @@ CREATE TABLE `clip_boards` (
 
 LOCK TABLES `clip_boards` WRITE;
 /*!40000 ALTER TABLE `clip_boards` DISABLE KEYS */;
-INSERT INTO `clip_boards` VALUES ('b53eede7-0f5c-11eb-89fc-49a05fab562d26','eeac43cb-0907-11eb-9432-cbc288c34e2d25','434c8890-08f9-11eb-bc80-ef49b8f384af25',7),('b6601558-0f5c-11eb-89fc-cdd42e5bee9027','eeac43cb-0907-11eb-9432-cbc288c34e2d25','434c8890-08f9-11eb-bc80-ef49b8f384af25',3),('b71a3d99-0f5c-11eb-89fc-51b721abde0b28','eeac43cb-0907-11eb-9432-cbc288c34e2d25','434c8890-08f9-11eb-bc80-ef49b8f384af25',8);
 /*!40000 ALTER TABLE `clip_boards` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,7 +127,12 @@ CREATE TABLE `clips` (
   `clip_uploader` varchar(100) NOT NULL,
   `clip_name` varchar(100) NOT NULL,
   `date_uploaded` varchar(100) NOT NULL,
-  PRIMARY KEY (`clip_key`)
+  `access` varchar(45) NOT NULL,
+  PRIMARY KEY (`clip_key`),
+  FULLTEXT KEY `clip_name` (`clip_name`),
+  FULLTEXT KEY `clip_uploader` (`clip_uploader`),
+  FULLTEXT KEY `clip_name_2` (`clip_name`),
+  FULLTEXT KEY `clip_uploader_2` (`clip_uploader`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -134,7 +142,7 @@ CREATE TABLE `clips` (
 
 LOCK TABLES `clips` WRITE;
 /*!40000 ALTER TABLE `clips` DISABLE KEYS */;
-INSERT INTO `clips` VALUES ('5e289a01-08f9-11eb-bc80-3b151f7de11027','[Anonymous]','Come As You Are.mp3','2020/10/07 19:01:16'),('b5689053-0b50-11eb-b7a5-7790c78566b027','username','windows','2020/10/10 18:31:25'),('d792b6f6-08f8-11eb-8960-b97a0371e07f28','username','Windows_snd.mp3','2020/10/07 18:57:23');
+INSERT INTO `clips` VALUES ('2faf1e5e-15bd-11eb-a250-71d7d79a1bd230','joseph','windows','2020/10/24 00:53:06','1'),('3aed1edf-1c72-11eb-8680-4d80395a329e31','prichard','windows_test','2020/11/01 12:44:11','1'),('6c464283-15c0-11eb-8e1d-f7d7a0fe53da28','joseph','<><>','2020/10/24 01:16:16','1'),('d8219b92-15bf-11eb-8e1d-9770083f07b523','joseph','\"\"\"\"\"\"\"\"\"\"','2020/10/24 01:12:08','1');
 /*!40000 ALTER TABLE `clips` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,11 +156,12 @@ DROP TABLE IF EXISTS `credentials`;
 CREATE TABLE `credentials` (
   `user_name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `pic_key` varchar(1000) NOT NULL,
   `password` varchar(1000) NOT NULL,
   `salt` varchar(100) NOT NULL,
   PRIMARY KEY (`user_name`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  FULLTEXT KEY `user_name` (`user_name`),
+  FULLTEXT KEY `user_name_2` (`user_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -162,30 +171,33 @@ CREATE TABLE `credentials` (
 
 LOCK TABLES `credentials` WRITE;
 /*!40000 ALTER TABLE `credentials` DISABLE KEYS */;
-INSERT INTO `credentials` VALUES ('account','jeh190000@utdallas.edu','default_profile_pic.png','16490c944dd10373b4e01c6fc6089b16538ba4d0953f110623d05063fb93c734b20974217e4d181021fe756a6a474e1998dba25a035383190f69d13a26cb6982','ghpui3f7rx7hP6osMOzWoR2a7Ug='),('hello','hello@gmail.com','default_profile_pic.png','e7ede323efec279babb92a38ab0b2b1572c61e2eace3f2cf4573c210a752e07c9cfd0d8e2f28f7588d1be04fe82dcb6e8965fb83f658b0bb1cddeae17ad15567','jFhZwoxgM5Cs+KPrZyVfQXyFflw='),('hi','hi@gmail.com','default_profile_pic.png','f9512020f4984d8fec9ffb12a6d7e82e20add3774191f89cc888362d6a870d1438600a46c661e2f4c8c14a7213b4491a8e1d7d815607f8f8032a2a329114eb70','D4VL3FVx6TBUSHqcrSp8gniHQVk='),('joseph','email1','default_profile_pic.png','8453515575bf44645daba8c21a5f2af0f43ce762172329840bfbf815dbab64406c2b0fdae064d419075932b44452595519ba08ec1c0071fe894f64d0460de584','1JSPNuaC7q4KintSTn6soW9lckk='),('test','test@gmail.com','default_profile_pic.png','da9d4828a9deb7927ee62e293aa989c20a80e52cbdc798da3d7efc03270de059206d6285c4a12cacfaafc538c5afa5602b84f0a5f8636d4971606658e5d79cd3','glMazhpxIKIVT1Ir87c5ok20Wdw='),('username','email','default_profile_pic.png','c27957325185ad3d05e85e044ca41d826d08a9e59a941c4de88a19925b29a47792f53e3dd5b82365c200104c7fecea0c5cc54fbc58c6020f345b94d3fe73ba6f','wQWX0D3VH2hWKdRSxGYaJa/9XxY=');
+INSERT INTO `credentials` VALUES ('joseph','jeh190000@utdallas.edu','45dc5350ea0e5ea605c30de73797fe896f2f762eb681903afba2306011ad7fd0b515c8a7e8968337315a851812a6a8e1f31be8b69ee47547b7ff2d22633f087b','rzToX7ewrOjK8CMBtWWJ73Wq/Po='),('prichard','Ltprichard2014@gmail.com','650f39107fc2b4284715ae369f7ad78e56c25cdca2856f2d0acd4f7db9b8f35456a0cd25dd76df6537ddbec3004f4123b3c86daf86f930b33783d6e552fde1a4','O7Rf5zk6AAgTTi5VBz/j2gsML3Y=');
 /*!40000 ALTER TABLE `credentials` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `followers`
+-- Table structure for table `profiles`
 --
 
-DROP TABLE IF EXISTS `followers`;
+DROP TABLE IF EXISTS `profiles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `followers` (
-  `follower` varchar(100) NOT NULL,
-  `following` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `profiles` (
+  `user_name` varchar(100) NOT NULL,
+  `pic_key` varchar(1000) NOT NULL,
+  `description` varchar(1000) NOT NULL,
+  PRIMARY KEY (`user_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `followers`
+-- Dumping data for table `profiles`
 --
 
-LOCK TABLES `followers` WRITE;
-/*!40000 ALTER TABLE `followers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `followers` ENABLE KEYS */;
+LOCK TABLES `profiles` WRITE;
+/*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
+INSERT INTO `profiles` VALUES ('joseph','d6ec9356-11c5-11eb-b4ca-f3e18995f1f023','Hello, I\'m new to Cloud Ensemble!'),('prichard','default_profile_pic.png','Hello, I\'m new to Cloud Ensemble!');
+/*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -211,8 +223,30 @@ CREATE TABLE `samples` (
 
 LOCK TABLES `samples` WRITE;
 /*!40000 ALTER TABLE `samples` DISABLE KEYS */;
-INSERT INTO `samples` VALUES ('39d2266c-0b68-11eb-9408-2930f48690f322','eeac43cb-0907-11eb-9432-cbc288c34e2d25','d792b6f6-08f8-11eb-8960-b97a0371e07f28',2,1),('f6e7e38b-0b60-11eb-9282-5ff01c8c762327','eeac43cb-0907-11eb-9432-cbc288c34e2d25','eeac43cb-0907-11eb-9432-cbc288c34e2d25',1,2),('fb0100cc-0907-11eb-9432-75bc2b73bb7c26','eeac43cb-0907-11eb-9432-cbc288c34e2d25','434c8890-08f9-11eb-bc80-ef49b8f384af25',51,3);
+INSERT INTO `samples` VALUES ('3ddce11f-15bd-11eb-a250-c5cb024fd6cc31','5668ef6d-15ba-11eb-a250-435e36ae024923','2faf1e5e-15bd-11eb-a250-71d7d79a1bd230',20,4);
 /*!40000 ALTER TABLE `samples` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `stars`
+--
+
+DROP TABLE IF EXISTS `stars`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `stars` (
+  `user_name` varchar(100) NOT NULL,
+  `object_starred` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `stars`
+--
+
+LOCK TABLES `stars` WRITE;
+/*!40000 ALTER TABLE `stars` DISABLE KEYS */;
+/*!40000 ALTER TABLE `stars` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -225,7 +259,8 @@ DROP TABLE IF EXISTS `tags`;
 CREATE TABLE `tags` (
   `object_key` varchar(1000) NOT NULL,
   `tag_id` varchar(50) NOT NULL,
-  `tag_type` int NOT NULL
+  FULLTEXT KEY `tag_id` (`tag_id`),
+  FULLTEXT KEY `tag_id_2` (`tag_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -235,6 +270,7 @@ CREATE TABLE `tags` (
 
 LOCK TABLES `tags` WRITE;
 /*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+INSERT INTO `tags` VALUES ('2faf1e5e-15bd-11eb-a250-71d7d79a1bd230','Rock'),('caad7622-1637-11eb-8d0d-d7166a54d1ec29','Rock'),('d8219b92-15bf-11eb-8e1d-9770083f07b523','Pop');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -251,7 +287,11 @@ CREATE TABLE `tracks` (
   `track_name` varchar(100) NOT NULL,
   `date_uploaded` varchar(100) NOT NULL,
   `access` varchar(45) NOT NULL,
-  PRIMARY KEY (`track_key`)
+  PRIMARY KEY (`track_key`),
+  FULLTEXT KEY `track_name` (`track_name`),
+  FULLTEXT KEY `track_uploader` (`track_uploader`),
+  FULLTEXT KEY `track_name_2` (`track_name`),
+  FULLTEXT KEY `track_uploader_2` (`track_uploader`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -261,7 +301,7 @@ CREATE TABLE `tracks` (
 
 LOCK TABLES `tracks` WRITE;
 /*!40000 ALTER TABLE `tracks` DISABLE KEYS */;
-INSERT INTO `tracks` VALUES ('eeac43cb-0907-11eb-9432-cbc288c34e2d25','username','test_track','2020/10/07 20:45:23','0');
+INSERT INTO `tracks` VALUES ('5668ef6d-15ba-11eb-a250-435e36ae024923','joseph','track','2020/10/24 00:32:42','1'),('a563a5e1-15bf-11eb-8e1d-a5d8fa287cd930','joseph','\"\"\"\"','2020/10/24 01:10:42','1'),('caad7622-1637-11eb-8d0d-d7166a54d1ec29','joseph','<script>     alert(\"HACKED\") </script> ','2020/10/24 15:30:44','1');
 /*!40000 ALTER TABLE `tracks` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -274,4 +314,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-18 12:56:43
+-- Dump completed on 2020-11-01 13:28:47

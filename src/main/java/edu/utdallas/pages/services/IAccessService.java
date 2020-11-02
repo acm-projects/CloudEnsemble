@@ -3,12 +3,12 @@ package edu.utdallas.pages.services;
 public interface IAccessService {
 
     /**
-     * Checks accessor has permissions to delete a clip
+     * Checks accessor has permissions to modify a clip
      * @param clipKey key of object
      * @param userName to check access
      * @return can access
      */
-    boolean canDeleteClip(String clipKey, String userName);
+    boolean canModifyClip(String clipKey, String userName);
 
     /**
      * Checks accessor has permissions to view a clip

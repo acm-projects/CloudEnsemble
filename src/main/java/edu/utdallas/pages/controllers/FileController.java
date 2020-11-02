@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Iterator;
@@ -44,6 +43,9 @@ public class FileController extends HttpController {
         Iterator<String> iterator = request.getFileNames();
         MultipartFile multiFile = request.getFile(iterator.next());
         HttpSession session = request.getSession();
+        if(isInputInValid(clipName)) {
+            return Status.INVALID.getJson();
+        }
         try {
             if(multiFile != null) {
                 String userName = getStringAttribute(session, USERNAME_ATTRIBUTE);

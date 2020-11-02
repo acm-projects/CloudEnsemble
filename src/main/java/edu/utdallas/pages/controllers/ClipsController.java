@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class ClipsController extends HttpController {
@@ -44,7 +43,7 @@ public class ClipsController extends HttpController {
     @RequestMapping(value="/clips/delete", method = RequestMethod.POST, produces = "application/json")
     public String deleteClip(HttpServletRequest request,
                              @RequestParam(value="clip_key") String clipKey) {
-        if(accessService.canDeleteClip(clipKey,
+        if(accessService.canModifyClip(clipKey,
                 getStringAttribute(request.getSession(), USERNAME_ATTRIBUTE))) {
             return Status.FAIL.getJson();
         }

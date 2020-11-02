@@ -1,6 +1,5 @@
 package edu.utdallas.pages.implementations;
 
-import edu.utdallas.pages.services.TagType;
 import edu.utdallas.pages.services.IDataSource;
 import edu.utdallas.pages.services.ITagsService;
 import org.json.JSONArray;
@@ -19,8 +18,8 @@ public class TagsService extends DbService implements ITagsService {
      * {@inheritDoc}
      */
     @Override
-    public void addTag(String clipKey, String tagId, TagType type) {
-        query(getQuery("ADD_TAG"), clipKey, tagId, type.getId());
+    public void addTag(String clipKey, String tagId) {
+        query(getQuery("ADD_TAG"), clipKey, tagId);
     }
 
     /**
@@ -54,18 +53,9 @@ public class TagsService extends DbService implements ITagsService {
     public String retrieveTags(String key) {
         String[] columns = {"tag_id"};
         JSONObject obj = new JSONObject();
-        JSONArray genreTags = retrieveAsJsonArrObj(columns,
-                columns, getQuery("RETRIEVE_GENRE_TAGS"), key);
-        JSONArray artistTags  = retrieveAsJsonArrObj(columns,
-                columns, getQuery("RETRIEVE_ARTIST_TAGS"), key);
-        JSONArray instrumentTags = retrieveAsJsonArrObj(columns,
-                columns, getQuery("RETRIEVE_INSTRUMENT_TAGS"), key);
-        JSONArray otherTags  = retrieveAsJsonArrObj(columns,
-                columns, getQuery("RETRIEVE_OTHER_TAGS"), key);
-        obj.put("genre_tags",genreTags);
-        obj.put("artist_tags",artistTags);
-        obj.put("instrument_tags",instrumentTags);
-        obj.put("other_tags",otherTags);
+        JSONArray tags = retrieveAsJsonArrObj(columns,
+                columns, getQuery("RETRIEVE_ALL_TAGS"), key);
+        obj.put("tags",tags);
         return obj.toString();
     }
 

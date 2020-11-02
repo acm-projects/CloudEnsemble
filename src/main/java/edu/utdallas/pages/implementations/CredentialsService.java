@@ -13,6 +13,7 @@ import java.sql.SQLException;
 @Service("CredentialsService")
 public class CredentialsService extends DbService implements ICredentialsService {
 
+    private static final String DEFAULT_DESC = "Hello, I'm new to Cloud Ensemble!";
     private static final String DEFAULT_PROFILE_PIC_KEY = "default_profile_pic.png";
 
     private final IHashService hashService;
@@ -27,8 +28,8 @@ public class CredentialsService extends DbService implements ICredentialsService
      */
     @Override
     public void register(String email, String username, String hashedPassword, String salt) throws SQLException {
-        queryUncaught(getQuery("ADD_PIC"),username,DEFAULT_PROFILE_PIC_KEY);
-        queryUncaught(getQuery("REGISTER"),username,email,hashedPassword, salt);
+        queryUncaught(getQuery("ADD_PROFILE"),username,DEFAULT_PROFILE_PIC_KEY,DEFAULT_DESC);
+        queryUncaught(getQuery("REGISTER"),username,email,hashedPassword,salt);
     }
 
     /**
@@ -38,6 +39,14 @@ public class CredentialsService extends DbService implements ICredentialsService
     public String login(String email, String password) {
         return retrieve("user_name",getQuery("LOGIN"),email,
                 hashService.hashString(password,getSalt(email)));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void resetPassword(String email, String newPassword) {
+        query(getQuery("RESET_PASSWORD"),hashService.hashString(newPassword,getSalt(email)),email);
     }
 
     /**
@@ -60,7 +69,15 @@ public class CredentialsService extends DbService implements ICredentialsService
         } catch (AddressException ex) {
             result = false;
         }
-        return !exists(getQuery("CHECK_EMAIL"),email) && result;
+        return !emailExists(email) && result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean emailExists(String email) {
+        return exists(getQuery("CHECK_EMAIL"),email);
     }
 
     /**
@@ -68,7 +85,7 @@ public class CredentialsService extends DbService implements ICredentialsService
      */
     @Override
     public boolean checkName(String name) {
-        return !exists(getQuery("CHECK_NAME"),name);
+        return !exists(getQuery("CHECK_NAME"),name) && name.length() >= 5 && name.length() <= 40;
     }
 
     /**
@@ -76,6 +93,7 @@ public class CredentialsService extends DbService implements ICredentialsService
      */
     @Override
     public boolean checkPassword(String password) {
-        return true;
+        int len = password.length();
+        return len >= 5 && len <= 40;
     }
 }

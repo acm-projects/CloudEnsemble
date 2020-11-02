@@ -16,4 +16,9 @@ public class HttpController {
         return (String)session.getAttribute(attribute);
     }
 
+    public boolean isInputInValid(String input) {
+        int len = input.length();
+        return len < 5 || len > 40;
+    }
+
 }

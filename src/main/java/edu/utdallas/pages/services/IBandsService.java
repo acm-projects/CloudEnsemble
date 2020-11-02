@@ -34,4 +34,25 @@ public interface IBandsService {
      */
     boolean inBand(String userName, String bandId);
 
+    /**
+     * Checks if a user is the band's founder
+     * @param userName of founder
+     * @param bandId for band
+     * @return true or false
+     */
+    boolean isFounder(String userName, String bandId);
+
+    /**
+     * Deletes a band
+     * @param bandId of band to delete
+     */
+    void deleteBand(String bandId);
+
+    /**
+     * Kicks a member from a band
+     * @param bandId of band
+     * @param userName of member to kick
+     */
+    void kickMember(String bandId, String userName);
+
 }

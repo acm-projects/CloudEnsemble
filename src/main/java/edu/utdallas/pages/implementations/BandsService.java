@@ -17,6 +17,7 @@ public class BandsService extends DbService implements IBandsService {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void newBand(String founder, String bandName) throws SQLException {
         queryUncaught(getQuery("NEW_BAND"), getUUID(), bandName, getTime(), founder);
     }
@@ -24,6 +25,7 @@ public class BandsService extends DbService implements IBandsService {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void joinBand(String userName, String bandId) {
         query(getQuery("JOIN_BAND"), bandId, userName);
     }
@@ -31,6 +33,7 @@ public class BandsService extends DbService implements IBandsService {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void leaveBand(String userName, String bandId) {
         query(getQuery("LEAVE_BAND"), bandId, userName);
     }
@@ -38,8 +41,33 @@ public class BandsService extends DbService implements IBandsService {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean inBand(String userName, String bandId) {
         return exists(getQuery("IN_BAND"), bandId, userName);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isFounder(String userName, String bandId) {
+        return exists(getQuery("IS_FOUNDER"),bandId,userName);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void deleteBand(String bandId) {
+        query(getQuery("DELETE_BAND"),bandId,bandId,bandId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void kickMember(String bandId, String userName) {
+        query(getQuery("KICK_MEMBER"),bandId,userName);
     }
 
 }

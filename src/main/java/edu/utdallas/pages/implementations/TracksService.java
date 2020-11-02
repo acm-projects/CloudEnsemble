@@ -62,4 +62,12 @@ public class TracksService extends DbService implements ITracksService {
         String[] column = {"sample_key","clip_key", "time", "rack"};
         return retrieveAsJsonArr("samples",column,column,getQuery("RETRIEVE_SAMPLES"),trackKey);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean trackKeyExists(String key) {
+        return exists(getQuery("RETRIEVE_TRACK_KEY"),key);
+    }
 }

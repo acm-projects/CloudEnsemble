@@ -33,8 +33,8 @@ public class ClipsService extends DbService implements IClipsService {
      * {@inheritDoc}
      */
     @Override
-    public boolean clipKeyExists(String user, String key) {
-        return exists(getQuery("RETRIEVE_CLIP_KEY"),user,key);
+    public boolean clipKeyExists(String key) {
+        return exists(getQuery("RETRIEVE_CLIP_KEY"),key);
     }
 
 }

@@ -5,7 +5,8 @@ public enum Status {
     SUCCESS("status","success"),
     FAIL("status","fail"),
     TAKEN("status","taken"),
-    DENIED("status","denied");
+    DENIED("status","denied"),
+    INVALID("status","invalid");
 
     private final String json;
 

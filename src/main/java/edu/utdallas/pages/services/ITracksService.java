@@ -7,7 +7,7 @@ public interface ITracksService {
      * @param user to get tracks for
      * @return all tracks
      */
-    public String retrieveTracks(String user);
+    String retrieveTracks(String user);
 
     /**
      * Create a new track
@@ -45,5 +45,12 @@ public interface ITracksService {
      * @return JSON with all samples
      */
     String retrieveSamples(String trackKey);
+
+    /**
+     * Checks if a track key exists
+     * @param key the key of the clip
+     * @return true if it exists
+     */
+    boolean trackKeyExists(String key);
 
 }

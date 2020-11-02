@@ -6,9 +6,8 @@ public interface ITagsService {
      * Adds a new tag to a clip
      * @param clipKey key to identify clip
      * @param tagId id of tag to add
-     * @param type type of tag to add
      */
-    void addTag(String clipKey, String tagId, TagType type);
+    void addTag(String clipKey, String tagId);
 
     /**
      * Returns if a clip has a tag already

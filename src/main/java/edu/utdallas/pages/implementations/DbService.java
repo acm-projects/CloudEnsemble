@@ -121,6 +121,7 @@ public class DbService {
                 rs.close();
                 return retrieve;
             } catch (SQLException ex) {
+                System.out.println("here");
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             } finally {
                 dataSource.closeStatement(ps);
@@ -241,9 +242,5 @@ public class DbService {
         }
         return true;
     }
-
-//    public static void main(String[] args) {
-//        System.out.println(cleanString("{ : \" \" }"));
-//    }
 
 }

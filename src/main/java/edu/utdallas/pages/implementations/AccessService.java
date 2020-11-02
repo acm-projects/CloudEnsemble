@@ -15,7 +15,7 @@ public class AccessService extends DbService implements IAccessService {
      * {@inheritDoc}
      */
     @Override
-    public boolean canDeleteClip(String clipKey, String userName) {
+    public boolean canModifyClip(String clipKey, String userName) {
         return isClipOwner(clipKey, userName);
     }
 
@@ -82,6 +82,7 @@ public class AccessService extends DbService implements IAccessService {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isClipOwner(String clipKey, String userName) {
         String column = "clip_uploader";
         return retrieve(column,getQuery("GET_CLIP_UPLOADER"),clipKey).equals(userName);
@@ -90,6 +91,7 @@ public class AccessService extends DbService implements IAccessService {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isTrackOwner(String clipKey, String userName) {
         String column = "track_uploader";
         return retrieve(column,getQuery("GET_TRACK_UPLOADER"),clipKey).equals(userName);

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -74,6 +75,19 @@ public class UserController extends HttpController {
         this.emailService = emailService;
         this.hashService = hashService;
         this.profileService = profilesService;
+    }
+
+    /**
+     * Gets the username that is currently logged in
+     * @param request request
+     * @return the user that is logged in, returns empty string if not logged in
+     */
+    @ResponseBody
+    @RequestMapping(value = "/logged-in", method = RequestMethod.GET, produces = "application/json")
+    public String getLoggedInAs(HttpServletRequest request) {
+        String user = getStringAttribute(request.getSession(), UserController.USERNAME_ATTRIBUTE);
+        String[] pair = {"user",user};
+        return JsonUtils.createJson(pair);
     }
 
     /**
@@ -180,9 +194,8 @@ public class UserController extends HttpController {
      * @param code on page
      * @return secure page
      */
-    @ResponseBody
     @RequestMapping(value = RESET_PAGE_PATH, method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public String resetPasswordPage(@RequestParam(value="token") String code) {
+    public String resetPasswordPage(ModelMap model, @RequestParam(value="token") String code) {
         String email;
         try {
             email = resetMap.get(code);
@@ -195,7 +208,8 @@ public class UserController extends HttpController {
             System.out.println("Error");
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
         }
-        return StaticContent.generateEmailPage(code);
+        model.put("code",code);
+        return "reset-password.jsp";
     }
 
     /**
@@ -204,26 +218,34 @@ public class UserController extends HttpController {
      * @param password to change to
      * @return page showing success or failure
      */
-    @ResponseBody
     @RequestMapping(value = "/verify-reset", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
-    public String resetPassword(@RequestParam(value="token") String code, @RequestParam(value="new_password") String password) {
+    public String resetPassword(ModelMap model,
+                                @RequestParam(value="token") String code,
+                                @RequestParam(value="new_password") String password) {
         if(!credentialsService.checkPassword(password)) {
-            return StaticContent.generateMessagePage("Reset Failed","Password doesn't meet requirements.");
+            model.put("title","Reset Failed");
+            model.put("message","Password doesn't meet requirements.");
+            return "message.jsp";
         }
         String email;
         try {
             email = resetMap.get(code);
         } catch (ExecutionException | CacheLoader.InvalidCacheLoadException e) {
             Logger.getLogger(this.getClass().getName()).log(Level.INFO, null, e);
-            return StaticContent.generateMessagePage("Reset Failed","An error occurred when trying to reset" +
-                    "your password.");
+            model.put("title","Reset Failed");
+            model.put("message","An error occurred when trying to reset your password.");
+            return "message.jsp";
         }
         if(email == null || email.equals("")) {
-            return StaticContent.generateMessagePage("Reset Failed","15 minute time limited expired.");
+            model.put("title","Reset Failed");
+            model.put("message","15 minute time limited expired.");
+            return "message.jsp";
         }
         credentialsService.resetPassword(email,password);
         emailService.sendResetSuccessEmail(email);
-        return StaticContent.generateMessagePage("Reset Successful","Password reset successfully!");
+        model.put("title","Reset Successful");
+        model.put("message","Password reset successfully!");
+        return "message.jsp";
     }
 
     /**

@@ -96,4 +96,5 @@ public class CredentialsService extends DbService implements ICredentialsService
         int len = password.length();
         return len >= 5 && len <= 40;
     }
+
 }

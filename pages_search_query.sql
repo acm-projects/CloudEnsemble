@@ -35,8 +35,8 @@ ORDER  BY match_score DESC
 LIMIT  25;
 
 -- Full stats version: use the commented query below to get individual stats for title/username/tag match scores
-/*
-SELECT 'clip' AS 'type', clips.clip_name, clips.clip_uploader, COUNT(tags.tag_id) AS 'num_tags', 
+
+/*SELECT 'clip' AS 'type', clips.clip_name, clips.clip_uploader, COUNT(tags.tag_id) AS 'num_tags', 
 	   MATCH (clips.clip_name) AGAINST (@squery) + 
           IF(clips.clip_name LIKE CONCAT('%', CAST(@squery AS CHAR CHARACTER SET utf8), '%'), 0.2, 0) 
           AS 'title_score', 

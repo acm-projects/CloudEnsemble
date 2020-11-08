@@ -3,13 +3,13 @@
 }
 
 .Main-picture {
-  height: 90vh;
+  max-width: 45%;
+  height: auto;
   flex-direction: column;
   align-items: left;
   position: absolute;
   top:130px;
   left:30px;
-  
 }
 
 .App-header {
@@ -28,21 +28,15 @@
   src: local('Segoe UI'), url(./fonts/Segoe_UI.ttf) format('ttf');
 }
 
-@font-face {
-  font-family: 'Segoe UI Bold';
-  src: local('Segoe UI Bold'), url(./fonts/Segoe_UI_Bold.ttf) format('ttf');
-}
-
 .text-title{
   font: 'Segoe UI';
   font-size: 85px;
   display: flex;
   flex-direction: column;
-  align-items: right;
-  position: absolute;
-  top: 200px;
-  left: 720px;
-  right: 30px;
+  align-items: left;
+  position: relative;
+  top: 15vh;
+  left: 50vw;
   text-align: left;
   line-height: 90px;
   color: #026aa7;
@@ -54,10 +48,9 @@
   display: flex;
   flex-direction: column;
   align-items: right;
-  position: absolute;
-  top: 425px;
-  left: 720px;
-  right: 30px;
+  position: relative;
+  top: 10vh;
+  left: 50vw;
   text-align: left;
   line-height: 40px;
   color: #707070;
@@ -70,50 +63,22 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  top: 650px;
+  top: 25vh;
   text-align: center;
   line-height: 40px;
   color: #026aa7;
 }
 
-
-.text-third-left{
+.text-thirds{
   font: 'Segoe UI';
   font-size: 20px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  top: 900px;
-  left: 225px;
-  text-align: center;
-  line-height: 30px;
-  color: #707070;
-}
-
-.text-third-middle{
-  font: 'Segoe UI';
-  font-size: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  top: 900px;
-  left: 610px;
-  text-align: center;
-  line-height: 30px;
-  color: #707070;
-}
-
-.text-third-right{
-  font: 'Segoe UI';
-  font-size: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  top: 900px;
-  right: 275px;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  position: relative;
+  top: 20vh;
   text-align: center;
   line-height: 30px;
   color: #707070;
@@ -123,14 +88,12 @@
   font: 'Segoe UI';
   font-size: 30px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 1140px;
-  left: 570px;
-  right: 570px;
+  position: relative;
+  top: 18vh;
   text-align: center;
-  line-height: 40px;
   color: #707070;
 }
 
@@ -138,12 +101,11 @@
   font: 'Segoe UI';
   font-size: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 1240px;
-  left: 565px;
-  right: 565px;
+  position: relative;
+  top: 12vh;
   text-align: center;
   line-height: 40px;
   color: #707070;
@@ -151,12 +113,12 @@
 
 .btn-sub-main{
   background-color: #026aa7;
+  flex-direction: row;
+  justify-content: center;
   padding: 8px 15px;
-  /*border-radius: 4px;*/
-  position: absolute;
-  top: 1230px;
-  left: 670px;
-  right: 670px;
+  align-items: center;
+  position: relative;
+  top: 15vh;
   font-size: 14px;
   color: #efe7DB;
 }
@@ -180,14 +142,14 @@
   background-color: #026aa7;
   padding: 12px 26px;
   /*border-radius: 4px;*/
-  position: absolute;
-  top: 570px;
-  left: 720px;
+  position: relative;
+  top: 8vh;
+  left: 5vw;
+  /*top: 570px;
+  left: 720px;*/
   font-size: 20px;
   color: #efe7DB;
 }
-
-
 
 .HeaderItems{
   background: #026aa7;
@@ -199,7 +161,6 @@
   font-size: 1.2rem;
 }
 
-
 .header-logo img
 {
 width: 120x;
@@ -208,7 +169,6 @@ position: absolute;
 top:10px;
 left:30px;
 opacity: 1;
-
 }
 
 .header-menu
@@ -221,19 +181,4 @@ opacity: 1;
   width: 85vw;
   justify-content: end;
   margin-right: 2rem;
-
-}
-
-.nav-links
-{
-  color: white;
-  text-decoration: none;
-  padding: .5rem 1rem;
-}
-
-.nav-links:hover{
-
-  background-color: #1b6e9e;
-  border-radius: 4px;
-  transition: all .2s ease-out;
 }

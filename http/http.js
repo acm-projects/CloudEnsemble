@@ -23,6 +23,7 @@ async function makeHttpRequest(type, request, param_names, param_contents, callb
 
 function doGet(request, param_names, param_contents, on_response) {
     function callback(response) {
+        console.log(response);
         var obj = JSON.parse(response);
         on_response(obj);
     };
@@ -31,6 +32,7 @@ function doGet(request, param_names, param_contents, on_response) {
 
 function doPost(request, param_names, param_contents, on_response) {
     function callback(response) {
+        console.log(response);
         var obj = JSON.parse(response);
         on_response(obj);
     };
@@ -300,9 +302,12 @@ function shareTrack(track_key,access_level,accessor,accessor_type,on_response) {
 }
 
 function main() {
-    var get_request = "search/1";
-    var get_param_names = ["query"];
-    var get_param_contents = ["windows"];
+    function do_sample_response(response_obj) {
+        console.log(response_obj.samples[0].sample_key);
+        console.log(response_obj.samples[0].clip_key);
+        console.log(response_obj.samples[0].time);
+        console.log(response_obj.samples[0].rack);
+    }
     function do_login_response(response_obj) {
         console.log(response_obj.status);
     }
@@ -313,8 +318,9 @@ function main() {
             console.log("type: " + response_obj.result[i].type);
         }
     }
-    doGet(get_request,get_param_names,get_param_contents,do_search_response);
-    login("ltprichard2014@gmail.com","hello",do_login_response);
+    getSamples("5668ef6d-15ba-11eb-a250-435e36ae024923",do_sample_response);
+    //search("hello",1,do_search_response);
+    //login("ltprichard2014@gmail.com","hello",do_login_response);
 }
 
 if (require.main === module) {

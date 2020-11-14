@@ -7,6 +7,7 @@ being seen by producers.
 
 ## The MVP
 > The platform should have a website where people can share and collabrate their musical genius. Users can upload audio files of musical parts and combine them with other peoples to create beautiful songs. Smaller features are left up to you, but the general sharing and combining of music should be the first thing completed. 
+
 ## Milestones
 Milestones include:
 - Ability to upload and store audio files
@@ -27,6 +28,7 @@ Some stretch goals, but feel free to make your own:
 * [Firebase] - Integrates easily with both Flutter and React.
 * [VisualStudioCode] - Good IDE for web development
 * [git] - Pretty terminal. (Here is a [cheat sheet])
+
 ## Software to install
 ### Installation
 

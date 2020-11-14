@@ -1,0 +1,64 @@
+
+.App .Avatar
+{   
+    position: absolute;
+    left: 150px;
+    top: 200px;
+}
+
+.App .UserName{
+    position: absolute;
+    height: 150px;
+    width: 200px;
+    left: 750px;
+    top: 50px;
+    font-size: 50px;
+
+}
+
+.App .About{
+    position: absolute;
+    height: 100%;
+    width: 200%;
+    left: 750px;
+    top: 200px;
+    font-size: 30px;
+
+}
+
+.App .Tracks
+{
+    position: absolute;
+    bottom: 300px;
+    left: 150px;
+    font-size: 50px;
+}
+.App .Tracks-Section
+{
+    position: absolute;
+    bottom: 80px;
+    left: 150px;
+    margin-right: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(5,auto);
+    grid-gap: 20px;
+
+}
+.App .Clips
+{
+    position: absolute;
+    bottom: 300px;
+    right: 950px;
+    font-size: 50px;
+}
+.App .Clips-Section
+{
+    position: absolute;
+    bottom: 80px;
+    right: 350px;
+    margin-right: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(5,auto);
+    grid-gap: 20px;
+
+}

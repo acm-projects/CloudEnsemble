@@ -8,23 +8,41 @@
       background-color: rgb(110, 170, 240);
     }
     button {
-      display: block;
+      display: inline;
       background-color: rgb(200, 200, 200);
+    }
+    .add-button {
+      background-color: rgb(180, 245, 230);
+    }
+    .unchecked {
+      background-color: rgb(220, 185, 245);
     }
     .racked-button {
       background-color: rgb(110, 170, 240);
+    }
+    .checked {
+      background-color: rgb(245, 245, 185);
+    }
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
   <p>Testing my knowledge of the Web Audio API!!</p>
-  <audio id='ms' crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/Moonlight-Sonata.mp3"></audio>
   <div id="volume">
     <h3>Volume</h3>
     <input id="volume-range" type="range"></input>
     <p id="volumep">50</p>
   </div>
 
+  <button id="start">Start</button>
+  <button id="test">Test</button>
+
+  <div id="add-buttons"></div>
+  <div id="select-buttons"></div>
+
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/Moonlight-Sonata.mp3"></audio>
   <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/In-the-Mood.mp3"></audio>
   <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/canon.mp3"></audio>
   <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/gravity+falls.mp3"></audio>
@@ -32,9 +50,7 @@
   <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/snare.mp3"></audio>
   <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/toms.mp3"></audio>
 
-  <button id="start">Start</button>
-  <button id="test">Test</button>
-
+  <audio id="impulse" crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/racquetballcourt.wav"></audio>
   <script src='script.js'></script>
 </body>
 </html>

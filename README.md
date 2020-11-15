@@ -1,57 +1,70 @@
-# Pages
-## Project Description
-Pages is a platform for musical talent to collaborate and share music. Its meant for people of any
-skill level to create, share, and collaborate on music. Users can upload individual playing and
-combine them with other parts, almost like an online band of sorts. Great for collaborating or
-being seen by producers.
+# Getting Started with Create React App
 
-## The MVP
-> The platform should have a website where people can share and collabrate their musical genius. Users can upload audio files of musical parts and combine them with other peoples to create beautiful songs. Smaller features are left up to you, but the general sharing and combining of music should be the first thing completed. 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Milestones
-Milestones include:
-- Ability to upload and store audio files
-- Combine different file together into one single audio file.
-- Users have individual profiles for sharing nad uploading their music and songs they create
+## Available Scripts
 
-## Stretch Goals
-Some stretch goals, but feel free to make your own: 
-- Allow for tweaking of audio files using more specific features of the Web Audio API
-- Main homepage of website where top songs and parts are featured
-- Reviews from other users
-- Request a part from an individual user.
+In the project directory, you can run:
 
-## Tech Stack
-> the Tech Stack isn't concrete; feel free to do your own research and decide what technologies would be best suited for the app!
-##### Here are some ideas:
-* [React] - component based frame work, prevents boilerplating!
-* [Firebase] - Integrates easily with both Flutter and React.
-* [VisualStudioCode] - Good IDE for web development
-* [git] - Pretty terminal. (Here is a [cheat sheet])
+### `npm start`
 
-## Software to install
-### Installation
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-##### Getting started with React:
-Reacts documentation describes how to use it 
-https://reactjs.org/docs/add-react-to-a-website.html
-follow the rest of the article to add react to your website
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-##### Getting started with Firebase:
-Follow Firebase's installation docs: [Getting started with Firebase]
+### `npm test`
 
-##### Getting started with Visual Studio Code:
-Follow Visual Studio Code's installation docs: [Install]
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-I will add more documentation as needed.
+### `npm run build`
 
-[Firebase]: <https://firebase.google.com/>
-[Flutter]: <https://flutter.dev/>
-[React]: <https://reactjs.org/>
-[VisualStudioCode]: <https://code.visualstudio.com/>
-[Install]: <https://code.visualstudio.com/docs/setup/setup-overview>
-[Flutter Installation]: <https://flutter.dev/docs/get-started/install>
-[Getting started with Firebase]: <https://firebase.google.com/docs/android/setup?authuser=0>
-[The Gist]: <https://dart.dev/guides/language/language-tour>
-[git]: <https://gitforwindows.org/>
-   [cheat sheet]: <https://education.github.com/git-cheat-sheet-education.pdf>
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

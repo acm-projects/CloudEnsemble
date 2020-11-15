@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Audio API</title>
+  <style>
+    #volume {
+      background-color: rgb(110, 170, 240);
+    }
+    button {
+      display: inline;
+      background-color: rgb(200, 200, 200);
+    }
+    .add-button {
+      background-color: rgb(180, 245, 230);
+    }
+    .unchecked {
+      background-color: rgb(220, 185, 245);
+    }
+    .racked-button {
+      background-color: rgb(110, 170, 240);
+    }
+    .checked {
+      background-color: rgb(245, 245, 185);
+    }
+    .hidden {
+      display: none;
+    }
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+  </style>
+</head>
+<body>
+  <p>Testing my knowledge of the Web Audio API!!</p>
+  <div id="volume">
+    <h3>Volume</h3>
+    <input id="volume-range" type="range"></input>
+    <p id="volumep">50</p>
+  </div>
+
+  <button id="start">Start</button>
+  <button id="test">Test</button>
+
+  <div id="add-buttons"></div>
+  <div id="select-buttons"></div>
+
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/Moonlight-Sonata.mp3"></audio>
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/In-the-Mood.mp3"></audio>
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/canon.mp3"></audio>
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/gravity+falls.mp3"></audio>
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/high-hat.mp3"></audio>
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/snare.mp3"></audio>
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/toms.mp3"></audio>
+
+  <audio id="impulse" crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/racquetballcourt.wav"></audio>
+  <script src='script.js'></script>
+</body>
+</html>

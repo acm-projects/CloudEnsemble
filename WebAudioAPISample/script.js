@@ -7,6 +7,7 @@ const play = document.getElementById('start');
 const test = document.getElementById("test");
 const volumeElement = document.getElementById('volume-range');
 
+// for convolver
 async function createReverb(url) {
     var convolver = audioCtx.createConvolver();
     var response = await fetch(url);
@@ -17,21 +18,24 @@ async function createReverb(url) {
 
 var clipObjects = [];
 var reverbSettings = [
+  {name: 'Beach', url: 'http://cloudens-env.eba-aqmxrmcz.us-east-2.elasticbeanstalk.com/audio/beach.wav'},
+  {name: 'Cave', url: 'http://cloudens-env.eba-aqmxrmcz.us-east-2.elasticbeanstalk.com/audio/cave.wav'},
+  {name: 'Glacier', url: 'http://cloudens-env.eba-aqmxrmcz.us-east-2.elasticbeanstalk.com/audio/glacier.wav'},
+  {name: 'Library', url: 'http://cloudens-env.eba-aqmxrmcz.us-east-2.elasticbeanstalk.com/audio/library.wav'},
+  {name: 'Racquetball Court', url: 'http://cloudens-env.eba-aqmxrmcz.us-east-2.elasticbeanstalk.com/audio/racquetballcourt.wav'},
+  {name: 'Stairwell', url: 'http://cloudens-env.eba-aqmxrmcz.us-east-2.elasticbeanstalk.com/audio/stairwell.wav'},
+  {name: 'Workshop', url: 'http://cloudens-env.eba-aqmxrmcz.us-east-2.elasticbeanstalk.com/audio/workshop.wav'}
+];
+/*var reverbSettings = [
   {name: 'Beach', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/beach.wav'},
-  //{name: 'Beach', url: 'http://cloudens-env.eba-aqmxrmcz.us-east-2.elasticbeanstalk.com/audio/beach.wav'},
   {name: 'Cave', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/cave.wav'},
   {name: 'Glacier', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/glacier.wav'},
   {name: 'Library', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/library.wav'},
   {name: 'Racquetball Court', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/racquetballcourt.wav'},
-  //{name: 'Racquetball Court', url: 'http://cloudens-env.eba-aqmxrmcz.us-east-2.elasticbeanstalk.com/audio/racquetballcourt.wav'},
   {name: 'Stairwell', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/stairwell.wav'},
   {name: 'Workshop', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/workshop.wav'}
-];
-/*var sources = [];
-var gains = [];
-var convolverNodes = [];
-var waveShaperNodes = [];
-var pannerNodes = [];*/
+];*/
+
 const trackGain = audioCtx.createGain();
 
 const clips = document.querySelectorAll('audio');

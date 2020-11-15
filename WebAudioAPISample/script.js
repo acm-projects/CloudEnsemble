@@ -9,27 +9,26 @@ const volumeElement = document.getElementById('volume-range');
 
 async function createReverb(url) {
     var convolver = audioCtx.createConvolver();
-
-    // load impulse response from file
-    var response     = await fetch(url);
-    var arraybuffer  = await response.arrayBuffer();
+    var response = await fetch(url);
+    var arraybuffer = await response.arrayBuffer();
     convolver.buffer = await audioCtx.decodeAudioData(arraybuffer);
-
     return convolver;
 }
 
 var clipObjects = [];
 var reverbSettings = [
   {name: 'Beach', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/beach.wav'},
+  //{name: 'Beach', url: 'http://cloudens-env.eba-aqmxrmcz.us-east-2.elasticbeanstalk.com/audio/beach.wav'},
   {name: 'Cave', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/cave.wav'},
   {name: 'Glacier', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/glacier.wav'},
   {name: 'Library', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/library.wav'},
   {name: 'Racquetball Court', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/racquetballcourt.wav'},
+  //{name: 'Racquetball Court', url: 'http://cloudens-env.eba-aqmxrmcz.us-east-2.elasticbeanstalk.com/audio/racquetballcourt.wav'},
   {name: 'Stairwell', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/stairwell.wav'},
   {name: 'Workshop', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/workshop.wav'}
 ];
 /*var sources = [];
-var gainNodes = [];
+var gains = [];
 var convolverNodes = [];
 var waveShaperNodes = [];
 var pannerNodes = [];*/
@@ -55,8 +54,24 @@ clips.forEach(function(currentClip, currentIndex) {
   // source node
   var source = audioCtx.createMediaElementSource(currentClip);
 
+  // delay node
+  var delay = audioCtx.createDelay(179);
+  delay.delayTime.value = 0;
+  var delayDiv = document.createElement("DIV");
+  var delayHeader = document.createElement("H3");
+  var delayElement = document.createElement("INPUT");
+  var delayP = document.createElement("P");
+  delayDiv.classList.add("hidden");
+  delayElement.setAttribute("type", "number");
+  delayElement.addEventListener("input", function() {
+    delay.delayTime.value = this.value / 1000;
+    delayP.innerHTML = this.value / 1000 + " seconds";
+  });
+  delayHeader.innerHTML = "Delay (milliseconds)";
+  delayP.innerHTML = 0.000 + " seconds";
+
   // gain node
-  var gainNode = audioCtx.createGain();
+  var gain = audioCtx.createGain();
   var gainDiv = document.createElement("DIV");
   var gainHeader = document.createElement("H3");
   var gainElement = document.createElement("INPUT");
@@ -64,7 +79,7 @@ clips.forEach(function(currentClip, currentIndex) {
   gainDiv.classList.add("hidden");
   gainElement.setAttribute("type", "range");
   gainElement.addEventListener("input", function() {
-    gainNode.gain.value = this.value / 100 * 2;
+    gain.gain.value = this.value / 100 * 2;
     gainP.innerHTML = this.value;
   });
   gainHeader.innerHTML = "Volume";
@@ -89,7 +104,7 @@ clips.forEach(function(currentClip, currentIndex) {
 
   // parenthetical early connection that you don't need to worry about
   var convolverNode;
-  gainNode.connect(audioCtx.destination);
+  gain.connect(audioCtx.destination);
   convolverType.addEventListener('input', function() {
     if (convolverType.value !== "blank") {
       reverbSettings.forEach(function(reverbObject) {
@@ -99,13 +114,13 @@ clips.forEach(function(currentClip, currentIndex) {
       });
       convolverNode = createReverb(impulseURL).then(function(CN){
         clipObject.convolverNode = CN;
-        gainNode.connect(CN);
+        gain.connect(CN);
         CN.connect(audioCtx.destination);
       });
     } else {
       console.log("we gotta change some stuff");
-      gainNode.disconnect(convolverNode);
-      gainNode.connect(audioCtx.destination);
+      gain.disconnect(convolverNode);
+      gain.connect(audioCtx.destination);
     }
   });
 
@@ -122,6 +137,7 @@ clips.forEach(function(currentClip, currentIndex) {
       currentClip.classList.remove("racked");
 
       // remove controls
+      delayDiv.classList.add("hidden");
       gainDiv.classList.add("hidden");
       convolverDiv.classList.add("hidden");
     } else {
@@ -129,6 +145,7 @@ clips.forEach(function(currentClip, currentIndex) {
       currentClip.classList.add("racked");
 
       // show controls
+      delayDiv.classList.remove("hidden");
       gainDiv.classList.remove("hidden");
       convolverDiv.classList.remove("hidden");
     }
@@ -145,19 +162,26 @@ clips.forEach(function(currentClip, currentIndex) {
   clipObject.addButton = addButton;
   clipObject.selectButton = selectButton;
   clipObject.source = source;
-  clipObject.gainNode = gainNode;
+  clipObject.delay = delay;
+  clipObject.delayDiv = delayDiv;
+  clipObject.gain = gain;
   clipObject.gainDiv = gainDiv;
   //clipObject.convolverNode = convolverNode;
   clipObject.convolverDiv = convolverDiv;
 
   clipObjects.push(clipObject);
 
-  clipObject.source.connect(clipObject.gainNode);
+  clipObject.source.connect(clipObject.delay);
+  clipObject.delay.connect(clipObject.gain);
   // gain is already connected to convolver, which is already connected to destination
 
   clipObject.div.appendChild(clipObject.addButton);
   clipObject.div.appendChild(clipObject.selectButton);
   document.body.appendChild(clipObject.div);
+  clipObject.delayDiv.appendChild(delayHeader);
+  clipObject.delayDiv.appendChild(delayElement);
+  clipObject.delayDiv.appendChild(delayP);
+  document.body.appendChild(clipObject.delayDiv);
   clipObject.gainDiv.appendChild(gainHeader);
   clipObject.gainDiv.appendChild(gainElement);
   clipObject.gainDiv.appendChild(gainP);
@@ -165,54 +189,6 @@ clips.forEach(function(currentClip, currentIndex) {
   clipObject.convolverDiv.appendChild(convolverHeader);
   clipObject.convolverDiv.appendChild(convolverType);
   document.body.appendChild(clipObject.convolverDiv);
-
-  ////////////////////////////////////////////////////
-  // make the buttons
-  /*var newButton = document.createElement("BUTTON");
-  newButton.innerText = "Add clip " + (currentIndex+1) + " to rack";
-  newButton.setAttribute("class", "add-button");
-  document.getElementById('add-buttons').appendChild(newButton);
-
-  var selectButton = document.createElement("BUTTON");
-  selectButton.innerText = "Select clip " + (currentIndex+1);
-  selectButton.setAttribute("class", "unchecked");
-  selectButtons.push(selectButton);
-  document.getElementById('select-buttons').appendChild(selectButton);
-
-  // source
-  var source = audioCtx.createMediaElementSource(currentClip);
-  sources.push(source);
-
-  // gain node and controls
-  var gainNode = audioCtx.createGain();
-  gainNodes.push(gainNode);
-  var gainElement = document.createElement("INPUT");
-  gainElement.setAttribute("type", "hidden");
-  document.body.appendChild(gainElement);
-
-  source.connect(gainNode).connect(audioCtx.destination);
-
-  newButton.addEventListener('click', function() {
-    selectButtons.forEach(function(currentButton) {
-      currentButton.setAttribute('class', 'unchecked');
-    })
-    selectButtons[currentIndex].setAttribute('class', 'checked');
-    if (newButton.classList.contains("racked-button")) {
-      newButton.classList.remove("racked-button");
-      currentClip.classList.remove("racked");
-    } else {
-      newButton.classList.add("racked-button");
-      currentClip.classList.add("racked");
-    }
-  })
-
-  // you can only select one select button at once
-  selectButton.addEventListener('click', function() {
-      selectButtons.forEach(function(currentButton) {
-        currentButton.setAttribute('class', 'unchecked');
-      })
-      selectButton.setAttribute('class', 'checked');
-  });*/
 })
 
 volumeElement.addEventListener('input', function() {
@@ -233,24 +209,3 @@ test.addEventListener('click', function() {
   source.connect(trackGain).connect(audioCtx.destination);
   audioElement.play();
 });
-
-
-/*
-function createBuffer(clipSrc) {
-  var newBuffer = audioCtx.createBufferSource();
-
-  var request = new XMLHttpRequest();
-  request.open('GET', clipSrc);
-  request.responseType = 'arraybuffer';
-  request.onload = function() {
-    var audioData = request.response;
-    audioCtx.decodeAudioData(audioData, function(buffer) {
-      newBuffer.buffer = buffer;
-    },
-      function(e){ console.log("Error with decoding audio data" + e.err); });
-  }
-  request.send();
-
-  return newBuffer;
-}
-*/

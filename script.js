@@ -51,7 +51,6 @@ clips.forEach(function(currentClip, currentIndex) {
   var impulseURL;
 
   var clipDiv = document.createElement("DIV");
-  clipDiv.setAttribute("class","grid-container");
   var image = document.createElement("IMG");
   var random = Math.floor(Math.random() * 3);
   if(random == 0)
@@ -74,10 +73,10 @@ clips.forEach(function(currentClip, currentIndex) {
   addButton.setAttribute("class", "add-button");
 
 
-  /*var selectButton = document.createElement("BUTTON");
+  var selectButton = document.createElement("BUTTON");
   selectButton.innerText = "Select clip " + (currentIndex+1);
   selectButton.setAttribute("class", "unchecked");
-  selectButton.setAttribute("class", "hidden");*/
+  selectButton.setAttribute("class", "hidden");
   var playButton = document.createElement("BUTTON");
   var testClip;
   var testSource;
@@ -103,6 +102,9 @@ clips.forEach(function(currentClip, currentIndex) {
   });
   delayHeader.innerHTML = "Delay (milliseconds)";
   delayP.innerHTML = 0.000 + " seconds";
+ delayHeader.style = 'position:absolute; top: 350px; left: 500px; margin-bottom: 10px;'
+ delayP.style = 'position:absolute; top: 410px; left: 500px; margin-bottom: 10px;'
+ delayElement.style = 'position:absolute; top: 400px; left: 500px; margin-bottom: 10px;'
 
   // gain node
   var gain = audioCtx.createGain();
@@ -117,6 +119,9 @@ clips.forEach(function(currentClip, currentIndex) {
   });
   gainHeader.innerHTML = "Volume";
   gainP.innerHTML = 50;
+   gainHeader.style = 'position:absolute; top: 200px; left: 500px; margin-bottom: 10px;'
+ gainP.style = 'position:absolute; top: 250px; left: 500px; margin-bottom: 10px;'
+ gainElement.style = 'position:absolute; top: 250px; left: 500px; margin-bottom: 10px;'
 
   // convolver node
   var convolverDiv = document.createElement("DIV");
@@ -133,6 +138,8 @@ clips.forEach(function(currentClip, currentIndex) {
     convolverType.appendChild(convolver);
   });
   convolverHeader.innerHTML = "Reverberation";
+  convolverHeader.style = 'position:absolute; top: 450px; left: 500px; margin-bottom: 10px;'
+  convolverType.style = 'position:absolute; top: 500px; left: 500px; margin-bottom: 10px;'
 
   // parenthetical early connection that you don't need to worry about
   var convolverNode;
@@ -168,9 +175,9 @@ clips.forEach(function(currentClip, currentIndex) {
     }
   })
 
-  /*selectButton.addEventListener('click', function() {
+  selectButton.addEventListener('click', function() {
       selectClip(clipObject);
-  });*/
+  });
 
   playButton.addEventListener('click', function() {
     if (this.classList.contains('playing')) {
@@ -190,7 +197,7 @@ clips.forEach(function(currentClip, currentIndex) {
 
   clipObject.div = clipDiv;
   clipObject.addButton = addButton;
-  //clipObject.selectButton = selectButton;
+  clipObject.selectButton = selectButton;
   clipObject.playButton = playButton;
   clipObject.source = source;
   clipObject.controlsDiv = controlsDiv;

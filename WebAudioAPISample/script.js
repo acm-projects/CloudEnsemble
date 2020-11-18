@@ -4,8 +4,6 @@ const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioCtx = new AudioContext();
 
 const play = document.getElementById('start');
-const test = document.getElementById("test");
-const volumeElement = document.getElementById('volume-range');
 
 // for convolver
 async function createReverb(url) {
@@ -26,17 +24,15 @@ var reverbSettings = [
   {name: 'Stairwell', url: 'http://cloudens-env.eba-aqmxrmcz.us-east-2.elasticbeanstalk.com/audio/stairwell.wav'},
   {name: 'Workshop', url: 'http://cloudens-env.eba-aqmxrmcz.us-east-2.elasticbeanstalk.com/audio/workshop.wav'}
 ];
-/*var reverbSettings = [
-  {name: 'Beach', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/beach.wav'},
-  {name: 'Cave', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/cave.wav'},
-  {name: 'Glacier', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/glacier.wav'},
-  {name: 'Library', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/library.wav'},
-  {name: 'Racquetball Court', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/racquetballcourt.wav'},
-  {name: 'Stairwell', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/stairwell.wav'},
-  {name: 'Workshop', url: 'https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/workshop.wav'}
-];*/
 
-const trackGain = audioCtx.createGain();
+function selectClip(clipObject) {
+  clipObjects.forEach(function(currentObject) {
+    currentObject.selectButton.setAttribute('class', 'unchecked');
+    currentObject.controlsDiv.classList.add("hidden");
+  })
+  clipObject.selectButton.setAttribute('class', 'checked');
+  clipObject.controlsDiv.classList.remove("hidden");
+}
 
 const clips = document.querySelectorAll('audio');
 
@@ -55,8 +51,15 @@ clips.forEach(function(currentClip, currentIndex) {
   selectButton.innerText = "Select clip " + (currentIndex+1);
   selectButton.setAttribute("class", "unchecked");
 
+  var playButton = document.createElement("BUTTON");
+  var testClip;
+  var testSource;
+  playButton.innerText = "Play clip " + (currentIndex+1);
+
   // source node
   var source = audioCtx.createMediaElementSource(currentClip);
+  var controlsDiv = document.createElement("DIV");
+  controlsDiv.classList.add("hidden");
 
   // delay node
   var delay = audioCtx.createDelay(179);
@@ -65,7 +68,6 @@ clips.forEach(function(currentClip, currentIndex) {
   var delayHeader = document.createElement("H3");
   var delayElement = document.createElement("INPUT");
   var delayP = document.createElement("P");
-  delayDiv.classList.add("hidden");
   delayElement.setAttribute("type", "number");
   delayElement.addEventListener("input", function() {
     delay.delayTime.value = this.value / 1000;
@@ -80,7 +82,6 @@ clips.forEach(function(currentClip, currentIndex) {
   var gainHeader = document.createElement("H3");
   var gainElement = document.createElement("INPUT");
   var gainP = document.createElement("P");
-  gainDiv.classList.add("hidden");
   gainElement.setAttribute("type", "range");
   gainElement.addEventListener("input", function() {
     gain.gain.value = this.value / 100 * 2;
@@ -104,7 +105,6 @@ clips.forEach(function(currentClip, currentIndex) {
     convolverType.appendChild(convolver);
   });
   convolverHeader.innerHTML = "Reverberation";
-  convolverDiv.classList.add("hidden");
 
   // parenthetical early connection that you don't need to worry about
   var convolverNode;
@@ -130,48 +130,44 @@ clips.forEach(function(currentClip, currentIndex) {
 
   // event listeners
   addButton.addEventListener('click', function() {
-    // deselect all clips; select current one
-    clipObjects.forEach(function(currentObject) {
-      currentObject.selectButton.setAttribute('class', 'unchecked');
-    })
-    clipObjects[currentIndex].selectButton.setAttribute('class', 'checked');
-
+    selectClip(clipObject);
     if (addButton.classList.contains("racked-button")) {
       addButton.classList.remove("racked-button");
       currentClip.classList.remove("racked");
-
-      // remove controls
-      delayDiv.classList.add("hidden");
-      gainDiv.classList.add("hidden");
-      convolverDiv.classList.add("hidden");
     } else {
       addButton.classList.add("racked-button");
       currentClip.classList.add("racked");
-
-      // show controls
-      delayDiv.classList.remove("hidden");
-      gainDiv.classList.remove("hidden");
-      convolverDiv.classList.remove("hidden");
     }
   })
 
   selectButton.addEventListener('click', function() {
-      clipObjects.forEach(function(currentObject) {
-        currentObject.selectButton.setAttribute('class', 'unchecked');
-      })
-      selectButton.setAttribute('class', 'checked');
+      selectClip(clipObject);
+  });
+
+  playButton.addEventListener('click', function() {
+    if (this.classList.contains('playing')) {
+      testClip.pause();
+      testSource.disconnect(delay);
+      this.classList.remove('playing');
+    } else {
+      testClip = document.createElement("AUDIO");
+      testClip.setAttribute("crossorigin", "anonymous");
+      testClip.setAttribute("src", currentClip.src);
+      testSource = audioCtx.createMediaElementSource(testClip);
+      testSource.connect(delay).connect(gain).connect(audioCtx.destination);
+      testClip.play();
+      this.classList.add('playing');
+    }
   });
 
   clipObject.div = clipDiv;
   clipObject.addButton = addButton;
   clipObject.selectButton = selectButton;
+  clipObject.playButton = playButton;
   clipObject.source = source;
+  clipObject.controlsDiv = controlsDiv;
   clipObject.delay = delay;
-  clipObject.delayDiv = delayDiv;
   clipObject.gain = gain;
-  clipObject.gainDiv = gainDiv;
-  //clipObject.convolverNode = convolverNode;
-  clipObject.convolverDiv = convolverDiv;
 
   clipObjects.push(clipObject);
 
@@ -181,35 +177,25 @@ clips.forEach(function(currentClip, currentIndex) {
 
   clipObject.div.appendChild(clipObject.addButton);
   clipObject.div.appendChild(clipObject.selectButton);
+  clipObject.div.appendChild(clipObject.playButton);
   document.body.appendChild(clipObject.div);
-  clipObject.delayDiv.appendChild(delayHeader);
-  clipObject.delayDiv.appendChild(delayElement);
-  clipObject.delayDiv.appendChild(delayP);
-  document.body.appendChild(clipObject.delayDiv);
-  clipObject.gainDiv.appendChild(gainHeader);
-  clipObject.gainDiv.appendChild(gainElement);
-  clipObject.gainDiv.appendChild(gainP);
-  document.body.appendChild(clipObject.gainDiv);
-  clipObject.convolverDiv.appendChild(convolverHeader);
-  clipObject.convolverDiv.appendChild(convolverType);
-  document.body.appendChild(clipObject.convolverDiv);
+  delayDiv.appendChild(delayHeader);
+  delayDiv.appendChild(delayElement);
+  delayDiv.appendChild(delayP);
+  controlsDiv.appendChild(delayDiv);
+  gainDiv.appendChild(gainHeader);
+  gainDiv.appendChild(gainElement);
+  gainDiv.appendChild(gainP);
+  controlsDiv.appendChild(gainDiv);
+  convolverDiv.appendChild(convolverHeader);
+  convolverDiv.appendChild(convolverType);
+  controlsDiv.appendChild(convolverDiv);
+  document.body.appendChild(clipObject.controlsDiv);
 })
-
-volumeElement.addEventListener('input', function() {
-  document.getElementById("volumep").innerHTML = this.value;
-  trackGain.gain.value = this.value / 100 * 2;
-});
 
 play.addEventListener('click', function() {
   var clipsOnRack = document.querySelectorAll(".racked");
   clipsOnRack.forEach(function(currentClip) {
     currentClip.play();
   });
-});
-
-test.addEventListener('click', function() {
-  var audioElement = document.getElementById('ms');
-  var source = audioCtx.createMediaElementSource(audioElement);
-  source.connect(trackGain).connect(audioCtx.destination);
-  audioElement.play();
 });

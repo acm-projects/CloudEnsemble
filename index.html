@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Audio API</title>
+  <style>
+    #volume {
+      background-color: rgb(110, 170, 240);
+      position: absolute;
+      top:500px;
+      left: 500px;
+    }
+    #header
+    {
+      position: absolute;
+      width: 100%;
+      top: 0px;
+      left: 0 px;
+      padding: 25px;
+      text-align: center;
+      background: #026aa7;
+      color: transparent;
+    }
+
+    #music
+    {
+  height: 200px;
+  width: 200px;
+  display: grid;
+  gap: 10px;
+  grid-template: repeat(4, 1fr) / repeat(2, 1fr);
+  grid-auto-flow: column;  /* or 'row', 'row dense', 'column dense' */
+}
+    button {
+      display: grid;
+      background-color: rgb(200, 200, 200);
+    }
+.grid-container
+    {
+    display:inline-grid;
+
+    }
+    .add-button {
+     position:relative; top: 150px;margin-left: 110px; color: white; padding: 6px 20px; border: $border-width solid transparent; background-clip: padding-box; transition: .5s all; border-radius: 50px; margin-top: 10px; margin-bottom: 10px;
+    color: white;
+  border: none;
+  font-size:18px;
+  background: linear-gradient(45deg, rgba(8, 211, 172, 0.45) 0%, rgba(8, 211, 172, 0.45) 12.5%,rgba(62, 29, 50, 0.45) 12.5%, rgba(62, 29, 50, 0.45) 25%,rgba(54, 55, 67, 0.45) 25%, rgba(54, 55, 67, 0.45) 37.5%,rgba(47, 81, 85, 0.45) 37.5%, rgba(47, 81, 85, 0.45) 50%,rgba(23, 159, 137, 0.45) 50%, rgba(23, 159, 137, 0.45) 62.5%,rgba(16, 185, 155, 0.45) 62.5%, rgba(16, 185, 155, 0.45) 75%,rgba(31, 133, 120, 0.45) 75%, rgba(31, 133, 120, 0.45) 87.5%,rgba(39, 107, 102, 0.45) 87.5%, rgba(39, 107, 102, 0.45) 100%),linear-gradient(135deg, rgb(87, 116, 221),rgb(35, 4, 229));
+    }
+    .menu{
+      list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-flex
+    }
+    .unchecked {
+      background-color: rgb(220, 185, 245);
+    }
+    .racked-button {
+      background-color: rgb(110, 170, 240);
+    }
+    .checked {
+      background-color: rgb(245, 245, 185);
+    }
+    .hidden {
+      display: none;
+    }
+
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+  </style>
+</head>
+<div id ="header">
+  <h1>I love Cloud Ensemble</h1>
+</div>
+<body>
+  <button id="start">Start</button>
+
+  <div id="add-buttons"></div>
+  <div id="select-buttons"></div>
+
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/heart-and-soul-left-hand.mp3"></audio>
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/Heart+and+Soul+right.mp3"></audio>
+
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/Moonlight-Sonata.mp3"></audio>
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/In-the-Mood.mp3"></audio>
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/canon.mp3"></audio>
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/gravity+falls.mp3"></audio>
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/high-hat.mp3"></audio>
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/snare.mp3"></audio>
+  <audio crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/toms.mp3"></audio>
+
+  <audio id="impulse" crossorigin="anonymous" src="https://cloud-ensemble.s3.us-east-2.amazonaws.com/IRLib/racquetballcourt.wav"></audio>
+  <div id="'script">
+  <script src='script.js'></script>
+    </div>
+</body>
+</html>

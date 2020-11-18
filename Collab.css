@@ -1,0 +1,29 @@
+ 
+.saved
+{
+list-style: none;
+position: absolute;
+left: 350px;
+top: 150px;
+
+}
+.saved img{
+    height:150px;
+    width: 150px;
+    border-radius: 60px;
+}
+.html 
+{
+position: absolute;
+top: 150px;
+left: 150px;
+
+}
+
+.Rack
+{
+position: absolute;
+top:150px;
+right: 100px;
+
+}

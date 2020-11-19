@@ -1,0 +1,38 @@
+
+[
+    {
+      "name": "In the Mood",
+      "type": "Drums",
+      "user": "Joseph",
+      "url":"https://cloud-ensemble.s3.us-east-2.amazonaws.com/In-the-Mood.mp3",
+      "pic": "pexels-anni-roenkae-3110509"
+    },
+{
+        "name": "Canon",
+        "type": "Trumpet",
+        "user": "Joseph",
+        "url":"https://cloud-ensemble.s3.us-east-2.amazonaws.com/canon.mp3",
+        "pic": "https://www.pexels.com/photo/purple-abstract-art-3110509/"
+      },
+      {
+        "name": "Spooky Skeleton",
+        "type": "Piano",
+        "user": "Joseph",
+        "url": "https://cloud-ensemble.s3.us-east-2.amazonaws.com/gravity+falls.mp3",
+        "pic": "https://www.pexels.com/photo/art-autumn-autumn-leaves-beautiful-589819/"
+      },
+      {
+        "name": "Elevator Music",
+        "type": "Violin",
+        "user": "Elizabeth",
+        "url": "https://cloud-ensemble.s3.us-east-2.amazonaws.com/high-hat.mp3",
+        "pic":"https://www.pexels.com/photo/art-autumn-autumn-leaves-beautiful-589819/"
+      },
+      {
+        "name": "Study Tunes",
+        "type": "Tambourine",
+        "user": "Jocelyn",
+        "url": "https://cloud-ensemble.s3.us-east-2.amazonaws.com/snare.mp3",
+        "pic":"https://www.pexels.com/photo/art-autumn-autumn-leaves-beautiful-589819/"
+      }
+]
